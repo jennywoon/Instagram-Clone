@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
-import Test from "../assets/test.jpg"
+import Test from "../assets/Test.jpg"
 import { AiOutlineHeart } from "react-icons/ai";
 import { IoChatbubbleOutline, IoPaperPlaneOutline, IoBookmarkOutline } from "react-icons/io5";
 import { VscSmiley } from "react-icons/vsc";
