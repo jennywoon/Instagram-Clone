@@ -1,28 +1,20 @@
 # 벌마, 리액트 아이콘 쓰자!
 
-뷰 구성(수정중)
-
-- 청운 : 메인 페이지, 마이페이지
-- 영일 : 로그인, 회원가입 페이지, 게시글 업로드
-
 ## 새로 시도하고 있는 것(수정중)
 
 1. 카카오톡 소셜 로그인
-2. 사진 끌어다 놓기
+2. 사진 끌어다 놓기(완료)
 3. 사진 업로드하면 미리보기 나오게 구현
 
-### `yarn start`
+### 뷰 구성
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- 청운 : 메인 페이지, 마이페이지, 게시글 상세 페이지
+- 영일 : 로그인+회원가입 페이지, 게시글 업로드, 모달 페이지 및 클릭 이벤트
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 기능 구현(수정중)
 
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- 청운 : 검색기능, 카카오톡 소셜 로그인, 게시글 post
+- 영일 : 다중 이미지 업로드
 
 ### `yarn build`
 

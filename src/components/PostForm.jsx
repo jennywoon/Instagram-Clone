@@ -8,6 +8,7 @@ import { RiMapPin2Line } from 'react-icons/ri'
 import { IoIosArrowDown } from 'react-icons/io'
 import { useDispatch } from 'react-redux'
 import { __getInstas, __postInstas } from '../redux/modules/InstaSlice'
+import FileUpload from './utils/FileUpload'
 
 
 const PostForm = () => {
@@ -39,6 +40,9 @@ const PostForm = () => {
     dispatch(__postInstas(insta));
   }
 
+const PostForm = () => {
+  const [files, setFiles] = useState([]);
+
   return (
     <StyledBackground onSubmit={onSubmitHandler}>
       <StyledUploadBox>
@@ -50,7 +54,7 @@ const PostForm = () => {
 
         <StyledBoxBody>
           <StyledUploadBoxBody>
-            <BsImages style={{ width: '70px', height: '70px' }} />
+            <FileUpload files={files} setFiles={setFiles} />
           </StyledUploadBoxBody>
           <StyledFormBoxBody>
             <FirstHeader>
@@ -142,7 +146,7 @@ const StyledBoxBody = styled.div`
 
 const StyledUploadBoxBody = styled.div`
   display: flex;
-  flex:2;
+  width:600px;
   height: 100%;
   flex-direction: column;
   justify-content: center;
@@ -154,7 +158,7 @@ const StyledUploadBoxBody = styled.div`
 
 const StyledFormBoxBody = styled.div`
   display: flex;
-  flex:1;
+  width:300px;
   height: 100%;
   flex-direction: column;
   align-items: center;
