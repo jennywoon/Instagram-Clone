@@ -4,8 +4,10 @@ import styled from "styled-components";
 import { __getInstas } from "../redux/modules/InstaSlice";
 import MainPost from "./MainPost";
 import MainRecommend from "./MainRecommend";
+import { __getInstas } from "../redux/modules/InstaSlice";
 
 const Main = () => {
+    const dispatch = useDispatch();
 
     const { instas } = useSelector((state) => state.instas)
     const dispatch = useDispatch();
@@ -14,18 +16,23 @@ const Main = () => {
         dispatch(__getInstas())
     }, [dispatch])
 
+
+    useEffect(() => {
+        dispatch(__getInstas());
+    }, [dispatch])
+
     return (
-            <MainContainer>
-                <MainList>
-                    {instas?.map((insta, index) => (
-                        <MainPost
-                            key={index}
-                            insta={insta} />
-                    ))}
-                </MainList>
-                {/* <MainPost/> */}
-                <MainRecommend />
-            </MainContainer>
+        <MainContainer>
+            <MainList>
+                {instas?.map((insta, index) => (
+                    <MainPost
+                        key={index}
+                        insta={insta} />
+                ))}
+            </MainList>
+            {/* <MainPost/> */}
+            <MainRecommend />
+        </MainContainer>
     )
 }
 

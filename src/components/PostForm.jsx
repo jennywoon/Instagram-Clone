@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { BsImages } from 'react-icons/bs'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
@@ -12,7 +12,7 @@ import FileUpload from './utils/FileUpload'
 
 
 const PostForm = () => {
-  
+
   const dispatch = useDispatch();
 
   const [files, setFiles] = useState([]);
@@ -25,10 +25,10 @@ const PostForm = () => {
     dispatch(__getInstas());
   }, [dispatch]);
 
-  const {content} = insta;
+  const { content } = insta;
 
   const onChangeHandler = (e) => {
-    const {value, name} = e.target;
+    const { value, name } = e.target;
     setInsta({
       ...insta,
       [name]: value,
@@ -61,12 +61,12 @@ const PostForm = () => {
               <UserImg />
               <UserLabel>user_name</UserLabel>
             </FirstHeader>
-            <StyledTextarea 
-            placeholder='문구 입력...'
-            maxLength="2200"
-            name="content"
-            value={content}
-            onChange={onChangeHandler}
+            <StyledTextarea
+              placeholder='문구 입력...'
+              maxLength="2200"
+              name="content"
+              value={content}
+              onChange={onChangeHandler}
             ></StyledTextarea>
             <CommentWrap>
               <CommentFirstSection>
