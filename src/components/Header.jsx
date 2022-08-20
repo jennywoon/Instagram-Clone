@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { MdHome } from "react-icons/md";
-import { IoPaperPlaneOutline, IoCompassOutline} from "react-icons/io5";
+import { IoPaperPlaneOutline, IoCompassOutline } from "react-icons/io5";
 import { TbSquarePlus } from "react-icons/tb";
 import { AiOutlineHeart } from "react-icons/ai";
-import Instagram from "../assets/Instagram.png"
+import Instagram from "../assets/instagram.png"
 import { useNavigate } from "react-router-dom";
-import Test2 from "../assets/Test2.jpg"
+import Test2 from "../assets/test2.jpg"
 // import { GoGear } from "react-icons/go";
 // import { BiUserCircle } from "react-icons/bi";
 // import { TbExchange } from "react-icons/tb";
@@ -28,7 +28,7 @@ const Header = () => {
                 />
                 <StInput
                     placeholder="검색"
-                    
+
                 ></StInput>
                 <NavbarIcons>
                     <MdHome size="30" style={{ cursor: "pointer" }} />
