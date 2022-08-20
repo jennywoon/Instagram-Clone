@@ -81,6 +81,7 @@ const NavbarContainer = styled.div`
     align-items: center;
     justify-content: space-between;
     /* z-index: 10; */
+    
 `
 const Logo = styled.div`
     background-image: url(${instagram});
