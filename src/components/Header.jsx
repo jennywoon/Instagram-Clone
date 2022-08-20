@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { MdHome } from "react-icons/md";
-import { IoPaperPlaneOutline, IoCompassOutline } from "react-icons/io5";
+import { IoPaperPlaneOutline, IoCompassOutline, IoBookmarkOutline } from "react-icons/io5";
 import { TbSquarePlus } from "react-icons/tb";
 import { AiOutlineHeart } from "react-icons/ai";
 import instagram from "../assets/instagram.png"
 import { useNavigate } from "react-router-dom";
 import test2 from "../assets/test2.jpg"
+import { GoGear } from "react-icons/go";
+import { BiUserCircle } from "react-icons/bi";
+import { TbExchange } from "react-icons/tb";
+import ProfileModal from "./ProfileModal";
+
 
 const Header = () => {
+    const [show, setShow] = useState(false);
+
 
     const navigate = useNavigate();
 
@@ -16,31 +23,35 @@ const Header = () => {
         <Navbar>
             <NavbarContainer>
                 <Logo
-                onClick={() => {
-                    navigate("/")
-                }}
+                    onClick={() => {
+                        navigate("/")
+                    }}
                 />
                 <StInput
-                placeholder="검색"
+                    placeholder="검색"
                 ></StInput>
                 <NavbarIcons>
-                    <MdHome size = "30" style={{cursor: "pointer"}}/>
-                    <IoPaperPlaneOutline size = "28"/>
+                    <MdHome size="30" style={{ cursor: "pointer" }} />
+                    <IoPaperPlaneOutline size="28" />
                     <TbSquarePlus
                         onClick={() => {
                             navigate("/upload")
                         }}
-                        style={{cursor: "pointer"}}
-                    size = "31"/>
-                    <IoCompassOutline size = "30"/>
-                    <AiOutlineHeart size = "30"/>
+                        style={{ cursor: "pointer" }}
+                        size="31" />
+                    <IoCompassOutline size="30" />
+                    <AiOutlineHeart size="30" />
                     <UserImage
                         onClick={() => {
-                            navigate("/mypage")
+                            // navigate("/mypage")
+                            setShow((prev) => !prev)
                         }}
-                        style={{cursor: "pointer"}}
-                        //src={props.user_profile}
+                        style={{ cursor: "pointer" }}
+                    //src={props.user_profile}
                     />
+
+                    <ProfileModal show={show} />
+
                 </NavbarIcons>
             </NavbarContainer>
         </Navbar>
@@ -97,14 +108,70 @@ const NavbarIcons = styled.div`
     justify-content: space-between; */
     gap: 20px;
     /* cursor: pointer; */
+    position: relative;
 `
 
 const UserImage = styled.image`
     width: 26px;
     height: 26px;
     border-radius: 50px;
-    border: 1px solid black;
     background-image: url(${test2});
     background-position: center;
     background-size: 100% 100%;
+`
+
+
+const StyledUploadBox = styled.div`
+  width: 220px;
+  height: auto;
+  border-radius: 8px;
+  background: #fff;
+  position: absolute;
+  right:-25px;
+  top:45px;
+  border:1px solid #eee;
+  z-index:10;
+  -webkit-box-shadow: 0px 0px 8px -3px rgba(0,0,0,0.4); 
+box-shadow: 0px 0px 8px -3px rgba(0,0,0,0.2);
+  `
+
+
+
+const StyledUploadBoxHeader = styled.div`
+display: flex;
+align-items:center;
+padding:.5rem 0.8rem;
+font-size: .9rem;
+
+
+&:first-child:hover {
+    background-color: #eee;
+    div {
+        background-color: #eee;
+    }
+  }
+
+    &:nth-child(4) {
+        border-bottom: 1px solid #eee;
+    }
+
+`
+
+const StyledTriangleBox = styled.div`
+    width: 15px;
+    height: 15px;
+    border-left: 1px solid #eee;
+    border-top: 1px solid #eee;
+    z-index: 11;
+    position: absolute;
+    right:48px;
+    top:-9px;
+    transform: rotate(45deg);
+    background: #fff;
+
+
+`
+
+const StyledShowBox = styled.div`
+
 `
