@@ -2,6 +2,8 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PostDetail from "../components/PostDetail";
 import PostForm from "../components/PostForm";
+import PostMyOption from "../components/PostMyOption";
+import PostOption from "../components/PostOption";
 import PostUpload from "../components/PostUpload";
 import LoginPage from "../pages/LoginPage";
 import MainPage from "../pages/MainPage"
@@ -21,6 +23,8 @@ const Router = () => {
         <Route path="/form" element={<PostForm />} />
         {/* PostDetail 부분 수정할 수 있음, 배경 어둡게 */}
         <Route path="/postdetail" element={<PostDetail />} />
+        <Route path="/option" element={<PostOption />} />
+        <Route path="/myOption" element={<PostMyOption />} />
       </Routes>
     </BrowserRouter>
   );
