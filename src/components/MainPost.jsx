@@ -1,76 +1,105 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import Test from "../assets/Test.jpg"
 import { AiOutlineHeart } from "react-icons/ai";
 import { IoChatbubbleOutline, IoPaperPlaneOutline, IoBookmarkOutline } from "react-icons/io5";
 import { VscSmiley } from "react-icons/vsc";
-import { __getInstas } from "../redux/modules/InstaSlice";
+import { __getComments, __getInstas, __postComments, __postInstas } from "../redux/modules/InstaSlice";
 // import { useParams } from "react-router-dom";
 
 
-const MainPost = ({insta}) => {
+const MainPost = ({ insta }) => {
 
     const dispatch = useDispatch();
-    // const param = useParams;
-    // const {instas} = useSelector((state) => state.instas);
-    // const insta = instas.find((insta) => insta.id === parseInt(param.id));
+
+    // useEffect(() => {
+    //     dispatch(__getInstas());
+    // }, [dispatch])
+
+
+    const [comment, setComment] = useState({
+        content: "",
+    })
 
     useEffect(() => {
-        dispatch(__getInstas());
-    }, [dispatch])
+        dispatch(__getComments());
+    }, [dispatch]);
+
+    const { content } = comment;
+
+    const onChangeHandler = (e) => {
+        const { value, name } = e.target;
+        setComment({
+            ...comment,
+            [name]: value,
+        })
+    }
+
+    const onSubmitHandler = (e) => {
+        e.preventDefault();
+        dispatch(__postComments(comment))
+    }
 
     return (
-        <PostContainer>
-            <PostHeader>
-                <FirstHeader>
-                    <UserImg />
-                    <UserLabel>user_name</UserLabel>
-                </FirstHeader>
-                <BiDotsHorizontalRounded style={{ paddingRight: "15px" }} />
-            </PostHeader>
-            <PostImg />
-            <LikeFirstBar>
-                <LikeBarSection>
-                    <AiOutlineHeart size="30" style={{ cursor: "pointer" }} />
-                    <IoChatbubbleOutline size="28" style={{ cursor: "pointer" }} />
-                    <IoPaperPlaneOutline size="28" style={{ cursor: "pointer" }} />
-                </LikeBarSection>
-                <IoBookmarkOutline size="27" style={{ paddingRight: "10px", cursor: "pointer" }} />
-            </LikeFirstBar>
-            <LikeSecondBar>
-                <UserLikeImg />
-                <UserLikeLable>
-                    00명이 좋아합니다.
-                </UserLikeLable>
-            </LikeSecondBar>
-            <ContentWrap>
-                <ContentFirstSection>
-                    <UserLabel>user_name</UserLabel>
-                    <PostContent>{insta.content}</PostContent>
-                </ContentFirstSection>
-                <CommentCount>
-                    댓글 0개 보기
-                </CommentCount>
-                <ContentTime>
-                    예시: 6시간 전
-                </ContentTime>
-            </ContentWrap>
-            <CommentWrap>
-                <CommentFirstSection>
-                    <VscSmiley size="26" style={{ padding: "0 10px" }} />
-                    <CommentInput />
-                </CommentFirstSection>
-                <UploadLable>게시</UploadLable>
-            </CommentWrap>
-        </PostContainer>
+            <PostContainer onSubmit={onSubmitHandler}>
+                <PostHeader>
+                    <FirstHeader>
+                        <UserImg />
+                        <UserLabel>user_name</UserLabel>
+                    </FirstHeader>
+                    <BiDotsHorizontalRounded style={{ paddingRight: "15px" }} />
+                </PostHeader>
+                <PostImg />
+                <LikeFirstBar>
+                    <LikeBarSection>
+                        <AiOutlineHeart size="30" style={{ cursor: "pointer" }} />
+                        <IoChatbubbleOutline
+                            size="28" style={{ cursor: "pointer" }}
+                        />
+                        <IoPaperPlaneOutline size="28" style={{ cursor: "pointer" }} />
+                    </LikeBarSection>
+                    <IoBookmarkOutline size="27" style={{ paddingRight: "10px", cursor: "pointer" }} />
+                </LikeFirstBar>
+                <LikeSecondBar>
+                    <UserLikeImg />
+                    <UserLikeLable>
+                        00명이 좋아합니다.
+                    </UserLikeLable>
+                </LikeSecondBar>
+                <ContentWrap>
+                    <ContentFirstSection>
+                        <UserLabel>user_name</UserLabel>
+                        <PostContent>{insta.content}</PostContent>
+                    </ContentFirstSection>
+                    <CommentCount>
+                        댓글 0개 보기
+                    </CommentCount>
+                    <ContentTime>
+                        예시: 6시간 전
+                    </ContentTime>
+                </ContentWrap>
+                <CommentWrap>
+                    <CommentFirstSection>
+                        <VscSmiley size="26" style={{ padding: "0 10px" }} />
+                        <CommentInput
+                            type="text"
+                            name="content"
+                            value={content}
+                            onChange={onChangeHandler}
+                        />
+                    </CommentFirstSection>
+                    {/* <UploadLable>게시</UploadLable> */}
+                    <UploadButton>게시</UploadButton>
+                </CommentWrap>
+            </PostContainer>
     )
 }
 
 export default MainPost;
 
-const PostContainer = styled.div`
+const PostContainer = styled.form`
     width: 470px;
     height: 811px;
     border: 1px solid rgb(219,219,219);
@@ -196,7 +225,11 @@ const CommentInput = styled.input`
     font-size: 14px;
 `
 
-const UploadLable = styled.div`
+const UploadButton = styled.button`
+    background-color: transparent;
     color: #0095f6;
     padding-right: 14px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
 `

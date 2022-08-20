@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { AiOutlineHeart } from "react-icons/ai";
@@ -6,14 +6,45 @@ import { IoChatbubbleOutline, IoPaperPlaneOutline, IoBookmarkOutline } from "rea
 import { VscSmiley } from "react-icons/vsc";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { __getInstas } from "../redux/modules/InstaSlice";
+import { __getComments, __getInstas, __postComments } from "../redux/modules/InstaSlice";
+import PostDetailFormComment from "./PostDetailFormComment";
 
 const PostDetailForm = () => {
 
+    const dispatch = useDispatch();
+    const param = useParams();
+    const comments = useSelector((state) => state.instas.comments);
 
+    useEffect(() => {
+        dispatch(__getComments(param.id))
+    }, [dispatch]);
+
+    const [comment, setComment] = useState({
+        content: "",
+    })
+
+    const onChangeHandler = (e) => {
+        const { value, name } = e.target;
+        setComment({
+            ...comment,
+            boardId: param.id,
+            [name]: value,
+        })
+    }
+
+    const postComment = (e) => {
+        e.preventDefault();
+        dispatch(__postComments({ boardId: param.id, content }));
+
+        setComment({
+            content: "",
+        })
+    }
+
+    const { content } = comment;
 
     return (
-        <PostDetailContainer>
+        <PostDetailContainer onSubmit={postComment}>
             <PostHeader>
                 <FirstHeader>
                     <UserImg />
@@ -21,15 +52,29 @@ const PostDetailForm = () => {
                 </FirstHeader>
                 <BiDotsHorizontalRounded style={{ paddingRight: "15px" }} />
             </PostHeader>
-            <PostContentContainer>
-                <FirstSection>
+            <PostScroll>
+                <PostContentContainer>
+                    <FirstSection>
+                        <UserImg />
+                    </FirstSection>
+                    <SecondSection>
+                        <UserLabel>user_name</UserLabel>
+                        <PostContent>내용</PostContent>
+                    </SecondSection>
+                </PostContentContainer>
+                <PostBottom>
+                    {/* <FirstSection>
                     <UserImg />
                 </FirstSection>
-                <SecondSection>
-                    <UserLabel>user_name</UserLabel>
-                    <PostContent>내용</PostContent>
-                </SecondSection>
-            </PostContentContainer>
+                <UserLabel>user_name</UserLabel>
+                <PostComment>댓글 내용</PostComment> */}
+                    {comments.map((v) => (
+                        <div key={v.id}>
+                            <PostDetailFormComment comment={v} />
+                        </div>
+                    ))}
+                </PostBottom>
+            </PostScroll>
             <LikeFirstBar>
                 <LikeBarSection>
                     <AiOutlineHeart size="28" style={{ cursor: "pointer" }} />
@@ -48,11 +93,17 @@ const PostDetailForm = () => {
                 <CommentWrap>
                     <CommentFirstSection>
                         <VscSmiley size="26" style={{ padding: "0 10px" }} />
-                        <CommentInput />
+                        <CommentInput
+                            type="text"
+                            name="content"
+                            value={content}
+                            onChange={onChangeHandler}
+                        />
                     </CommentFirstSection>
-                    <UploadLable>게시</UploadLable>
+                    <UploadButton>게시</UploadButton>
                 </CommentWrap>
             </LikeSecondBar>
+
         </PostDetailContainer>
     )
 }
@@ -94,30 +145,55 @@ const UserLabel = styled.div`
     font-size: 15px;
 `
 
+const PostScroll = styled.div`
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 650px;
+    border: 1px solid #ebedf0;
+`
+
 const PostContentContainer = styled.div`
     width: 100%;
-    border: 1px solid #ebedf0;
-    height: 630px;
+    /* border: 1px solid #ebedf0; */
+    min-height: 100px;
+    height: auto;
     display: flex;
     flex-direction: row;
     padding: 10px 0;
+    
 `
 
 const FirstSection = styled.div`
     padding: 0 10px;
 `
+const PostBottom = styled.div`
+    width: 499px;
+    height: 250px;
+    /* border: 1px solid #ebedf0; */
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+    /* overflow-y: scroll;
+    overflow-x: hidden; */
+`
+
 const SecondSection = styled.div`
     width: 439px;
     text-align: justify;
     display: flex;
     flex-direction: column;
+    /* height: 368px; */
     /* flex-wrap: wrap; */
 `
-
 const PostContent = styled.div`
     padding: 10px 12px;
     font-size: 14px;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
+`
+
+const PostComment = styled.div`
+    padding : 0 12px;
+    font-size: 14px;
 `
 
 const LikeFirstBar = styled.div`
@@ -172,7 +248,11 @@ const CommentInput = styled.input`
     font-size: 14px;
 `
 
-const UploadLable = styled.div`
+const UploadButton = styled.button`
+    background-color: transparent;
     color: #0095f6;
     padding-right: 14px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
 `

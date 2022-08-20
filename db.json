@@ -5,16 +5,34 @@
       "id": 1
     },
     {
-      "content": "테스트입니다",
+      "content": "민혁님 하이",
+      "id": 2
+    }
+  ],
+  "comments": [
+    {
+      "content": "^^",
+      "id": 1
+    },
+    {
+      "content": "테스트",
       "id": 2
     },
     {
-      "content": "테스트해보기",
+      "content": "반가워요",
       "id": 3
     },
     {
-      "content": "테스트 하는데 되겠지?",
+      "content": "어떻게 될까?",
       "id": 4
+    },
+    {
+      "content": "마지막 테스트",
+      "id": 5
+    },
+    {
+      "content": "민혁님 이거 테스트",
+      "id": 6
     }
   ]
 }
