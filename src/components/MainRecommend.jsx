@@ -4,6 +4,7 @@ import design1 from "../assets/design1.jpg"
 import design2 from "../assets/design2.jpg"
 import design3 from "../assets/design3.jpg"
 import design4 from "../assets/design4.jpg"
+import { AiOutlineCopyrightCircle } from "react-icons/ai";
 
 const MainRecommend = () => {
     return (
@@ -60,6 +61,15 @@ const MainRecommend = () => {
                     </RecommendFirstSection>
                     <RecommendFollow>팔로우</RecommendFollow>
                 </RecommentWrap>
+                <RecommendFooter>
+                    <FooterFirstSection>
+                        소개·도움말·홍보 센터·API·채용 정보·개인정보처리방침·약관·위치·언어
+                    </FooterFirstSection>
+                    <FooterSecondSection>
+                        <AiOutlineCopyrightCircle/>
+                        2022 INSTAGRAM FROM META
+                    </FooterSecondSection>
+                </RecommendFooter>
             </RecommentList>
         </Container>
     )
@@ -191,3 +201,13 @@ const RecommendSecondSection = styled.div``
 const RecommendFollow = styled.div`
     color: #0095f6;
 `
+const RecommendFooter = styled.div`
+    width: 195px;
+    color: #c7c7c7;
+    font-size: 12px;
+`
+
+const FooterFirstSection = styled.div`
+    padding: 25px 0;
+`
+const FooterSecondSection = styled.div``
