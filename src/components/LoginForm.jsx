@@ -2,6 +2,7 @@ import React from 'react'
 import Input from './elements/Input'
 import Button from './elements/Button'
 import styled from 'styled-components';
+import KakaoLogin from "./KakaoLogin";
 
 const LoginForm = () => {
 
@@ -30,12 +31,13 @@ const LoginForm = () => {
           <div style={{ position: 'relative', top: '-3px' }}>또는</div>
           <StyledLine></StyledLine>
         </div>
-        <Button
+        {/* <Button
           width='245px'
           padding='10px 0'
           backgroundColor='#FFE500'
           color='#000'
-        >카카오톡으로 로그인</Button>
+        >카카오톡으로 로그인</Button> */}
+        <KakaoLogin/>
       </StyledForm >
       <StyledBox>
         <p>계정이 없으신가요? <span style={{ color: '#0095F6' }}>가입하기</span></p>

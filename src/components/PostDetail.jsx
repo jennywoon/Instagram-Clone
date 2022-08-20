@@ -1,7 +1,7 @@
 import React from "react";
 import PostDetailForm from "./PostDetailForm";
 import styled from "styled-components"
-import design1 from "../assets/design1.jpg"
+import Design1 from "../assets/Design1.jpg"
 
 const PostDetail = () => {
 
@@ -25,7 +25,7 @@ const PostDetailContainer = styled.div`
 const PostImg = styled.div`
     width: 826px;
     height: 870px;
-    background-image: url(${design1});
+    background-image: url(${Design1});
     background-position: center;
     background-size: 100% 96%;
 `

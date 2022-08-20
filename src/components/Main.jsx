@@ -1,12 +1,22 @@
 import React from "react";
+import { useSelector } from "react-redux"
 import styled from "styled-components";
 import MainPost from "./MainPost";
 import MainRecommend from "./MainRecommend";
 
 const Main = () => {
+
+    const { instas } = useSelector((state) => state.instas)
+
     return (
         <MainContainer>
-            <MainPost />
+            <MainList>
+                {instas?.map((insta, index) => (
+                    <MainPost
+                    key={index}
+                    insta={insta}/>
+                ))}
+            </MainList>
             <MainRecommend />
         </MainContainer>
     )
@@ -15,7 +25,7 @@ const Main = () => {
 export default Main;
 
 const MainContainer = styled.div`
-    align-items: center;
+    /* align-items: center; */
     /* border: 1px solid rgb(219,219,219); */
     /* width: 45%; */
     width: 850px;
@@ -23,4 +33,13 @@ const MainContainer = styled.div`
     margin: auto;
     /* position: absolute; */
     display: flex;
+`
+
+const MainList = styled.div`
+    /* position: relative; */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* margin-top: 10px; */
 `

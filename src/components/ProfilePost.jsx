@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import design5 from "../assets/design5.jpg"
+import Design5 from "../assets/Design5.jpg"
 
 const ProfilePost = () => {
 
@@ -19,7 +19,7 @@ const ProfilePostContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url(${design5});
+    background-image: url(${Design5});
     background-position: center;
     background-size: 100% 100%;
 `

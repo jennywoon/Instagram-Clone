@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { GoGear } from "react-icons/go";
-import test2 from "../assets/test2.jpg"
+import Test2 from "../assets/Test2.jpg"
 
 const ProfileEdit = () => {
 
@@ -60,7 +60,7 @@ const UserImg = styled.div`
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    background-image: url(${test2});
+    background-image: url(${Test2});
     background-position: center;
     background-size: 100% 100%;
 `

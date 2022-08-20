@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import design1 from "../assets/design1.jpg"
-import design2 from "../assets/design2.jpg"
-import design3 from "../assets/design3.jpg"
-import design4 from "../assets/design4.jpg"
+import Design1 from "../assets/Design1.jpg"
+import Design2 from "../assets/Design2.jpg"
+import Design3 from "../assets/Design3.jpg"
+import Design4 from "../assets/Design4.jpg"
 import { AiOutlineCopyrightCircle } from "react-icons/ai";
 
 const MainRecommend = () => {
@@ -79,10 +79,11 @@ export default MainRecommend;
 
 const Container = styled.div`
     width: 420px;
-    height: 811px;
+    /* height: 811px; */
+    /* height: 100vh; */
     display: flex;
     /* justify-content: center; */
-    align-items: center;
+    /* align-items: center; */
     flex-direction: column;
     margin-top: 25px;
 `
@@ -148,7 +149,7 @@ const RecommentWrap = styled.div`
 `
 
 const RecommendFirstImg = styled.div`
-    background-image: url(${design1});
+    background-image: url(${Design1});
     border: 1px solid #bebebe;
     width: 32px;
     height: 32px;
@@ -157,7 +158,7 @@ const RecommendFirstImg = styled.div`
     background-size: 100% 100%;
 `
 const RecommendSecondImg = styled.div`
-    background-image: url(${design2});
+    background-image: url(${Design2});
     border: 1px solid #bebebe;
     width: 32px;
     height: 32px;
@@ -166,7 +167,7 @@ const RecommendSecondImg = styled.div`
     background-size: 100% 100%;
 `
 const RecommendThirdImg = styled.div`
-    background-image: url(${design3});
+    background-image: url(${Design3});
     border: 1px solid #bebebe;
     width: 32px;
     height: 32px;
@@ -175,7 +176,7 @@ const RecommendThirdImg = styled.div`
     background-size: 100% 100%;
 `
 const RecommendFourthImg = styled.div`
-    background-image: url(${design4});
+    background-image: url(${Design4});
     border: 1px solid #bebebe;
     width: 32px;
     height: 32px;

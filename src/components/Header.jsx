@@ -1,21 +1,20 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { MdHome } from "react-icons/md";
-import { IoPaperPlaneOutline, IoCompassOutline, IoBookmarkOutline } from "react-icons/io5";
+import { IoPaperPlaneOutline, IoCompassOutline} from "react-icons/io5";
 import { TbSquarePlus } from "react-icons/tb";
 import { AiOutlineHeart } from "react-icons/ai";
-import instagram from "../assets/instagram.png"
+import Instagram from "../assets/Instagram.png"
 import { useNavigate } from "react-router-dom";
-import test2 from "../assets/test2.jpg"
-import { GoGear } from "react-icons/go";
-import { BiUserCircle } from "react-icons/bi";
-import { TbExchange } from "react-icons/tb";
+import Test2 from "../assets/Test2.jpg"
+// import { GoGear } from "react-icons/go";
+// import { BiUserCircle } from "react-icons/bi";
+// import { TbExchange } from "react-icons/tb";
 import ProfileModal from "./ProfileModal";
 
 
 const Header = () => {
     const [show, setShow] = useState(false);
-
 
     const navigate = useNavigate();
 
@@ -29,6 +28,7 @@ const Header = () => {
                 />
                 <StInput
                     placeholder="검색"
+                    
                 ></StInput>
                 <NavbarIcons>
                     <MdHome size="30" style={{ cursor: "pointer" }} />
@@ -83,7 +83,7 @@ const NavbarContainer = styled.div`
     /* z-index: 10; */
 `
 const Logo = styled.div`
-    background-image: url(${instagram});
+    background-image: Url(${Instagram});
     min-width: 150px;
     min-height: 60px;
     background-size: contain;
@@ -98,6 +98,7 @@ const StInput = styled.input`
     padding: 0 10px 0 16px;
     border-radius: 8px;
     border: none;
+    outline: none;
     height: 36px;
     width: 268px;
 `
@@ -115,7 +116,7 @@ const UserImage = styled.image`
     width: 26px;
     height: 26px;
     border-radius: 50px;
-    background-image: url(${test2});
+    background-image: url(${Test2});
     background-position: center;
     background-size: 100% 100%;
 `

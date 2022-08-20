@@ -9,6 +9,7 @@ import LoginPage from "../pages/LoginPage";
 import MainPage from "../pages/MainPage"
 import Mypage from "../pages/MyPage";
 import RegisterPage from "../pages/RegisterPage";
+import TestPage from "../pages/TestPage";
 
 const Router = () => {
   return (
@@ -25,6 +26,8 @@ const Router = () => {
         <Route path="/postdetail" element={<PostDetail />} />
         <Route path="/option" element={<PostOption />} />
         <Route path="/myOption" element={<PostMyOption />} />
+
+        <Route path="test" element={<TestPage/>} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,12 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
-import test from "../assets/test.jpg"
+import Test from "../assets/Test.jpg"
 import { AiOutlineHeart } from "react-icons/ai";
 import { IoChatbubbleOutline, IoPaperPlaneOutline, IoBookmarkOutline } from "react-icons/io5";
 import { VscSmiley } from "react-icons/vsc";
+import { __getInstas } from "../redux/modules/InstaSlice";
+// import { useParams } from "react-router-dom";
 
-const MainPost = () => {
+
+const MainPost = ({insta}) => {
+
+    const dispatch = useDispatch();
+    // const param = useParams;
+    // const {instas} = useSelector((state) => state.instas);
+    // const insta = instas.find((insta) => insta.id === parseInt(param.id));
+
+    useEffect(() => {
+        dispatch(__getInstas());
+    }, [dispatch])
+
     return (
         <PostContainer>
             <PostHeader>
@@ -34,7 +48,7 @@ const MainPost = () => {
             <ContentWrap>
                 <ContentFirstSection>
                     <UserLabel>user_name</UserLabel>
-                    <PostContent>내용이 들어갈 자리입니다</PostContent>
+                    <PostContent>{insta.content}</PostContent>
                 </ContentFirstSection>
                 <CommentCount>
                     댓글 0개 보기
@@ -93,7 +107,7 @@ const UserLabel = styled.div`
 const PostImg = styled.div`
     width: 100%;
     height: 525px;
-    background-image: url(${test});
+    background-Image: url(${Test});
     background-position: center;
     background-size: 100% 100%;
 `

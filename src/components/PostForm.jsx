@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import styled from 'styled-components'
 import { BsImages } from 'react-icons/bs'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
@@ -6,16 +6,46 @@ import Button from './elements/Button'
 import { VscSmiley } from "react-icons/vsc";
 import { RiMapPin2Line } from 'react-icons/ri'
 import { IoIosArrowDown } from 'react-icons/io'
+import { useDispatch } from 'react-redux'
+import { __getInstas, __postInstas } from '../redux/modules/InstaSlice'
 
 
 const PostForm = () => {
+  
+  const dispatch = useDispatch();
+
+  const [insta, setInsta] = useState({
+    content: "",
+  })
+
+  useEffect(() => {
+    dispatch(__getInstas());
+  }, [dispatch]);
+
+  const {content} = insta;
+
+  const onChangeHandler = (e) => {
+    const {value, name} = e.target;
+    setInsta({
+      ...insta,
+      [name]: value,
+    });
+  };
+
+  console.log(insta);
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    dispatch(__postInstas(insta));
+  }
+
   return (
-    <StyledBackground>
+    <StyledBackground onSubmit={onSubmitHandler}>
       <StyledUploadBox>
         <StyledUploadBoxHeader>
           <AiOutlineArrowLeft />
           <p style={{ position: 'relative', left: '15px' }}>새 게시물 만들기</p>
-          <Button backgroundColor='none' color='#0095F6' padding='0.5rem'>공유하기</Button>
+          <Button backgroundColor='none' color='#0095F6' padding='0.5rem' type="submit">공유하기</Button>
         </StyledUploadBoxHeader>
 
         <StyledBoxBody>
@@ -27,7 +57,13 @@ const PostForm = () => {
               <UserImg />
               <UserLabel>user_name</UserLabel>
             </FirstHeader>
-            <StyledTextarea placeholder='문구 입력...'></StyledTextarea>
+            <StyledTextarea 
+            placeholder='문구 입력...'
+            maxLength="2200"
+            name="content"
+            value={content}
+            onChange={onChangeHandler}
+            ></StyledTextarea>
             <CommentWrap>
               <CommentFirstSection>
                 <div>
@@ -67,7 +103,7 @@ const PostForm = () => {
   )
 }
 
-const StyledBackground = styled.div`
+const StyledBackground = styled.form`
   width:100vw;
   height: 100vh;
   background: rgba(0,0,0,.5);
@@ -153,6 +189,8 @@ const StyledTextarea = styled.textarea`
   border: none;
   outline: none;
 `
+
+const StInput = styled.input``
 
 const CommentWrap = styled.div`
   border-bottom: 1px solid rgb(219,219,219);
