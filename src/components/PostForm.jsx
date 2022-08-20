@@ -15,6 +15,8 @@ const PostForm = () => {
   
   const dispatch = useDispatch();
 
+  const [files, setFiles] = useState([]);
+
   const [insta, setInsta] = useState({
     content: "",
   })
@@ -40,8 +42,6 @@ const PostForm = () => {
     dispatch(__postInstas(insta));
   }
 
-const PostForm = () => {
-  const [files, setFiles] = useState([]);
 
   return (
     <StyledBackground onSubmit={onSubmitHandler}>
@@ -106,6 +106,7 @@ const PostForm = () => {
     </StyledBackground>
   )
 }
+
 
 const StyledBackground = styled.form`
   width:100vw;
@@ -218,4 +219,4 @@ const UploadLable = styled.div`
     padding-right: 15px;
 `
 
-export default PostForm
+export default PostForm;
