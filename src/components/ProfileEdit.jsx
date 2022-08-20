@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { GoGear } from "react-icons/go";
-import Test2 from "../assets/Test2.jpg"
+import Test2 from "../assets/test2.jpg"
 
 const ProfileEdit = () => {
 
@@ -14,7 +14,7 @@ const ProfileEdit = () => {
                 <FirstWrap>
                     <UserLable>user_name</UserLable>
                     <StEditButton>프로필 편집</StEditButton>
-                    <GoGear size="25"/>
+                    <GoGear size="25" />
                 </FirstWrap>
                 <SecondWrap>
                     <PostWrap>

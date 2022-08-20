@@ -24,7 +24,7 @@ const FileUpload = ({ files, setFiles }) => {
 
   useEffect(() => {
     // Make sure to revoke the data uris to avoid memory leaks, will run on unmount
-    return () => files.forEach(file => URL.revokeObjectURL(file[0].preview));
+    return () => files && files.forEach(file => URL.revokeObjectURL(file[0].preview));
   }, []);
 
   return (
@@ -76,7 +76,7 @@ const StyledImageContainer = styled.div`
   box-sizing:border-box;
   display: flex;
   overflow-x: scroll;
-  background: #fff;
+  background: #eee;
   scrollbar-width: none;
   border-bottom-left-radius: 20px;
   &::-webkit-scrollbar {

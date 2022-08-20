@@ -1,20 +1,27 @@
-import React from "react";
-import { useSelector } from "react-redux"
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux"
 import styled from "styled-components";
 import MainPost from "./MainPost";
 import MainRecommend from "./MainRecommend";
+import { __getInstas } from "../redux/modules/InstaSlice";
 
 const Main = () => {
+    const dispatch = useDispatch();
 
     const { instas } = useSelector((state) => state.instas)
+
+
+    useEffect(() => {
+        dispatch(__getInstas());
+    }, [dispatch])
 
     return (
         <MainContainer>
             <MainList>
                 {instas?.map((insta, index) => (
                     <MainPost
-                    key={index}
-                    insta={insta}/>
+                        key={index}
+                        insta={insta} />
                 ))}
             </MainList>
             <MainRecommend />
