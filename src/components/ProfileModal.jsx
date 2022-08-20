@@ -31,7 +31,7 @@ const ProfileModal = ({ show }) => {
           <p style={{ margin: 0 }}>계정 전환</p>
         </StyledUploadBoxHeader>
         <StyledUploadBoxHeader>
-          <p style={{ margin: 0 }}>링크 복사</p>
+          <p style={{ margin: 0 }}>로그아웃</p>
         </StyledUploadBoxHeader>
       </StyledUploadBox>
     </StyledShowBox>
