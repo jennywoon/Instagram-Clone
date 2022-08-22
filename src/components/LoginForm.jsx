@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, { useEffect, useState } from 'react'
 import Input from './elements/Input'
 import Button from './elements/Button'
 import styled from 'styled-components';
@@ -15,32 +15,51 @@ const LoginForm = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [userInfo, onChangeUserInfo, reset] = useInputs({
+
+  const [userInfo, setUserInfo] = useState({
     username: "",
     password: "",
   });
+
+  const onChangeUserName = (e) => {
+    const { value } = e.target;
+    setUserInfo({
+      ...userInfo,
+      username: value
+    })
+  }
+
+  const onChangeUserPassword = (e) => {
+    const { value } = e.target;
+    setUserInfo({
+      ...userInfo,
+      password: value
+    })
+  }
+
 
   useEffect(() => {
     if (cookieCkeck()) {
       alert("이미 로그인 하셨습니다.");
       navigate("/");
-    } else {
-      return;
     }
+    // else {
+    //   return;
+    // }
   }, []);
 
-  const { username, password } = userInfo;
 
+  console.log('userInfo', userInfo);
   const __postLogin = async () => {
     try {
-      console.log(userInfo);
+      console.log('userInfo', userInfo);
       const data = await axios.post(`${API_BASE}/login`, userInfo);
       setTokenToCookie(data.headers.authorization);
       navigate("/");
     } catch (error) {
-      if (username.trim() === "") {
+      if (userInfo.username.trim() === "") {
         return alert("로그인 정보를 입력해 주세요.");
-      } else if (password.trim() === "") {
+      } else if (userInfo.password.trim() === "") {
         return alert("비밀번호를 입력해 주세요.");
       }
       return alert("로그인에 실패하였습니다.");
@@ -50,7 +69,10 @@ const LoginForm = () => {
   const onCreate = (e) => {
     e.preventDefault();
     __postLogin(userInfo);
-    reset();
+    setUserInfo({
+      username: "",
+      password: ""
+    })
   };
 
   return (
@@ -59,13 +81,13 @@ const LoginForm = () => {
         <StyledTitle>
           Instagram
         </StyledTitle>
-        <Input 
-        width='200px' padding='12px 20px' placeholder='아이디' 
-        name="username" value={username} onChange={onChangeUserInfo} type="text"
+        <Input
+          width='200px' padding='12px 20px' placeholder='아이디'
+          name="username" value={userInfo.username} onChange={(e) => onChangeUserName(e)} type="text"
         />
-        <Input 
-        width='200px' padding='12px 20px' placeholder='비밀번호' 
-        name="password"  value={password} onChange={onChangeUserInfo} type="password"
+        <Input
+          width='200px' padding='12px 20px' placeholder='비밀번호'
+          name="password" value={userInfo.password} onChange={(e) => onChangeUserPassword(e)} type="password"
         />
         <Button
           width='245px'
@@ -86,7 +108,7 @@ const LoginForm = () => {
           backgroundColor='#FFE500'
           color='#000'
         >카카오톡으로 로그인</Button> */}
-        <KakaoLogin/>
+        <KakaoLogin />
       </StyledForm >
       <StyledBox>
         <p>계정이 없으신가요? <span style={{ color: '#0095F6' }}>가입하기</span></p>
