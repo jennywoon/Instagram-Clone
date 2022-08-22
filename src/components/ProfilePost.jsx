@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Design5 from "../assets/Design5.jpg"
+import Design5 from "../assets/design5.jpg"
 
 const ProfilePost = () => {
 

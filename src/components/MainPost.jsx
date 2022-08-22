@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
-import Test from "../assets/Test.jpg"
+import Test from "../assets/test.jpg"
 import { AiOutlineHeart } from "react-icons/ai";
 import { IoChatbubbleOutline, IoPaperPlaneOutline, IoBookmarkOutline } from "react-icons/io5";
 import { VscSmiley } from "react-icons/vsc";
@@ -43,57 +43,57 @@ const MainPost = ({ insta }) => {
     }
 
     return (
-            <PostContainer onSubmit={onSubmitHandler}>
-                <PostHeader>
-                    <FirstHeader>
-                        <UserImg />
-                        <UserLabel>user_name</UserLabel>
-                    </FirstHeader>
-                    <BiDotsHorizontalRounded style={{ paddingRight: "15px" }} />
-                </PostHeader>
-                <PostImg />
-                <LikeFirstBar>
-                    <LikeBarSection>
-                        <AiOutlineHeart size="30" style={{ cursor: "pointer" }} />
-                        <IoChatbubbleOutline
-                            size="28" style={{ cursor: "pointer" }}
-                        />
-                        <IoPaperPlaneOutline size="28" style={{ cursor: "pointer" }} />
-                    </LikeBarSection>
-                    <IoBookmarkOutline size="27" style={{ paddingRight: "10px", cursor: "pointer" }} />
-                </LikeFirstBar>
-                <LikeSecondBar>
-                    <UserLikeImg />
-                    <UserLikeLable>
-                        00명이 좋아합니다.
-                    </UserLikeLable>
-                </LikeSecondBar>
-                <ContentWrap>
-                    <ContentFirstSection>
-                        <UserLabel>user_name</UserLabel>
-                        <PostContent>{insta.content}</PostContent>
-                    </ContentFirstSection>
-                    <CommentCount>
-                        댓글 0개 보기
-                    </CommentCount>
-                    <ContentTime>
-                        예시: 6시간 전
-                    </ContentTime>
-                </ContentWrap>
-                <CommentWrap>
-                    <CommentFirstSection>
-                        <VscSmiley size="26" style={{ padding: "0 10px" }} />
-                        <CommentInput
-                            type="text"
-                            name="content"
-                            value={content}
-                            onChange={onChangeHandler}
-                        />
-                    </CommentFirstSection>
-                    {/* <UploadLable>게시</UploadLable> */}
-                    <UploadButton>게시</UploadButton>
-                </CommentWrap>
-            </PostContainer>
+        <PostContainer onSubmit={onSubmitHandler}>
+            <PostHeader>
+                <FirstHeader>
+                    <UserImg />
+                    <UserLabel>user_name</UserLabel>
+                </FirstHeader>
+                <BiDotsHorizontalRounded style={{ paddingRight: "15px" }} />
+            </PostHeader>
+            <PostImg />
+            <LikeFirstBar>
+                <LikeBarSection>
+                    <AiOutlineHeart size="30" style={{ cursor: "pointer" }} />
+                    <IoChatbubbleOutline
+                        size="28" style={{ cursor: "pointer" }}
+                    />
+                    <IoPaperPlaneOutline size="28" style={{ cursor: "pointer" }} />
+                </LikeBarSection>
+                <IoBookmarkOutline size="27" style={{ paddingRight: "10px", cursor: "pointer" }} />
+            </LikeFirstBar>
+            <LikeSecondBar>
+                <UserLikeImg />
+                <UserLikeLable>
+                    00명이 좋아합니다.
+                </UserLikeLable>
+            </LikeSecondBar>
+            <ContentWrap>
+                <ContentFirstSection>
+                    <UserLabel>user_name</UserLabel>
+                    <PostContent>{insta.content}</PostContent>
+                </ContentFirstSection>
+                <CommentCount>
+                    댓글 0개 보기
+                </CommentCount>
+                <ContentTime>
+                    예시: 6시간 전
+                </ContentTime>
+            </ContentWrap>
+            <CommentWrap>
+                <CommentFirstSection>
+                    <VscSmiley size="26" style={{ padding: "0 10px" }} />
+                    <CommentInput
+                        type="text"
+                        name="content"
+                        value={content}
+                        onChange={onChangeHandler}
+                    />
+                </CommentFirstSection>
+                {/* <UploadLable>게시</UploadLable> */}
+                <UploadButton>게시</UploadButton>
+            </CommentWrap>
+        </PostContainer>
     )
 }
 
