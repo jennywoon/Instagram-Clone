@@ -12,6 +12,8 @@ import RegisterPage from "../pages/RegisterPage";
 import TestPage from "../pages/TestPage";
 
 const Router = () => {
+
+  
   return (
     <BrowserRouter>
       <Routes>

@@ -1,7 +1,7 @@
 import React from "react";
 import PostDetailForm from "./PostDetailForm";
 import styled from "styled-components"
-import Design1 from "../assets/Design1.jpg"
+import Design1 from "../assets/design1.jpg"
 
 const PostDetail = () => {
 

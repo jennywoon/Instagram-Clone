@@ -31,6 +31,7 @@ const FileUpload = ({ files, setFiles }) => {
 
     <section className="container" style={{ width: '100%' }}>
       <div {...getRootProps({ className: 'dropzone' })} style={{ width: '100%', height: '450px', display: 'flex', justifyContent: 'center' }}>
+
         <input {...getInputProps()} />
         <StyledUploadBoxBody>
           <BsImages style={{ width: '70px', height: '70px' }} />

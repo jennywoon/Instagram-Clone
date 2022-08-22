@@ -6,14 +6,18 @@ import { GoGear } from "react-icons/go";
 import { BiUserCircle } from "react-icons/bi";
 import { TbExchange } from "react-icons/tb";
 
-const ProfileModal = ({ show }) => {
+const ProfileModal = ({
+  profileModalShow,
+}) => {
   const navigate = useNavigate();
 
   return (
     <StyledShowBox>
 
-      <StyledUploadBox style={{ display: show ? 'block' : 'none' }}>
-        <StyledUploadBoxHeader onClick={() => navigate("/mypage")}>
+      <StyledUploadBox style={{ display: profileModalShow ? 'block' : 'none' }}>
+        <StyledUploadBoxHeader onClick={() => {
+          navigate("/mypage")
+        }}>
           <StyledTriangleBox></StyledTriangleBox>
           <BiUserCircle size="20" style={{ paddingRight: "10px" }} />
           <p style={{ margin: 0 }}>프로필</p>
