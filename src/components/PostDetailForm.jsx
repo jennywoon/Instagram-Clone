@@ -9,15 +9,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { __getComments, __getInstas, __postComments } from "../redux/modules/InstaSlice";
 import PostDetailFormComment from "./PostDetailFormComment";
 
-const PostDetailForm = () => {
+const PostDetailForm = ({ username, boardContent, commentList }) => {
 
     const dispatch = useDispatch();
     const param = useParams();
-    const comments = useSelector((state) => state.instas.comments);
+    // const comments = useSelector((state) => state.instas.comments);
 
-    useEffect(() => {
-        dispatch(__getComments(param.id))
-    }, [dispatch]);
+    // useEffect(() => {
+    //     dispatch(__getComments(param.id))
+    // }, [dispatch]);
 
     const [comment, setComment] = useState({
         content: "",
@@ -58,8 +58,8 @@ const PostDetailForm = () => {
                         <UserImg />
                     </FirstSection>
                     <SecondSection>
-                        <UserLabel>user_name</UserLabel>
-                        <PostContent>내용</PostContent>
+                        <UserLabel>{username}</UserLabel>
+                        <PostContent>{boardContent}</PostContent>
                     </SecondSection>
                 </PostContentContainer>
                 <PostBottom>
@@ -68,9 +68,9 @@ const PostDetailForm = () => {
                 </FirstSection>
                 <UserLabel>user_name</UserLabel>
                 <PostComment>댓글 내용</PostComment> */}
-                    {comments.map((v) => (
-                        <div key={v.id}>
-                            <PostDetailFormComment comment={v} />
+                    {commentList.map((comment) => (
+                        <div key={comment.id}>
+                            <PostDetailFormComment comment={comment} />
                         </div>
                     ))}
                 </PostBottom>

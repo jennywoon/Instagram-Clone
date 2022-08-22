@@ -9,6 +9,8 @@ const Main = () => {
     const dispatch = useDispatch();
 
     const { instas } = useSelector((state) => state.instas)
+    const data = useSelector((state) => state.instas.instas.result)
+    console.log('instas', instas, 'data', data && data.data.BoardInfo)
 
     useEffect(() => {
         dispatch(__getInstas())
@@ -18,10 +20,15 @@ const Main = () => {
     return (
         <MainContainer>
             <MainList>
-                {instas?.map((insta, index) => (
+                {data && data.data.BoardInfo.map((insta) => (
                     <MainPost
-                        key={index}
-                        insta={insta} />
+                        key={insta.boardId}
+                        boardId={insta.boardId}
+                        boardContent={insta.content}
+                        commentCount={insta.commentCount}
+                        img={insta.imgUrl}
+                        username={insta.username}
+                    />
                 ))}
             </MainList>
             {/* <MainPost/> */}

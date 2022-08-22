@@ -1,16 +1,16 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+// import dotenv from "dotenv";
+// dotenv.config();
 
-const API_BASE = process.env.REACT_APP_INSTAS_API_URL;
+const API_BASE = 'http://43.200.171.29:8080/api'
+console.log('API_BASE', API_BASE);
 
 const initialState = {
     instas: [],
-    // insta: {
-    //     comments: [],
-    // },
+    insta: null,
     isLoading: false,
     error: null,
-    comments: [],
 };
 
 export const __getInstas = createAsyncThunk("instas/getInstas", async (payload, thunkAPI) => {
@@ -20,13 +20,14 @@ export const __getInstas = createAsyncThunk("instas/getInstas", async (payload, 
         console.log(data.data)
         return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
+        console.log('error', error);
         return thunkAPI.rejectWithValue(error);
     }
 });
 
 export const __postInstas = createAsyncThunk("instas/postInstas", async (payload, thunkAPI) => {
     try {
-        const data = await axios.post("http://localhost:3001/instas", payload);
+        const data = await axios.post(`${API_BASE}/board/write`, payload);
         return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
         return thunkAPI.rejectWithValue(error);
@@ -34,9 +35,11 @@ export const __postInstas = createAsyncThunk("instas/postInstas", async (payload
 });
 
 export const __getComments = createAsyncThunk("comments/getComments", async (payload, thunkAPI) => {
+    console.log('payload', payload);
     try {
-        const data = await axios.get('http://localhost:3001/comments');
-        return thunkAPI.fulfillWithValue(data.data);
+        const data = await axios.get(`${API_BASE}/board/details/${payload}`);
+        console.log('data', data.data.result);
+        return thunkAPI.fulfillWithValue(data.data.result);
     } catch (error) {
         return thunkAPI.rejectWithValue(error);
     }
@@ -44,9 +47,9 @@ export const __getComments = createAsyncThunk("comments/getComments", async (pay
 
 export const __postComments = createAsyncThunk("comments/postComments", async (payload, thunkAPI) => {
     try {
-        const data = await axios.post('http://localhost:3001/comments', payload);
+        // const data = await axios.post(`${API_BASE}/board/details/${payload.boardId}`, payload);
         // return thunkAPI.fulfillWithValue(payload);
-        return thunkAPI.fulfillWithValue(data.data);
+        // return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
         return thunkAPI.rejectWithValue("ERROR=>", error);
     }
@@ -84,7 +87,7 @@ export const InstaSlice = createSlice({
         },
         [__getComments.fulfilled]: (state, action) => {
             state.isLoading = false;
-            state.comments = action.payload;
+            state.insta = action.payload;
         },
         [__getComments.rejected]: (state, action) => {
             state.isLoading = false;
