@@ -9,7 +9,7 @@ import { VscSmiley } from "react-icons/vsc";
 import { __getComments, __getInstas, __postComments, __postInstas } from "../redux/modules/InstaSlice";
 import PostDetail from "./PostDetail";
 
-const MainPost = ({ insta }) => {
+const MainPost = ({ boardId, boardContent, commentCount, img, username }) => {
 
     const dispatch = useDispatch();
 
@@ -19,7 +19,7 @@ const MainPost = ({ insta }) => {
     const showModal = () => {
         setModalOpen(true);
     }
-    
+
     // 댓글 POST
     const [comment, setComment] = useState({
         content: "",
@@ -27,7 +27,7 @@ const MainPost = ({ insta }) => {
 
     // comment POST, GET 구현
     useEffect(() => {
-        dispatch(__getComments());
+        dispatch(__getComments(boardId));
     }, [dispatch]);
 
     const { content } = comment;
@@ -48,7 +48,7 @@ const MainPost = ({ insta }) => {
     return (
         <>
             <PostContainer onSubmit={onSubmitHandler}>
-            {modalOpen && <PostDetail setModalOpen={setModalOpen}/>}
+                {modalOpen && <PostDetail setModalOpen={setModalOpen} boardId={boardId} />}
                 <PostHeader>
                     <FirstHeader>
                         <UserImg />
@@ -56,7 +56,13 @@ const MainPost = ({ insta }) => {
                     </FirstHeader>
                     <BiDotsHorizontalRounded style={{ paddingRight: "15px" }} />
                 </PostHeader>
-                <PostImg />
+
+                <PostImg>
+                    {img.map((img) => (
+                        <img src={img} />
+                    ))}
+                </PostImg>
+
                 <LikeFirstBar>
                     <LikeBarSection>
                         <AiOutlineHeart size="30" style={{ cursor: "pointer" }} />
@@ -76,11 +82,11 @@ const MainPost = ({ insta }) => {
                 </LikeSecondBar>
                 <ContentWrap>
                     <ContentFirstSection>
-                        <UserLabel>user_name</UserLabel>
-                        <PostContent>{insta.content}</PostContent>
+                        <UserLabel>{username}</UserLabel>
+                        <PostContent>{boardContent}</PostContent>
                     </ContentFirstSection>
                     <CommentCount>
-                        댓글 0개 보기
+                        댓글 {commentCount}개 보기
                     </CommentCount>
                     <ContentTime>
                         예시: 6시간 전
@@ -100,8 +106,8 @@ const MainPost = ({ insta }) => {
                     <UploadButton>게시</UploadButton>
                 </CommentWrap>
             </PostContainer>
-            
-            </>
+
+        </>
     )
 }
 
@@ -144,7 +150,9 @@ const UserLabel = styled.div`
 const PostImg = styled.div`
     width: 100%;
     height: 525px;
-    background-Image: url(${test});
+    display: flex;
+    overflow-x: scroll;
+    overflow-y: hidden;
     background-position: center;
     background-size: 100% 100%;
 `

@@ -1,22 +1,42 @@
 import React, { useState, useRef, useEffect } from "react";
 import PostDetailForm from "./PostDetailForm";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components"
 import design1 from "../assets/design1.jpg"
+import { __getComments } from "../redux/modules/InstaSlice";
 
-const PostDetail = ({ setModalOpen }) => {
+const PostDetail = ({ setModalOpen, boardId }) => {
 
+
+    console.log('boardId', boardId)
+    const dispatch = useDispatch();
+    const data = useSelector((state) => state.instas.insta.data)
+
+    console.log('data', data.imgUrl);
     const modalRef = useRef(null);
 
     const closeModal = (e) => {
-        if(!modalRef.current.contains(e.target))
-        setModalOpen(false);
+        if (!modalRef.current.contains(e.target))
+            setModalOpen(false);
     };
+
+    useEffect(() => {
+        dispatch(__getComments(boardId));
+    }, [dispatch]);
 
     return (
         <Background onClick={closeModal}>
             <PostDetailContainer ref={modalRef}>
-                <PostImg />
-                <PostDetailForm />
+                <PostImg>
+                    {data.imgUrl.map((img) => (
+                        <img src={img} />
+                    ))}
+                </PostImg>
+                <PostDetailForm
+                    commentList={data.commentList}
+                    boardContent={data.content}
+                    username={data.username}
+                />
             </PostDetailContainer>
         </Background>
     )
@@ -45,7 +65,10 @@ const PostDetailContainer = styled.div`
 const PostImg = styled.div`
     width: 826px;
     height: 870px;
-    background-image: url(${design1});
+    display: flex;
+    overflow-y:hidden;
+    overflow-x:scroll;
     background-position: center;
     background-size: 100% 96%;
+
 `
