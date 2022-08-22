@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { GoGear } from "react-icons/go";
-import Test2 from "../assets/Test2.jpg"
+import Test2 from "../assets/test2.jpg"
 
 const ProfileEdit = () => {
 

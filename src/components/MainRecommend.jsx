@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import Design1 from "../assets/Design1.jpg"
-import Design2 from "../assets/Design2.jpg"
-import Design3 from "../assets/Design3.jpg"
-import Design4 from "../assets/Design4.jpg"
+import Design1 from "../assets/design1.jpg"
+import Design2 from "../assets/design2.jpg"
+import Design3 from "../assets/design3.jpg"
+import Design4 from "../assets/design4.jpg"
 import { AiOutlineCopyrightCircle } from "react-icons/ai";
 
 const MainRecommend = () => {

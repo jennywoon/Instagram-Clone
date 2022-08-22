@@ -11,7 +11,10 @@ import { __getInstas, __postInstas } from '../redux/modules/InstaSlice'
 import FileUpload from './utils/FileUpload'
 
 
-const PostForm = () => {
+const PostForm = ({
+  uploadModalShow,
+  setUploadModalShow,
+}) => {
 
   const dispatch = useDispatch();
 
@@ -28,6 +31,7 @@ const PostForm = () => {
   const { content } = insta;
 
   const onChangeHandler = (e) => {
+    console.log(uploadModalShow);
     const { value, name } = e.target;
     setInsta({
       ...insta,
@@ -39,84 +43,112 @@ const PostForm = () => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
+    e.stopPropagation();
     dispatch(__postInstas(insta));
   }
 
 
   return (
-    <StyledBackground onSubmit={onSubmitHandler}>
-      <StyledUploadBox>
-        <StyledUploadBoxHeader>
-          <AiOutlineArrowLeft />
-          <p style={{ position: 'relative', left: '15px' }}>새 게시물 만들기</p>
-          <Button backgroundColor='none' color='#0095F6' padding='0.5rem' type="submit">공유하기</Button>
-        </StyledUploadBoxHeader>
+    <>
+      <StyledBackground onClick={(e) => {
+        setUploadModalShow(false);
+      }}>
+      </StyledBackground>
+      <StyledUploadContainer onSubmit={onSubmitHandler}>
+        <StyledUploadBox>
+          <StyledUploadBoxHeader>
+            <AiOutlineArrowLeft onClick={() => setUploadModalShow(false)} />
+            <p style={{ position: 'relative', left: '15px' }}>새 게시물 만들기</p>
+            <Button backgroundColor='none' color='#0095F6' padding='0.5rem' type="submit">공유하기</Button>
+          </StyledUploadBoxHeader>
 
-        <StyledBoxBody>
-          <StyledUploadBoxBody>
-            <FileUpload files={files} setFiles={setFiles} />
-          </StyledUploadBoxBody>
-          <StyledFormBoxBody>
-            <FirstHeader>
-              <UserImg />
-              <UserLabel>user_name</UserLabel>
-            </FirstHeader>
-            <StyledTextarea
-              placeholder='문구 입력...'
-              maxLength="2200"
-              name="content"
-              value={content}
-              onChange={onChangeHandler}
-            ></StyledTextarea>
-            <CommentWrap>
-              <CommentFirstSection>
-                <div>
-                  <VscSmiley size="26" style={{ padding: "0 15px" }} />
-                </div>
-                <UploadLable>0/2,200</UploadLable>
-              </CommentFirstSection>
-            </CommentWrap>
-            <CommentWrap>
-              <CommentFirstSection>
-                <div>
-                  위치 추가
-                </div>
-                <RiMapPin2Line />
-              </CommentFirstSection>
-            </CommentWrap>
-            <CommentWrap>
-              <CommentFirstSection>
-                <div>
-                  접근성
-                </div>
-                <IoIosArrowDown />
-              </CommentFirstSection>
-            </CommentWrap>
-            <CommentWrap>
-              <CommentFirstSection>
-                <div>
-                  고급 설정
-                </div>
-                <IoIosArrowDown />
-              </CommentFirstSection>
-            </CommentWrap>
-          </StyledFormBoxBody>
-        </StyledBoxBody>
-      </StyledUploadBox>
-    </StyledBackground>
+          <StyledBoxBody>
+            <StyledUploadBoxBody>
+              <FileUpload files={files} setFiles={setFiles} />
+            </StyledUploadBoxBody>
+            <StyledFormBoxBody>
+              <FirstHeader>
+                <UserImg />
+                <UserLabel>user_name</UserLabel>
+              </FirstHeader>
+              <StyledTextarea
+                placeholder='문구 입력...'
+                maxLength="2200"
+                name="content"
+                value={content}
+                onChange={onChangeHandler}
+              ></StyledTextarea>
+              <CommentWrap>
+                <CommentFirstSection>
+                  <div>
+                    <VscSmiley size="26" style={{ padding: "0 15px" }} />
+                  </div>
+                  <UploadLable>0/2,200</UploadLable>
+                </CommentFirstSection>
+              </CommentWrap>
+              <CommentWrap>
+                <CommentFirstSection>
+                  <div>
+                    위치 추가
+                  </div>
+                  <RiMapPin2Line />
+                </CommentFirstSection>
+              </CommentWrap>
+              <CommentWrap>
+                <CommentFirstSection>
+                  <div>
+                    접근성
+                  </div>
+                  <IoIosArrowDown />
+                </CommentFirstSection>
+              </CommentWrap>
+              <CommentWrap>
+                <CommentFirstSection>
+                  <div>
+                    고급 설정
+                  </div>
+                  <IoIosArrowDown />
+                </CommentFirstSection>
+              </CommentWrap>
+            </StyledFormBoxBody>
+          </StyledBoxBody>
+        </StyledUploadBox>
+      </StyledUploadContainer>
+    </>
   )
 }
 
 
-const StyledBackground = styled.form`
+const StyledBackground = styled.div`
   width:100vw;
   height: 100vh;
   background: rgba(0,0,0,.5);
-  z-index:10;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: fixed;
+  top:0;
+  left:0;
+  z-index:99;
+
 `
+
+const StyledUploadContainer = styled.form`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width:900px;
+  height: 800px;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  margin:auto;
+  z-index:100;
+`
+
+
 
 const StyledUploadBox = styled.div`
   width: 900px;
