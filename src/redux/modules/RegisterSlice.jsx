@@ -2,18 +2,22 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const API_BASE = process.env.REACT_APP_INSTAS_API_URL;
-console.log(API_BASE);
 
 const initialState = {
+    // instas: [],
     isLoading: false,
     error: null,
 };
 
 export const __postRegister = createAsyncThunk("register/postRegister", async (payload, thunkAPI) => {
     try {
-        await axios.post(`${API_BASE}/signup`, payload)
+        console.log(payload)
+        const data = await axios.post(`${API_BASE}/signup`, payload)
+        // return thunkAPI.fulfillWithValue(data)
+        // await axios.post("http://localhost:3001/instas", payload)
     } catch (error) {
-        return thunkAPI.rejectWithValue(error.response.data);
+        console.log(error)
+        return thunkAPI.rejectWithValue(error);
     }
 });
 
