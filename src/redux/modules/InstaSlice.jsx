@@ -3,8 +3,8 @@ import axios from "axios";
 // import dotenv from "dotenv";
 // dotenv.config();
 
-// const API_BASE = 'http://43.200.171.29:8080/api'
-const API_BASE = process.env.REACT_APP_INSTAS_API_URL
+// const API_BASE = process.env.REACT_APP_INSTAS_API_URL
+const API_BASE = 'http://43.200.171.29:8080/api'
 console.log('API_BASE', API_BASE);
 
 const initialState = {
