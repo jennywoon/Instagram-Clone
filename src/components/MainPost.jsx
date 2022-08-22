@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
@@ -7,22 +7,25 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { IoChatbubbleOutline, IoPaperPlaneOutline, IoBookmarkOutline } from "react-icons/io5";
 import { VscSmiley } from "react-icons/vsc";
 import { __getComments, __getInstas, __postComments, __postInstas } from "../redux/modules/InstaSlice";
-// import { useParams } from "react-router-dom";
-
+import PostDetail from "./PostDetail";
 
 const MainPost = ({ insta }) => {
 
     const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     dispatch(__getInstas());
-    // }, [dispatch])
+    // 모달 구현
+    const [modalOpen, setModalOpen] = useState(false);
 
-
+    const showModal = () => {
+        setModalOpen(true);
+    }
+    
+    // 댓글 POST
     const [comment, setComment] = useState({
         content: "",
     })
 
+    // comment POST, GET 구현
     useEffect(() => {
         dispatch(__getComments());
     }, [dispatch]);
@@ -43,7 +46,9 @@ const MainPost = ({ insta }) => {
     }
 
     return (
+        <>
             <PostContainer onSubmit={onSubmitHandler}>
+            {modalOpen && <PostDetail setModalOpen={setModalOpen}/>}
                 <PostHeader>
                     <FirstHeader>
                         <UserImg />
@@ -57,6 +62,7 @@ const MainPost = ({ insta }) => {
                         <AiOutlineHeart size="30" style={{ cursor: "pointer" }} />
                         <IoChatbubbleOutline
                             size="28" style={{ cursor: "pointer" }}
+                            onClick={showModal}
                         />
                         <IoPaperPlaneOutline size="28" style={{ cursor: "pointer" }} />
                     </LikeBarSection>
@@ -94,6 +100,8 @@ const MainPost = ({ insta }) => {
                     <UploadButton>게시</UploadButton>
                 </CommentWrap>
             </PostContainer>
+            
+            </>
     )
 }
 

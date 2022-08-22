@@ -7,6 +7,7 @@ import Design4 from "../assets/Design4.jpg"
 import { AiOutlineCopyrightCircle } from "react-icons/ai";
 
 const MainRecommend = () => {
+
     return (
         <Container>
             <MyContainer>
@@ -201,6 +202,7 @@ const RecommendSecondSection = styled.div``
 
 const RecommendFollow = styled.div`
     color: #0095f6;
+    cursor: pointer;
 `
 const RecommendFooter = styled.div`
     width: 195px;

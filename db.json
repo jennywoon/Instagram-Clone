@@ -1,10 +1,6 @@
 {
   "instas": [
     {
-      "content": "adfadfasdf",
-      "id": 1
-    },
-    {
       "content": "민혁님 하이",
       "id": 2
     }
@@ -37,6 +33,10 @@
     {
       "content": "자기전 테스트",
       "id": 7
+    },
+    {
+      "content": "모달 테스트",
+      "id": 8
     }
   ]
 }

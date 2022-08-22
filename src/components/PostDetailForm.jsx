@@ -115,6 +115,7 @@ const PostDetailContainer = styled.form`
     width: 499px;
     height: 870px;
     border-radius: 5px;
+    background-color: white;
 `
 
 const PostHeader = styled.div`

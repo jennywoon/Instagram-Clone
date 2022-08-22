@@ -39,7 +39,7 @@ const MainContainer = styled.div`
     width: 850px;
     height: 100%;
     margin: auto;
-    /* position: absolute; */
+    /* position: relative; */
     display: flex;
 `
 
@@ -49,5 +49,6 @@ const MainList = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
     /* margin-top: 10px; */
 `
