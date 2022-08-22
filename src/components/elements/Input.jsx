@@ -37,7 +37,7 @@ Input.defaultValue = {
   minLength: '',
   maxLength: '',
   text: '',
-  defaultValue: ""
+  defaultValue: "",
 }
 
 export default Input;

@@ -47,7 +47,6 @@ const RegisterForm = () => {
       console.log(username, password);
       await axios.post(
         `${API_BASE}/signup`
-        // "http://localhost:3001/instas"
         , {
         username: username,
         nickname: nickname,
