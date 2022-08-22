@@ -4,9 +4,9 @@ import { MdHome } from "react-icons/md";
 import { IoPaperPlaneOutline, IoCompassOutline } from "react-icons/io5";
 import { TbSquarePlus } from "react-icons/tb";
 import { AiOutlineHeart, AiOutlineHome } from "react-icons/ai";
-import Instagram from "../assets/instagram.png"
+import instagram from "../assets/instagram.png"
 import { useNavigate } from "react-router-dom";
-import Test2 from "../assets/test2.jpg"
+import test2 from "../assets/test2.jpg"
 // import { GoGear } from "react-icons/go";
 // import { BiUserCircle } from "react-icons/bi";
 // import { TbExchange } from "react-icons/tb";
@@ -107,7 +107,7 @@ const NavbarContainer = styled.div`
     
 `
 const Logo = styled.div`
-    background-image: Url(${Instagram});
+    background-image: Url(${instagram});
     min-width: 150px;
     min-height: 60px;
     background-size: contain;
@@ -140,7 +140,7 @@ const UserImage = styled.image`
     width: 26px;
     height: 26px;
     border-radius: 50px;
-    background-image: url(${Test2});
+    background-image: url(${test2});
     background-position: center;
     background-size: 100% 100%;
 `

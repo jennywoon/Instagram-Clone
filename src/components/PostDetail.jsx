@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import PostDetailForm from "./PostDetailForm";
 import styled from "styled-components"
-import Design1 from "../assets/design1.jpg"
+import design1 from "../assets/design1.jpg"
 
 const PostDetail = ({ setModalOpen }) => {
 
@@ -45,7 +45,7 @@ const PostDetailContainer = styled.div`
 const PostImg = styled.div`
     width: 826px;
     height: 870px;
-    background-image: url(${Design1});
+    background-image: url(${design1});
     background-position: center;
     background-size: 100% 96%;
 `

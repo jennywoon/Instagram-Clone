@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
-import Test from "../assets/test.jpg"
+import test from "../assets/test.jpg"
 import { AiOutlineHeart } from "react-icons/ai";
 import { IoChatbubbleOutline, IoPaperPlaneOutline, IoBookmarkOutline } from "react-icons/io5";
 import { VscSmiley } from "react-icons/vsc";
@@ -144,7 +144,7 @@ const UserLabel = styled.div`
 const PostImg = styled.div`
     width: 100%;
     height: 525px;
-    background-Image: url(${Test});
+    background-Image: url(${test});
     background-position: center;
     background-size: 100% 100%;
 `
