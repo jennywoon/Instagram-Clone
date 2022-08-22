@@ -27,8 +27,15 @@ export const __getInstas = createAsyncThunk("instas/getInstas", async (payload, 
 });
 
 export const __postInstas = createAsyncThunk("instas/postInstas", async (payload, thunkAPI) => {
+    console.log('payload', payload)
     try {
-        const data = await axios.post(`${API_BASE}/board/write`, payload);
+        const config = {
+            headers: {
+                "Content-type": false, responseType: 'blob'
+            }
+        }
+        const data = await axios.post(`${API_BASE}/board/write`, payload, config);
+        console.log('data', data)
         return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
         return thunkAPI.rejectWithValue(error);
@@ -39,7 +46,7 @@ export const __getComments = createAsyncThunk("comments/getComments", async (pay
     console.log('payload', payload);
     try {
         const data = await axios.get(`${API_BASE}/board/details/${payload}`);
-        console.log('data', data.data.result);
+        // console.log('data', data.data.result);
         return thunkAPI.fulfillWithValue(data.data.result);
     } catch (error) {
         return thunkAPI.rejectWithValue(error);

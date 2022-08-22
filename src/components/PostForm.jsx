@@ -6,7 +6,7 @@ import Button from './elements/Button'
 import { VscSmiley } from "react-icons/vsc";
 import { RiMapPin2Line } from 'react-icons/ri'
 import { IoIosArrowDown } from 'react-icons/io'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { __getInstas, __postInstas } from '../redux/modules/InstaSlice'
 import FileUpload from './utils/FileUpload'
 
@@ -17,6 +17,8 @@ const PostForm = ({
 }) => {
 
   const dispatch = useDispatch();
+  const data = useSelector((state) => state.instas.insta.data)
+  // console.log('data', data)
 
   const [files, setFiles] = useState([]);
 
@@ -31,20 +33,34 @@ const PostForm = ({
   const { content } = insta;
 
   const onChangeHandler = (e) => {
-    console.log(uploadModalShow);
-    const { value, name } = e.target;
-    setInsta({
-      ...insta,
-      [name]: value,
-    });
+    // console.log(uploadModalShow);
+    const { value } = e.target;
+    setInsta(value);
+    // setInsta({
+    //   ...insta,
+    //   [name]: value,
+    // });
   };
 
-  console.log(insta);
+  console.log('files', files, 'insta', insta);
 
+  const formdata = new FormData();
   const onSubmitHandler = (e) => {
+    const newInsta = {
+      content: insta
+    }
+
     e.preventDefault();
     e.stopPropagation();
-    dispatch(__postInstas(insta));
+
+    files.map((img) => {
+      console.log('img', img[0]);
+      formdata.append('imgUrl', img[0])
+    }
+    )
+
+    formdata.append('content', new Blob([JSON.stringify(newInsta)], { type: "application/json" }))
+    dispatch(__postInstas(formdata));
   }
 
 
