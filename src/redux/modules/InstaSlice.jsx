@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const API_BASE = process.env.REACT_APP_INSTAS_API_URL;
+
 const initialState = {
     instas: [],
     // insta: {
@@ -13,7 +15,8 @@ const initialState = {
 
 export const __getInstas = createAsyncThunk("instas/getInstas", async (payload, thunkAPI) => {
     try {
-        const data = await axios.get("http://localhost:3001/instas")
+        // const data = await axios.get("http://localhost:3001/instas")
+        const data = await axios.get(`${API_BASE}/boards`)
         console.log(data.data)
         return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
