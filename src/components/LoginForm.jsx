@@ -1,10 +1,21 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Input from './elements/Input'
 import Button from './elements/Button'
 import styled from 'styled-components';
 import KakaoLogin from "./KakaoLogin";
 
 const LoginForm = () => {
+
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState("")
+
+  const onIdHandler = (e) => {
+    setId(e.currentTarget.value);
+  }
+
+  const onPasswordHandler = (e) => {
+    setPassword(e.currentTarget.value);
+  }
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
@@ -16,13 +27,20 @@ const LoginForm = () => {
         <StyledTitle>
           Instagram
         </StyledTitle>
-        <Input width='200px' padding='12px 20px' placeholder='아이디' />
-        <Input width='200px' padding='12px 20px' placeholder='비밀번호' />
+        <Input 
+        width='200px' padding='12px 20px' placeholder='아이디' 
+        name="id" type="id" value={id} onChange={onIdHandler}
+        />
+        <Input 
+        width='200px' padding='12px 20px' placeholder='비밀번호' 
+        name="password" typed="password" value={password} onChange={onPasswordHandler}
+        />
         <Button
           width='245px'
           padding='10px 0px'
           backgroundColor='#B2DFFC'
           color='#fff'
+          type="submit"
         >
           로그인
         </Button>

@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const API_BASE = process.env.REACT_APP_INSTAS_API_URL;
+console.log(API_BASE);
 
 const initialState = {
     instas: [],
@@ -10,7 +11,7 @@ const initialState = {
     // },
     isLoading: false,
     error: null,
-    comments: [],
+    // comments: [],
 };
 
 export const __getInstas = createAsyncThunk("instas/getInstas", async (payload, thunkAPI) => {
@@ -26,7 +27,8 @@ export const __getInstas = createAsyncThunk("instas/getInstas", async (payload, 
 
 export const __postInstas = createAsyncThunk("instas/postInstas", async (payload, thunkAPI) => {
     try {
-        const data = await axios.post("http://localhost:3001/instas", payload);
+        // const data = await axios.post("http://localhost:3001/instas", payload);
+        const data = await axios.post(`${API_BASE}/board/write`, payload);
         return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
         return thunkAPI.rejectWithValue(error);
@@ -35,7 +37,8 @@ export const __postInstas = createAsyncThunk("instas/postInstas", async (payload
 
 export const __getComments = createAsyncThunk("comments/getComments", async (payload, thunkAPI) => {
     try {
-        const data = await axios.get('http://localhost:3001/comments');
+        // const data = await axios.get('http://localhost:3001/comments');
+        const data = await axios.get(`${API_BASE}/board/details/${payload}`)
         return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
         return thunkAPI.rejectWithValue(error);
@@ -44,7 +47,8 @@ export const __getComments = createAsyncThunk("comments/getComments", async (pay
 
 export const __postComments = createAsyncThunk("comments/postComments", async (payload, thunkAPI) => {
     try {
-        const data = await axios.post('http://localhost:3001/comments', payload);
+        // const data = await axios.post('http://localhost:3001/comments', payload);
+        const data = await axios.post(`${API_BASE}/board/details/${payload.boardId}`, payload)
         // return thunkAPI.fulfillWithValue(payload);
         return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
