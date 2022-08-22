@@ -56,7 +56,7 @@ const MainRecommend = () => {
                     <RecommendFirstSection>
                         <RecommendFourthImg />
                         <RecommendSecondSection>
-                            <RecommendUser>oh_yeongil</RecommendUser>
+                            <RecommendUser>oh_youngil</RecommendUser>
                             <RecommendDetail>park_hyeonwook님이 팔로우합니다</RecommendDetail>
                         </RecommendSecondSection>
                     </RecommendFirstSection>
