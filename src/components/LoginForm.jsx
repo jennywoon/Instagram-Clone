@@ -49,29 +49,17 @@ const LoginForm = () => {
     // }
   }, []);
 
-  console.log('userInfo', userInfo);
   const __postLogin = async () => {
     try {
       console.log('userInfo', userInfo);
       const data = await axios.post(`${API_BASE}/login`, userInfo);
-      console.log(data)
-      // console.log(JSON.stringify(data))
-      // console.log('accessToken', JSON.parse(data.request.response).result.data.accessToken);
-      // console.log('refreshToken', JSON.parse(data.request.response).result.data.refreshToken);
-      // console.log('username', JSON.parse(data.request.response).result.data.username);
-      // // setTokenToCookie(data.headers.Authorization);
-      // setTokenToCookie(JSON.parse(data.request.response).result.data.accessToken);
-
-      // console.log('accessToken', JSON.parse(data.request.response).result.data.accessToken);
-      // console.log('refreshToken', JSON.parse(data.request.response).result.data.refreshToken);
-      // console.log('username', JSON.parse(data.request.response).result.data.username);
-      // console.log('data', data.request.response['accessToken'])
 
       const tokenData = {
         accessToken: data.data.result.data.accessToken,
         refreshToken: data.data.result.data.refreshToken,
-        username: data.data.result.data.username,
+        username: data.data.result.data.username
       }
+
 
       setTokenToCookie(tokenData);
 

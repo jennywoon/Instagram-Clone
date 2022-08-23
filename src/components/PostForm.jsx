@@ -70,13 +70,16 @@ const PostForm = ({
         setUploadModalShow(false);
       }}>
       </StyledBackground>
-      <StyledUploadContainer onSubmit={onSubmitHandler}>
+      <StyledUploadContainer>
         <StyledUploadBox>
-          <StyledUploadBoxHeader>
-            <AiOutlineArrowLeft onClick={() => setUploadModalShow(false)} />
-            <p style={{ position: 'relative', left: '15px' }}>새 게시물 만들기</p>
-            <Button backgroundColor='none' color='#0095F6' padding='0.5rem' type="submit">공유하기</Button>
-          </StyledUploadBoxHeader>
+
+          <form onSubmit={onSubmitHandler}>
+            <StyledUploadBoxHeader>
+              <AiOutlineArrowLeft onClick={() => setUploadModalShow(false)} />
+              <p style={{ position: 'relative', left: '15px' }}>새 게시물 만들기</p>
+              <Button backgroundColor='none' color='#0095F6' padding='0.5rem' type="submit">공유하기</Button>
+            </StyledUploadBoxHeader>
+          </form>
 
           <StyledBoxBody>
             <StyledUploadBoxBody>
@@ -149,7 +152,7 @@ const StyledBackground = styled.div`
 
 `
 
-const StyledUploadContainer = styled.form`
+const StyledUploadContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;

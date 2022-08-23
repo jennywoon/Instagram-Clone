@@ -5,8 +5,8 @@ import Cookies from "universal-cookie"
 // dotenv.config();
 
 const cookies = new Cookies();
-// const API_BASE = 'http://43.200.171.29:8080/api'
-const API_BASE = process.env.REACT_APP_INSTAS_API_URL
+const API_BASE = 'http://43.200.171.29:8080/api'
+// const API_BASE = process.env.REACT_APP_INSTAS_API_URL
 console.log('API_BASE', API_BASE);
 
 const initialState = {
@@ -31,20 +31,24 @@ export const __getInstas = createAsyncThunk("instas/getInstas", async (payload, 
 export const __postInstas = createAsyncThunk("instas/postInstas", async (payload, thunkAPI) => {
     console.log('payload', payload)
     try {
-        // const accessToken = cookies.get("Authorization");
         const accessToken = cookies.get("accessToken");
+
         const config = {
             headers: {
                 "Content-type": false, responseType: 'blob',
-                // accessToken: accessToken,
-            }
-        }       
-        const data = await axios.post(`${API_BASE}/board/write`, payload, config)
-        console.log('data', data)
-        console.log(config)
+                Authorization: `Bearer ${accessToken}`
+            },
+        }
+
+        const datas = await axios.post(`${API_BASE}/board/write`, payload, config)
+
+
+
+        console.log('data', datas)
         thunkAPI.dispatch(__getInstas());
-        return thunkAPI.fulfillWithValue(data.data);
+        return thunkAPI.fulfillWithValue(datas.data);
     } catch (error) {
+        console.log('error', error)
         return thunkAPI.rejectWithValue(error);
     }
 });

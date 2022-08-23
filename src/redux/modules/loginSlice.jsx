@@ -19,8 +19,8 @@ export const __loginCheck = createAsyncThunk("Login/loginCheck", async (payload,
     console.log(accessToken)
     const data = await axios.get(`${API_BASE}/login`,
       {
-        request: {
-          Authorization: accessToken,
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
         },
       }
     );
