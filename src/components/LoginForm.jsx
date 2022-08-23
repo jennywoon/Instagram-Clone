@@ -49,12 +49,20 @@ const LoginForm = () => {
   }, []);
 
 
-  console.log('userInfo', userInfo);
   const __postLogin = async () => {
     try {
       console.log('userInfo', userInfo);
       const data = await axios.post(`${API_BASE}/login`, userInfo);
-      setTokenToCookie(data.headers.authorization);
+
+      const tokenData = {
+        accessToken: data.data.result.data.accessToken,
+        refreshToken: data.data.result.data.refreshToken,
+        username: data.data.result.data.username
+      }
+
+
+      setTokenToCookie(tokenData);
+
       navigate("/");
     } catch (error) {
       if (userInfo.username.trim() === "") {
