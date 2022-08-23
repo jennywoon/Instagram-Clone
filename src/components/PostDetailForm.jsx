@@ -34,6 +34,7 @@ const PostDetailForm = ({ username, boardContent, commentList }) => {
 
     const postComment = (e) => {
         e.preventDefault();
+        // e.stopPropagation();
         dispatch(__postComments({ boardId: param.id, content }));
 
         setComment({
@@ -68,7 +69,7 @@ const PostDetailForm = ({ username, boardContent, commentList }) => {
                 </FirstSection>
                 <UserLabel>user_name</UserLabel>
                 <PostComment>댓글 내용</PostComment> */}
-                    {commentList.map((comment) => (
+                    {commentList && commentList.map((comment) => (
                         <div key={comment.id}>
                             <PostDetailFormComment comment={comment} />
                         </div>
