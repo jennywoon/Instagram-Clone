@@ -13,6 +13,7 @@ import test2 from "../assets/test2.jpg"
 import ProfileModal from "./ProfileModal";
 import { BsPlusSquareFill } from 'react-icons/bs';
 
+const API_BASE = process.env.REACT_APP_INSTAS_API_URL;
 
 const Header = ({
     profileModalShow,
@@ -26,7 +27,6 @@ const Header = ({
         setUploadModalShow(false);
         setProfileModalShow(false)
     }
-
 
     return (
         <Navbar onClick={onClickModalClose}>

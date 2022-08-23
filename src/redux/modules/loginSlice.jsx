@@ -3,8 +3,8 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 
 const cookies = new Cookies();
-// const API_BASE = process.env.REACT_APP_INSTAS_API_URL
-const API_BASE = 'http://43.200.171.29:8080/api'
+const API_BASE = process.env.REACT_APP_INSTAS_API_URL
+// const API_BASE = 'http://43.200.171.29:8080/api'
 
 const initialState = {
   nickname: "",
@@ -16,9 +16,10 @@ const initialState = {
 export const __loginCheck = createAsyncThunk("Login/loginCheck", async (payload, thunkAPI) => {
   try {
     const accessToken = cookies.get("Authorization");
+    console.log(accessToken)
     const data = await axios.get(`${API_BASE}/login`,
       {
-        headers: {
+        request: {
           Authorization: accessToken,
         },
       }

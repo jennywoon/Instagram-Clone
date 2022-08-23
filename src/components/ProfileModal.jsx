@@ -16,15 +16,6 @@ const ProfileModal = ({
   const dispatch = useDispatch();
   const [token, setToken] = useState(false);
 
-  useEffect(() => {
-    if (cookieCkeck()) {
-      dispatch(__loginCheck());
-      setToken(true);
-    } else {
-      return;
-    }
-  }, []);
-
   const onClickLogout = (e) => {
     logout();
     navigate("/login");

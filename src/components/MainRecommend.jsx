@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import design1 from "../assets/design1.jpg"
 import design2 from "../assets/design2.jpg"
@@ -7,6 +7,12 @@ import design4 from "../assets/design4.jpg"
 import { AiOutlineCopyrightCircle } from "react-icons/ai";
 
 const MainRecommend = () => {
+
+    const [state, setState] = useState("팔로우")
+
+    const changeText = () => {
+        setState("팔로잉")
+    }
 
     return (
         <Container>
@@ -30,7 +36,9 @@ const MainRecommend = () => {
                             <RecommendDetail>Instagram 신규 가입</RecommendDetail>
                         </RecommendSecondSection>
                     </RecommendFirstSection>
-                    <RecommendFollow>팔로우</RecommendFollow>
+                    <RecommendFollow
+                    onClick={changeText}
+                    >{state}</RecommendFollow>
                 </RecommentWrap>
                 <RecommentWrap>
                     <RecommendFirstSection>
@@ -40,7 +48,9 @@ const MainRecommend = () => {
                             <RecommendDetail>park_minhyeok님 외 13명이 팔로우합니다</RecommendDetail>
                         </RecommendSecondSection>
                     </RecommendFirstSection>
-                    <RecommendFollow>팔로우</RecommendFollow>
+                    <RecommendFollow
+                    onClick={changeText}
+                    >{state}</RecommendFollow>
                 </RecommentWrap>
                 <RecommentWrap>
                     <RecommendFirstSection>
@@ -50,7 +60,9 @@ const MainRecommend = () => {
                             <RecommendDetail>na_cheongwoon님 외 2명이 팔로우합니다</RecommendDetail>
                         </RecommendSecondSection>
                     </RecommendFirstSection>
-                    <RecommendFollow>팔로우</RecommendFollow>
+                    <RecommendFollow
+                    onClick={changeText}
+                    >{state}</RecommendFollow>
                 </RecommentWrap>
                 <RecommentWrap>
                     <RecommendFirstSection>
@@ -60,7 +72,9 @@ const MainRecommend = () => {
                             <RecommendDetail>park_hyeonwook님이 팔로우합니다</RecommendDetail>
                         </RecommendSecondSection>
                     </RecommendFirstSection>
-                    <RecommendFollow>팔로우</RecommendFollow>
+                    <RecommendFollow
+                    onClick={changeText}
+                    >{state}</RecommendFollow>
                 </RecommentWrap>
                 <RecommendFooter>
                     <FooterFirstSection>
@@ -203,6 +217,9 @@ const RecommendSecondSection = styled.div``
 const RecommendFollow = styled.div`
     color: #0095f6;
     cursor: pointer;
+    /* .clicked{
+        color: black;
+    } */
 `
 const RecommendFooter = styled.div`
     width: 195px;

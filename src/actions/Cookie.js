@@ -7,15 +7,23 @@ export function setTokenToCookie(data) {
   let now = new Date();
   let after1m = new Date();
   after1m.setMinutes(now.getMinutes() + 30);
-  cookies.set("Authorization", data, { path: "/", expires: after1m });
+  // cookies.set("Authorization", data, { path: "/", expires: after1m });
+  cookies.set("accessToken", data.accessToken, { path: "/", expires: after1m });
+  cookies.set("refreshToken", data.refreshToken, { path: "/", expires: after1m });
+  cookies.set("username", data.username, { path: "/", expires: after1m });
 }
+//Authorization
 
 export function logout() {
-  cookies.remove("Authorization", { path: "/" });
+  // cookies.remove("Authorization", { path: "/" });
+  cookies.remove("accessToken", { path: "/" });
+  cookies.remove("refreshToken", { path: "/" });
+  cookies.remove("username", { path: "/" });
 }
 
+
 export function cookieCkeck() {
-  const accessCookie = cookies.get("Authorization");
+  const accessCookie = cookies.get("accessToken");
   if (accessCookie === undefined) {
     return false;
   } else {

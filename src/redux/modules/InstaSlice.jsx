@@ -31,15 +31,17 @@ export const __getInstas = createAsyncThunk("instas/getInstas", async (payload, 
 export const __postInstas = createAsyncThunk("instas/postInstas", async (payload, thunkAPI) => {
     console.log('payload', payload)
     try {
-        const accessToken = cookies.get("Authorization");
+        // const accessToken = cookies.get("Authorization");
+        const accessToken = cookies.get("accessToken");
         const config = {
             headers: {
-                "Content-type": false, responseType: 'blob' 
-                // Authorization: accessToken,
+                "Content-type": false, responseType: 'blob',
+                // accessToken: accessToken,
             }
-        }
+        }       
         const data = await axios.post(`${API_BASE}/board/write`, payload, config)
         console.log('data', data)
+        console.log(config)
         thunkAPI.dispatch(__getInstas());
         return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
@@ -50,7 +52,7 @@ export const __postInstas = createAsyncThunk("instas/postInstas", async (payload
 export const __getComments = createAsyncThunk("comments/getComments", async (payload, thunkAPI) => {
     console.log('payload', payload);
     try {
-        const data = await axios.get(`${API_BASE}/board/details/${payload}`);
+        const data = await axios.get(`${API_BASE}/boards/details/${payload}`);
         // console.log('data', data.data.result);
         return thunkAPI.fulfillWithValue(data.data.result);
     } catch (error) {
@@ -60,9 +62,17 @@ export const __getComments = createAsyncThunk("comments/getComments", async (pay
 
 export const __postComments = createAsyncThunk("comments/postComments", async (payload, thunkAPI) => {
     try {
-        // const data = await axios.post(`${API_BASE}/board/details/${payload.boardId}`, payload);
+        const accessToken = cookies.get("Authorization");
+        const data = await axios.post(`${API_BASE}/board/details/${payload.boardId}`, payload,
+        {
+            headers: {
+              Authorization: accessToken,
+            },
+          }
+        );
         // return thunkAPI.fulfillWithValue(payload);
-        // return thunkAPI.fulfillWithValue(data.data);
+        return thunkAPI.fulfillWithValue(data.data);
+        
     } catch (error) {
         return thunkAPI.rejectWithValue("ERROR=>", error);
     }

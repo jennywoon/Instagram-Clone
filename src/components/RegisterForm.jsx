@@ -4,8 +4,9 @@ import Button from './elements/Button'
 import styled from 'styled-components';
 import axios from "axios";
 import { __postRegister } from '../redux/modules/RegisterSlice';
-import {cookieCkeck} from "../actions/Cookie"
+import { cookieCkeck } from "../actions/Cookie"
 import { useNavigate } from 'react-router-dom';
+import instagram from "../assets/instagram.png"
 
 const API_BASE = process.env.REACT_APP_INSTAS_API_URL;
 
@@ -43,18 +44,19 @@ const RegisterForm = () => {
   const [usernameVaild, setUsernameVaild] = useState(false);
 
   const postSignUp = async () => {
+
     try {
       console.log(username, password);
       await axios.post(
         `${API_BASE}/signup`
         , {
-        username: username,
-        nickname: nickname,
-        password: password,
-        validPassword: validPassword,
-      });
+          username: username,
+          nickname: nickname,
+          password: password,
+          validPassword: validPassword,
+        });
       alert("회원가입이 완료되었습니다. 로그인을 해주세요.");
-    
+
     } catch (error) {
       alert("회원가입이 실패하였습니다");
       return;
@@ -77,7 +79,7 @@ const RegisterForm = () => {
   };
 
   //  아이디(username) 중복확인
-   const usernameCheck = async () => {
+  const usernameCheck = async () => {
     const data = await axios.post(`${API_BASE}/validateId`, { username: username });
     if (username.trim() === "") {
       alert("아이디를 입력해주세요.");
@@ -146,23 +148,23 @@ const RegisterForm = () => {
 
   // 비밀번호
   const onChangePassword = useCallback((e) => {
-      const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
-      const passwordCurrent = e.target.value;
-      setPassword(e.target.value);
-      if (validPassword === passwordCurrent) {
-        setValidPasswordMessage("비밀번호를 똑같이 입력했어요.");
-      } else {
-        setValidPasswordMessage("비밀번호가 불일치합니다. 다시 입력해주세요.");
-      }
-      if (!passwordRegex.test(passwordCurrent)) {
-        setPasswordMessage("숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요!");
-        setIsPassword(false);
-      } else {
-        setPasswordMessage("안전한 비밀번호입니다.");
-        setIsValidPassword(false);
-        setIsPassword(true);
-      }
-    },
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
+    const passwordCurrent = e.target.value;
+    setPassword(e.target.value);
+    if (validPassword === passwordCurrent) {
+      setValidPasswordMessage("비밀번호를 똑같이 입력했어요.");
+    } else {
+      setValidPasswordMessage("비밀번호가 불일치합니다. 다시 입력해주세요.");
+    }
+    if (!passwordRegex.test(passwordCurrent)) {
+      setPasswordMessage("숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요!");
+      setIsPassword(false);
+    } else {
+      setPasswordMessage("안전한 비밀번호입니다.");
+      setIsValidPassword(false);
+      setIsPassword(true);
+    }
+  },
     [validPassword, password]
   );
 
@@ -187,7 +189,7 @@ const RegisterForm = () => {
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <StyledForm onSubmit={onCreate}>
         <StyledTitle>
-          Instagram
+
         </StyledTitle>
         <StyledDesc>친구들의 사진과 동영상을 보려면 가입하세요.</StyledDesc>
         <Button
@@ -202,16 +204,16 @@ const RegisterForm = () => {
           <StyledLine></StyledLine>
         </div>
         <Input width='200px' padding='12px 20px' placeholder='아이디'
-        name="username" value={username} onChange={onChangeusername} type="text" 
+          name="username" value={username} onChange={onChangeusername} type="text"
         />
         <Input width='200px' padding='12px 20px' placeholder='닉네임'
-        name="nickname" value={nickname} onChange={onChangenickname} type="text"
+          name="nickname" value={nickname} onChange={onChangenickname} type="text"
         />
         <Input width='200px' padding='12px 20px' placeholder='비밀번호'
-        name="password" value={password} onChange={onChangePassword} type="password"
+          name="password" value={password} onChange={onChangePassword} type="password"
         />
         <Input width='200px' padding='12px 20px' placeholder='비밀번호 확인'
-        name="validPassword" value={validPassword} onChange={onChangeValidPassword}  type="password"
+          name="validPassword" value={validPassword} onChange={onChangeValidPassword} type="password"
         />
         <Button
           width='245px'
@@ -223,7 +225,16 @@ const RegisterForm = () => {
         </Button>
       </StyledForm >
       <StyledBox>
-        <p>계정이 있으신가요? <span style={{ color: '#0095F6' }}>로그인</span></p>
+        <p>계정이 있으신가요?
+          {/* <span style={{ color: '#0095F6' }}>로그인</span> */}
+          <StLogin
+          onClick={() => {
+            navigate("/login")
+          }}
+          >
+            로그인
+          </StLogin>
+        </p>
       </StyledBox>
     </div >
   )
@@ -245,13 +256,20 @@ const StyledForm = styled.form`
 `
 
 const StyledTitle = styled.p`
-  font-size:2rem;
-  margin-bottom: 0.5rem;
+  /* font-size:2rem;
+  margin-bottom: 0.5rem; */
+  background-image: Url(${instagram});
+  min-width: 180px;
+  min-height: 100px;
+  /* background-size: contain; */
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  cursor: pointer;
 `
 const StyledDesc = styled.p`
-  font-size:1.4rem;
-  margin: 0rem 0 0.5rem 0;
-  padding: 0.5rem 1.5rem 0 1.5rem;
+  font-size: 15px;
+  margin: 0 0 0.5rem 0;
+  padding: 0 1.5rem;
 `
 
 
@@ -269,6 +287,11 @@ const StyledBox = styled.div`
   text-align: center;
   margin: 1rem 0;
   box-sizing: border-box;
+`
+const StLogin = styled.span`
+  color: #0095F6;
+  padding-left: 10px;
+  cursor: pointer;
 `
 
 export default RegisterForm;

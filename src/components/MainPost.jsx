@@ -13,6 +13,14 @@ const MainPost = ({ boardId, boardContent, commentCount, img, username }) => {
 
     const dispatch = useDispatch();
 
+    // 좋아요 구현
+    let [like, setLike] = useState(0);
+
+    let likeCount = () => {
+        setLike(like+1);
+    }
+
+
     // 모달 구현
     const [modalOpen, setModalOpen] = useState(false);
 
@@ -52,7 +60,7 @@ const MainPost = ({ boardId, boardContent, commentCount, img, username }) => {
                 <PostHeader>
                     <FirstHeader>
                         <UserImg />
-                        <UserLabel>user_name</UserLabel>
+                        <UserLabel>{username}</UserLabel>
                     </FirstHeader>
                     <BiDotsHorizontalRounded style={{ paddingRight: "15px" }} />
                 </PostHeader>
@@ -65,7 +73,7 @@ const MainPost = ({ boardId, boardContent, commentCount, img, username }) => {
 
                 <LikeFirstBar>
                     <LikeBarSection>
-                        <AiOutlineHeart size="30" style={{ cursor: "pointer" }} />
+                        <AiOutlineHeart size="30" style={{ cursor: "pointer" }} onClick={likeCount}/>
                         <IoChatbubbleOutline
                             size="28" style={{ cursor: "pointer" }}
                             onClick={showModal}
@@ -75,9 +83,10 @@ const MainPost = ({ boardId, boardContent, commentCount, img, username }) => {
                     <IoBookmarkOutline size="27" style={{ paddingRight: "10px", cursor: "pointer" }} />
                 </LikeFirstBar>
                 <LikeSecondBar>
-                    <UserLikeImg />
-                    <UserLikeLable>
-                        00명이 좋아합니다.
+                    <UserLikeImg/>
+                    <UserLikeLable
+                    >
+                        {like} 명이 좋아합니다.
                     </UserLikeLable>
                 </LikeSecondBar>
                 <ContentWrap>
