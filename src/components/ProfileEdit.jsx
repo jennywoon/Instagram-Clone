@@ -1,9 +1,12 @@
 import React from "react";
+import { useNavigate } from "react-router-dom"
 import styled from "styled-components";
 import { GoGear } from "react-icons/go";
 import test2 from "../assets/test2.jpg"
 
 const ProfileEdit = () => {
+
+    const navigate = useNavigate();
 
     return (
         <ProfileEditContainer>
@@ -13,7 +16,11 @@ const ProfileEdit = () => {
             <UserSecondContainer>
                 <FirstWrap>
                     <UserLable>user_name</UserLable>
-                    <StEditButton>프로필 편집</StEditButton>
+                    <StEditButton
+                    onClick={() => {
+                        navigate("/mypage/edit")
+                    }}
+                    >프로필 편집</StEditButton>
                     <GoGear size="25" />
                 </FirstWrap>
                 <SecondWrap>
@@ -89,6 +96,7 @@ const StEditButton = styled.button`
     border-radius: 5px;
     padding: 5px 10px;
     font-size: 14px;
+    cursor: pointer;
 `
 const SecondWrap = styled.div`
     margin: 0 0 25px 0;

@@ -5,6 +5,7 @@ import PostForm from "../components/PostForm";
 import PostMyOption from "../components/PostMyOption";
 import PostOption from "../components/PostOption";
 import PostUpload from "../components/PostUpload";
+import EditMyPage from "../pages/EditMyPage";
 import LoginPage from "../pages/LoginPage";
 import MainPage from "../pages/MainPage"
 import Mypage from "../pages/MyPage";
@@ -28,7 +29,7 @@ const Router = () => {
         <Route path="/postdetail" element={<PostDetail />} />
         <Route path="/option" element={<PostOption />} />
         <Route path="/myOption" element={<PostMyOption />} />
-
+        <Route path="mypage/edit" element={<EditMyPage/>} />
         <Route path="test" element={<TestPage/>} />
       </Routes>
     </BrowserRouter>

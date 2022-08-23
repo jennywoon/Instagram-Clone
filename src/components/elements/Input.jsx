@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 
 
-const Input = ({ defaultValue, disabled, id, className, type, value, placeholder, width, padding, onChange, minLength, maxLength, text }) => {
+const Input = ({ height, defaultValue, disabled, id, className, type, value, placeholder, width, padding, onChange, minLength, maxLength, text }) => {
   return (
     <StyledButtonField >
       <StyledInput
@@ -19,6 +19,7 @@ const Input = ({ defaultValue, disabled, id, className, type, value, placeholder
         onChange={onChange}
         minLength={minLength}
         maxLength={maxLength}
+        height={height}
       />
       <StyledText>{text}</StyledText>
     </StyledButtonField>
@@ -38,6 +39,7 @@ Input.defaultValue = {
   maxLength: '',
   text: '',
   defaultValue: "",
+  height: "",
 }
 
 export default Input;
