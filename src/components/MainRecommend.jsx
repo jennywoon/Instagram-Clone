@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import design1 from "../assets/design1.jpg"
 import design2 from "../assets/design2.jpg"
@@ -37,7 +37,7 @@ const MainRecommend = () => {
                         </RecommendSecondSection>
                     </RecommendFirstSection>
                     <RecommendFollow
-                    onClick={changeText}
+                        onClick={changeText}
                     >{state}</RecommendFollow>
                 </RecommentWrap>
                 <RecommentWrap>
@@ -49,7 +49,7 @@ const MainRecommend = () => {
                         </RecommendSecondSection>
                     </RecommendFirstSection>
                     <RecommendFollow
-                    onClick={changeText}
+                        onClick={changeText}
                     >{state}</RecommendFollow>
                 </RecommentWrap>
                 <RecommentWrap>
@@ -61,7 +61,7 @@ const MainRecommend = () => {
                         </RecommendSecondSection>
                     </RecommendFirstSection>
                     <RecommendFollow
-                    onClick={changeText}
+                        onClick={changeText}
                     >{state}</RecommendFollow>
                 </RecommentWrap>
                 <RecommentWrap>
@@ -73,7 +73,7 @@ const MainRecommend = () => {
                         </RecommendSecondSection>
                     </RecommendFirstSection>
                     <RecommendFollow
-                    onClick={changeText}
+                        onClick={changeText}
                     >{state}</RecommendFollow>
                 </RecommentWrap>
                 <RecommendFooter>
@@ -95,7 +95,6 @@ export default MainRecommend;
 const Container = styled.div`
     width: 420px;
     /* height: 811px; */
-    /* height: 100vh; */
     display: flex;
     /* justify-content: center; */
     /* align-items: center; */

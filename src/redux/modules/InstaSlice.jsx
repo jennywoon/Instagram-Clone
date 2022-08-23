@@ -40,18 +40,38 @@ export const __postInstas = createAsyncThunk("instas/postInstas", async (payload
             },
         }
 
-        const datas = await axios.post(`${API_BASE}/board/write`, payload, config)
+        const data = await axios.post(`${API_BASE}/board/write`, payload, config)
 
 
-
-        console.log('data', datas)
+        console.log('data', data)
         thunkAPI.dispatch(__getInstas());
-        return thunkAPI.fulfillWithValue(datas.data);
+        return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
         console.log('error', error)
         return thunkAPI.rejectWithValue(error);
     }
 });
+
+export const __deleteInsta = createAsyncThunk("instas/__deleteInsta", async (payload, thunkAPI) => {
+    try {
+        const accessToken = cookies.get("accessToken");
+
+        const config = {
+            headers: {
+                "Content-type": false, responseType: 'blob',
+                Authorization: `Bearer ${accessToken}`
+            },
+        }
+        const data = await axios.delete(`${API_BASE}/board/details/${payload}`, config)
+        console.log('data', data);
+        return thunkAPI.fulfillWithValue(payload);
+    } catch (error) {
+        console.log('error', error);
+        return thunkAPI.rejectWithValue(error);
+    }
+})
+
+
 
 export const __getComments = createAsyncThunk("comments/getComments", async (payload, thunkAPI) => {
     console.log('payload', payload);
@@ -68,15 +88,15 @@ export const __postComments = createAsyncThunk("comments/postComments", async (p
     try {
         const accessToken = cookies.get("Authorization");
         const data = await axios.post(`${API_BASE}/board/details/${payload.boardId}`, payload,
-        {
-            headers: {
-              Authorization: accessToken,
-            },
-          }
+            {
+                headers: {
+                    Authorization: accessToken,
+                },
+            }
         );
         // return thunkAPI.fulfillWithValue(payload);
         return thunkAPI.fulfillWithValue(data.data);
-        
+
     } catch (error) {
         return thunkAPI.rejectWithValue("ERROR=>", error);
     }
@@ -109,6 +129,20 @@ export const InstaSlice = createSlice({
             state.isLoading = false; // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경합니다.
             state.error = action.payload; // catch 된 error 객체를 state.error에 넣습니다.
         },
+        [__deleteInsta.pending]: (state) => {
+            state.isLoading = true;
+        },
+        [__deleteInsta.fulfilled]: (state, action) => {
+            state.isLoading = false;
+            console.log('action.payload', action.payload)
+            state.instas = state.instas.filter((data) => data.boardId !== action.payload);
+        },
+        [__deleteInsta.rejected]: (state, action) => {
+            state.isLoading = false;
+            state.error = action.payload;
+        },
+
+
         [__getComments.pending]: (state) => {
             state.isLoading = true;
         },

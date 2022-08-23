@@ -20,11 +20,11 @@ const FileUpload = ({ files, setFiles }) => {
       }))]);
     }
   })
-  console.log(files);
+  console.log('files', files);
 
   useEffect(() => {
     // Make sure to revoke the data uris to avoid memory leaks, will run on unmount
-    return () => files && files.forEach(file => URL.revokeObjectURL(file[0].preview));
+    return () => files && files.map((file) => URL.revokeObjectURL(file[0].preview));
   }, []);
 
   return (
@@ -41,12 +41,31 @@ const FileUpload = ({ files, setFiles }) => {
       </div>
       <StyledImageContainer>
         {files && files.map((file, index) => (
-          <div div key={index} >
+          //   file.length > 1 ?
+          //     file.mpa((item, index) => {
+          //   <div key={index} >
+          //     <div style={{ width: '200px', height: '200px' }}>
+          //       <img
+          //         src={item[index].preview}
+          //         style={{ width: '100%', height: '100%', backgroundSize: 'cover' }}
+          //         onLoad={() => {
+          //           file.map((itme) => {
+          //             URL.revokeObjectURL(itme[index].preview);
+          //           })
+          //         }}
+          //       />
+          //     </div>
+          //   </div>
+          // })
+          // :
+
+          // 파일 여러장 한꺼번에 보여주기는 crud 끝나고 하기
+          <div key={index} >
             <div style={{ width: '200px', height: '200px' }}>
               <img
                 src={file[0].preview}
                 style={{ width: '100%', height: '100%', backgroundSize: 'cover' }}
-                onLoad={() => { URL.revokeObjectURL(file[0].preview) }}
+                onLoad={() => URL.revokeObjectURL(file[0].preview)}
               />
             </div>
           </div>
