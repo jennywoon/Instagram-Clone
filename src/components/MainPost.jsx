@@ -6,20 +6,34 @@ import test from "../assets/test.jpg"
 import { AiOutlineHeart } from "react-icons/ai";
 import { IoChatbubbleOutline, IoPaperPlaneOutline, IoBookmarkOutline } from "react-icons/io5";
 import { VscSmiley } from "react-icons/vsc";
-import { __getComments, __getInstas, __postComments, __postInstas } from "../redux/modules/InstaSlice";
+import { __getComments, __getInstas, __deleteInsta, __postComments, __postInstas } from "../redux/modules/InstaSlice";
 import PostDetail from "./PostDetail";
+import PostOption from "./PostOption";
+import PostMyOption from "./PostMyOption";
+import Cookies from "universal-cookie";
 
-const MainPost = ({ boardId, boardContent, commentCount, img, username }) => {
-
+const MainPost = ({
+    boardId,
+    boardContent,
+    commentCount,
+    img,
+    username,
+    optionModal,
+    setOptionModal,
+    myOptionModal,
+    setMyOptionModal,
+    insta
+}) => {
     const dispatch = useDispatch();
+
+    const [selectId, setSelectId] = useState(null);
 
     // 좋아요 구현
     let [like, setLike] = useState(0);
 
     let likeCount = () => {
-        setLike(like+1);
+        setLike(like + 1);
     }
-
 
     // 모달 구현
     const [modalOpen, setModalOpen] = useState(false);
@@ -27,6 +41,11 @@ const MainPost = ({ boardId, boardContent, commentCount, img, username }) => {
     const showModal = () => {
         setModalOpen(true);
     }
+
+    const cookies = new Cookies();
+    // console.log(cookies.get('username'))
+    // console.log('username!!', username, boardId, cookies.get('username') === username)
+
 
     // 댓글 POST
     const [comment, setComment] = useState({
@@ -53,8 +72,14 @@ const MainPost = ({ boardId, boardContent, commentCount, img, username }) => {
         dispatch(__postComments(comment))
     }
 
+    const onClickDeleteHandler = () => {
+        console.log('boardId!!!!', boardId);
+        dispatch(__deleteInsta(boardId));
+    }
+
     return (
         <>
+
             <PostContainer onSubmit={onSubmitHandler}>
                 {modalOpen && <PostDetail setModalOpen={setModalOpen} boardId={boardId} />}
                 <PostHeader>
@@ -62,18 +87,25 @@ const MainPost = ({ boardId, boardContent, commentCount, img, username }) => {
                         <UserImg />
                         <UserLabel>{username}</UserLabel>
                     </FirstHeader>
-                    <BiDotsHorizontalRounded style={{ paddingRight: "15px" }} />
+                    <BiDotsHorizontalRounded style={{ paddingRight: "15px" }}
+                        onClick={() => {
+                            console.log('boardId', boardId)
+                            setSelectId(boardId);
+                            cookies.get('username') === username
+                                ? setMyOptionModal(true)
+                                : setOptionModal(true)
+                        }} />
                 </PostHeader>
 
                 <PostImg>
-                    {img.map((img) => (
-                        <img src={img} />
+                    {img.map((img, index) => (
+                        <img key={index} src={img} />
                     ))}
                 </PostImg>
 
                 <LikeFirstBar>
                     <LikeBarSection>
-                        <AiOutlineHeart size="30" style={{ cursor: "pointer" }} onClick={likeCount}/>
+                        <AiOutlineHeart size="30" style={{ cursor: "pointer" }} onClick={likeCount} />
                         <IoChatbubbleOutline
                             size="28" style={{ cursor: "pointer" }}
                             onClick={showModal}
@@ -83,7 +115,7 @@ const MainPost = ({ boardId, boardContent, commentCount, img, username }) => {
                     <IoBookmarkOutline size="27" style={{ paddingRight: "10px", cursor: "pointer" }} />
                 </LikeFirstBar>
                 <LikeSecondBar>
-                    <UserLikeImg/>
+                    <UserLikeImg />
                     <UserLikeLable
                     >
                         {like} 명이 좋아합니다.
@@ -115,7 +147,12 @@ const MainPost = ({ boardId, boardContent, commentCount, img, username }) => {
                     <UploadButton>게시</UploadButton>
                 </CommentWrap>
             </PostContainer>
-
+            {optionModal && <PostOption optionModal={optionModal} setOptionModal={setOptionModal} />}
+            {myOptionModal &&
+                <PostMyOption
+                    setMyOptionModal={setMyOptionModal}
+                    onClickDeleteHandler={onClickDeleteHandler}
+                />}
         </>
     )
 }

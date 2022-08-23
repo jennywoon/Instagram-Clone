@@ -17,8 +17,6 @@ const PostForm = ({
 }) => {
 
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.instas.insta.data)
-  // console.log('data', data)
 
   const [files, setFiles] = useState([]);
 
