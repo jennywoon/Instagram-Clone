@@ -56,7 +56,7 @@ const RegisterForm = () => {
           validPassword: validPassword,
         });
       alert("회원가입이 완료되었습니다. 로그인을 해주세요.");
-
+        navigate("/login")
     } catch (error) {
       alert("회원가입이 실패하였습니다");
       return;
