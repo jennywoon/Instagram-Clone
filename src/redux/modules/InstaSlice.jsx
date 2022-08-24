@@ -6,25 +6,23 @@ import Cookies from "universal-cookie"
 
 const cookies = new Cookies();
 // 13.124.0.25 현욱님 ip
-// const API_BASE = 'http://43.200.171.29:8080/api'
+const API_BASE = 'http://43.200.171.29:8080/api'
 // const API_BASE = 'http://13.124.0.25/api'
 
-const API_BASE = process.env.REACT_APP_INSTAS_API_URL
+// const API_BASE = process.env.REACT_APP_INSTAS_API_URL
 console.log('API_BASE', API_BASE);
 console.log(API_BASE)
 
 const initialState = {
     instas: [],
     insta: null,
-    // insta: {
-    //     commentList: [],
-    // },
     isLoading: false,
     error: null,
 };
 
 export const __getInstas = createAsyncThunk("instas/getInstas", async (payload, thunkAPI) => {
     try {
+        // const data = await axios.get("http://localhost:3001/instas")
         const data = await axios.get(`${API_BASE}/boards`)
         console.log(data.data)
         return thunkAPI.fulfillWithValue(data.data);
@@ -97,7 +95,7 @@ export const __putInsta = createAsyncThunk("instas/__putInsta", async (payload, 
 
         const config = {
             headers: {
-                "Content-type": 'multipart/form-data', responseType: 'blob',
+                "Content-type": 'application/json', responseType: 'blob',
                 Authorization: `Bearer ${accessToken}`
             },
         }
@@ -129,6 +127,7 @@ export const __postComments = createAsyncThunk("insta/postComments", async (payl
 
     console.log('payload', payload)
     try {
+        // const accessToken = cookies.get("Authorization");
         const accessToken = cookies.get("accessToken");
         const config = {
             headers: {
@@ -141,6 +140,7 @@ export const __postComments = createAsyncThunk("insta/postComments", async (payl
         // return thunkAPI.fulfillWithValue(payload);
         console.log('data', data)
         return thunkAPI.fulfillWithValue(data.data.result);
+        // return thunkAPI.fulfillWithValue(data.data.result.data.commentList);
     } catch (error) {
         console.log(error, error)
         return thunkAPI.rejectWithValue("ERROR=>", error);
