@@ -10,32 +10,41 @@ import { __getComments, __getInstas, __postComments } from "../redux/modules/Ins
 import PostDetailFormComment from "./PostDetailFormComment";
 import Cookies from "universal-cookie";
 
-const PostDetailForm = ({ username, boardContent, commentList, commentId }) => {
-
+const PostDetailForm = ({ username, boardContent, commentList, commentId, boardId }) => {
     const dispatch = useDispatch();
+    const cookies = new Cookies();
 
     const [userComment, setUserComment] = useState({
         comment: "",
     })
 
+
     const { comment } = userComment;
+
+    console.log('boardId', boardId, 'commentUser', cookies.get('username'), 'comment', comment);
 
     const onChangeHandler = (e) => {
         console.log(userComment)
         const { value, name } = e.target;
         setUserComment({
             ...userComment,
-            commentId,
+            // commentId,
             [name]: value,
         })
     }
 
     const postComment = (e) => {
         e.preventDefault();
+        e.stopPropagation();
         // e.stopPropagation();
         // dispatch(__postComments({ boardId: param.id, content }));
         console.log(commentId)
-        dispatch(__postComments({ userComment }));
+        const newComment = {
+            boardId: boardId,
+            content: comment
+        }
+
+        dispatch(__postComments(newComment));
         setUserComment({
             comment: "",
         })
