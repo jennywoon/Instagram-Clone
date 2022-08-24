@@ -8,19 +8,13 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { __getComments, __getInstas, __postComments } from "../redux/modules/InstaSlice";
 import PostDetailFormComment from "./PostDetailFormComment";
+import Cookies from "universal-cookie";
 
-const PostDetailForm = ({ username, boardContent, commentList }) => {
+const PostDetailForm = ({ username, boardContent, commentList, commentId }) => {
 
     const dispatch = useDispatch();
-    // const param = useParams();
-    // const comments = useSelector((state) => state.instas.comments);
-
-    // useEffect(() => {
-    //     dispatch(__getComments(param.id))
-    // }, [dispatch]);
 
     const [userComment, setUserComment] = useState({
-        // username: "",
         comment: "",
     })
 
@@ -31,7 +25,7 @@ const PostDetailForm = ({ username, boardContent, commentList }) => {
         const { value, name } = e.target;
         setUserComment({
             ...userComment,
-            // boardId: param.id,
+            commentId,
             [name]: value,
         })
     }
@@ -40,8 +34,8 @@ const PostDetailForm = ({ username, boardContent, commentList }) => {
         e.preventDefault();
         // e.stopPropagation();
         // dispatch(__postComments({ boardId: param.id, content }));
+        console.log(commentId)
         dispatch(__postComments({ userComment }));
-
         setUserComment({
             comment: "",
         })
