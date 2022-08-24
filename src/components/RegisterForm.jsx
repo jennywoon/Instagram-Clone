@@ -253,6 +253,7 @@ const StyledForm = styled.form`
   align-items: center;
   box-sizing: border-box;
   padding-bottom: 3rem;
+  border-radius: 3px;
 `
 
 const StyledTitle = styled.p`
@@ -287,6 +288,7 @@ const StyledBox = styled.div`
   text-align: center;
   margin: 1rem 0;
   box-sizing: border-box;
+  border-radius: 3px;
 `
 const StLogin = styled.span`
   color: #0095F6;

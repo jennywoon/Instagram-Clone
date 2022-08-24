@@ -154,6 +154,7 @@ const StyledForm = styled.form`
   flex-direction: column;
   align-items: center;
   margin-bottom: 1rem;
+  border-radius: 3px;
 `
 const StyledLine = styled.div`
   border-top: 1px solid #ccc;
@@ -167,6 +168,7 @@ const StyledBox = styled.div`
   padding: 0.5rem;
   text-align: center;
   box-sizing: border-box;
+  border-radius: 3px;
 `
 
 const StLogin = styled.span`

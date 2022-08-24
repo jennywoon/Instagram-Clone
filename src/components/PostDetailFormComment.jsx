@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-const PostDetailFormComment = ({ comment }) => {
-    console.log('comment', comment)
+const PostDetailFormComment = ({ userComment }) => {
+    // console.log('comment', comment)
+    console.log(userComment)
 
     return (
         <PostBottom>
@@ -14,8 +15,8 @@ const PostDetailFormComment = ({ comment }) => {
                 </FirstWrap>
                 <SecondWrap>
                     <UserWrap>
-                        <UserLabel>{comment.username}</UserLabel>
-                        <PostComment>{comment.comment}</PostComment>
+                        <UserLabel>{userComment.username}</UserLabel>
+                        <PostComment>{userComment.comment}</PostComment>
                     </UserWrap>
                     <ThirdWrap>
                         <ContentTime>6시간 전</ContentTime>

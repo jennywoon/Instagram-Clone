@@ -19,7 +19,7 @@ const MainRecommend = () => {
             <MyContainer>
                 <MyConterSection>
                     <UserImg />
-                    <UserLabel>user_name</UserLabel>
+                    <UserLabel>username</UserLabel>
                 </MyConterSection>
                 <TransferLabel>전환</TransferLabel>
             </MyContainer>

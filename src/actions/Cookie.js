@@ -6,7 +6,7 @@ const cookies = new Cookies();
 export function setTokenToCookie(data) {
   let now = new Date();
   let after1m = new Date();
-  after1m.setMinutes(now.getMinutes() + 30);
+  after1m.setMinutes(now.getMinutes() + 120);
 
   cookies.set("accessToken", data.accessToken, { path: "/", expires: after1m });
   cookies.set("refreshToken", data.refreshToken, { path: "/", expires: after1m });

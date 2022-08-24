@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import test from "../assets/test.jpg"
@@ -11,6 +11,7 @@ import PostDetail from "./PostDetail";
 import PostOption from "./PostOption";
 import PostMyOption from "./PostMyOption";
 import Cookies from "universal-cookie";
+import { useParams } from "react-router-dom";
 
 const MainPost = ({
     boardId,
@@ -22,9 +23,12 @@ const MainPost = ({
     setOptionModal,
     myOptionModal,
     setMyOptionModal,
-    insta
+    // insta
 }) => {
     const dispatch = useDispatch();
+    // const param = useParams();
+    // const {instas} = useSelector((state) => state.instas)
+    // const insta = instas.find((insta) => insta.boardId === parseInt(param.id))
 
     const [selectId, setSelectId] = useState(null);
 
@@ -48,8 +52,8 @@ const MainPost = ({
 
 
     // 댓글 POST
-    const [comment, setComment] = useState({
-        content: "",
+    const [userComment, setUserComment] = useState({
+        comment: "",
     })
 
     // comment POST, GET 구현
@@ -57,19 +61,19 @@ const MainPost = ({
         dispatch(__getComments(boardId));
     }, [dispatch]);
 
-    const { content } = comment;
+    const { comment } = userComment;
 
     const onChangeHandler = (e) => {
         const { value, name } = e.target;
-        setComment({
-            ...comment,
+        setUserComment({
+            ...userComment,
             [name]: value,
         })
     }
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
-        dispatch(__postComments(comment))
+        dispatch(__postComments(userComment))
     }
 
     const onClickDeleteHandler = () => {
@@ -80,7 +84,9 @@ const MainPost = ({
     return (
         <>
 
-            <PostContainer onSubmit={onSubmitHandler}>
+            <PostContainer 
+            onSubmit={onSubmitHandler}
+            >
                 {modalOpen && <PostDetail setModalOpen={setModalOpen} boardId={boardId} />}
                 <PostHeader>
                     <FirstHeader>
@@ -138,8 +144,8 @@ const MainPost = ({
                         <VscSmiley size="26" style={{ padding: "0 10px" }} />
                         <CommentInput
                             type="text"
-                            name="content"
-                            value={content}
+                            name="comment"
+                            value={comment}
                             onChange={onChangeHandler}
                         />
                     </CommentFirstSection>

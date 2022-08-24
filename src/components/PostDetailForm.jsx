@@ -12,22 +12,26 @@ import PostDetailFormComment from "./PostDetailFormComment";
 const PostDetailForm = ({ username, boardContent, commentList }) => {
 
     const dispatch = useDispatch();
-    const param = useParams();
+    // const param = useParams();
     // const comments = useSelector((state) => state.instas.comments);
 
     // useEffect(() => {
     //     dispatch(__getComments(param.id))
     // }, [dispatch]);
 
-    const [comment, setComment] = useState({
-        content: "",
+    const [userComment, setUserComment] = useState({
+        // username: "",
+        comment: "",
     })
 
+    const { comment } = userComment;
+
     const onChangeHandler = (e) => {
+        console.log(userComment)
         const { value, name } = e.target;
-        setComment({
-            ...comment,
-            boardId: param.id,
+        setUserComment({
+            ...userComment,
+            // boardId: param.id,
             [name]: value,
         })
     }
@@ -35,21 +39,20 @@ const PostDetailForm = ({ username, boardContent, commentList }) => {
     const postComment = (e) => {
         e.preventDefault();
         // e.stopPropagation();
-        dispatch(__postComments({ boardId: param.id, content }));
+        // dispatch(__postComments({ boardId: param.id, content }));
+        dispatch(__postComments({ userComment }));
 
-        setComment({
-            content: "",
+        setUserComment({
+            comment: "",
         })
     }
-
-    const { content } = comment;
 
     return (
         <PostDetailContainer onSubmit={postComment}>
             <PostHeader>
                 <FirstHeader>
                     <UserImg />
-                    <UserLabel>user_name</UserLabel>
+                    <UserLabel>{username}</UserLabel>
                 </FirstHeader>
                 <BiDotsHorizontalRounded style={{ paddingRight: "15px" }} />
             </PostHeader>
@@ -69,9 +72,9 @@ const PostDetailForm = ({ username, boardContent, commentList }) => {
                 </FirstSection>
                 <UserLabel>user_name</UserLabel>
                 <PostComment>댓글 내용</PostComment> */}
-                    {commentList && commentList.map((comment) => (
-                        <div key={comment.id}>
-                            <PostDetailFormComment comment={comment} />
+                    {commentList && commentList.map((userComment) => (
+                        <div key={userComment.id}>
+                            <PostDetailFormComment userComment={userComment} />
                         </div>
                     ))}
                 </PostBottom>
@@ -96,8 +99,8 @@ const PostDetailForm = ({ username, boardContent, commentList }) => {
                         <VscSmiley size="26" style={{ padding: "0 10px" }} />
                         <CommentInput
                             type="text"
-                            name="content"
-                            value={content}
+                            name="comment"
+                            value={comment}
                             onChange={onChangeHandler}
                         />
                     </CommentFirstSection>

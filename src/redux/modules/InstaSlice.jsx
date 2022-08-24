@@ -5,9 +5,9 @@ import Cookies from "universal-cookie"
 // dotenv.config();
 
 const cookies = new Cookies();
-const API_BASE = 'http://43.200.171.29:8080/api'
-// const API_BASE = process.env.REACT_APP_INSTAS_API_URL
+const API_BASE = process.env.REACT_APP_INSTAS_API_URL
 console.log('API_BASE', API_BASE);
+console.log(API_BASE)
 
 const initialState = {
     instas: [],
@@ -39,10 +39,7 @@ export const __postInstas = createAsyncThunk("instas/postInstas", async (payload
                 Authorization: `Bearer ${accessToken}`
             },
         }
-
         const data = await axios.post(`${API_BASE}/board/write`, payload, config)
-
-
         console.log('data', data)
         thunkAPI.dispatch(__getInstas());
         return thunkAPI.fulfillWithValue(data.data);
@@ -64,6 +61,7 @@ export const __deleteInsta = createAsyncThunk("instas/__deleteInsta", async (pay
         }
         const data = await axios.delete(`${API_BASE}/board/details/${payload}`, config)
         console.log('data', data);
+        thunkAPI.dispatch(__getInstas());
         return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
         console.log('error', error);
@@ -73,30 +71,31 @@ export const __deleteInsta = createAsyncThunk("instas/__deleteInsta", async (pay
 
 
 
-export const __getComments = createAsyncThunk("comments/getComments", async (payload, thunkAPI) => {
+export const __getComments = createAsyncThunk("insta/getComments", async (payload, thunkAPI) => {
     console.log('payload', payload);
     try {
         const data = await axios.get(`${API_BASE}/boards/details/${payload}`);
-        // console.log('data', data.data.result);
+        console.log( data.data.result.data.commentList);
         return thunkAPI.fulfillWithValue(data.data.result);
     } catch (error) {
         return thunkAPI.rejectWithValue(error);
     }
 });
 
-export const __postComments = createAsyncThunk("comments/postComments", async (payload, thunkAPI) => {
+export const __postComments = createAsyncThunk("insta/postComments", async (payload, thunkAPI) => {
     try {
-        const accessToken = cookies.get("Authorization");
-        const data = await axios.post(`${API_BASE}/board/details/${payload.boardId}`, payload,
-            {
-                headers: {
-                    Authorization: accessToken,
-                },
-            }
-        );
+        // const accessToken = cookies.get("Authorization");
+        const accessToken = cookies.get("accessToken");
+        const config = {
+            headers: {
+                "Content-type": false, responseType: 'blob',
+                Authorization: `Bearer ${accessToken}`
+            },
+        }
+        const data = await axios.post(`${API_BASE}/board/details/${payload.boardId}`, payload, config);
         // return thunkAPI.fulfillWithValue(payload);
-        return thunkAPI.fulfillWithValue(data.data);
-
+        return thunkAPI.fulfillWithValue(data.data.result);
+        // return thunkAPI.fulfillWithValue(data.data.result.data.commentList);
     } catch (error) {
         return thunkAPI.rejectWithValue("ERROR=>", error);
     }
@@ -159,7 +158,7 @@ export const InstaSlice = createSlice({
         },
         [__postComments.fulfilled]: (state, action) => {
             state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경합니다.
-            state.comments.push(action.payload); // Store에 있는 todos에 서버에서 가져온 todos를 넣습니다.
+            state.insta.push(action.payload); // Store에 있는 todos에 서버에서 가져온 todos를 넣습니다.
         },
         [__postComments.rejected]: (state, action) => {
             state.isLoading = false; // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경합니다.
