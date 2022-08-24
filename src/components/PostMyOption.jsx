@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
-const PostMyOption = ({ setMyOptionModal, onClickDeleteHandler }) => {
+const PostMyOption = ({ boardId, setMyOptionModal, onClickDeleteHandler, onClickPutModalHandler }) => {
 
 
 
@@ -11,7 +11,7 @@ const PostMyOption = ({ setMyOptionModal, onClickDeleteHandler }) => {
       </StyledBackground>
       <StyledUploadBox>
         <StyledUploadBoxHeader onClick={onClickDeleteHandler}>삭제</StyledUploadBoxHeader>
-        <StyledUploadBoxHeader>수정</StyledUploadBoxHeader>
+        <StyledUploadBoxHeader onClick={onClickPutModalHandler}>수정</StyledUploadBoxHeader>
         <StyledUploadBoxHeader>좋아요 수 숨기기</StyledUploadBoxHeader>
         <StyledUploadBoxHeader>댓글 기능 해제</StyledUploadBoxHeader>
         <StyledUploadBoxHeader>게시물로 이동</StyledUploadBoxHeader>
@@ -39,7 +39,7 @@ const StyledBackground = styled.div`
 
 const StyledUploadBox = styled.div`
       width: 450px;
-      height: 445px;
+      height: 498px;
       border-radius: 20px;
       background: #fff;
       position:fixed;

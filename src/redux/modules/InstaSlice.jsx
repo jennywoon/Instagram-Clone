@@ -5,7 +5,10 @@ import Cookies from "universal-cookie"
 // dotenv.config();
 
 const cookies = new Cookies();
+// 13.124.0.25 현욱님 ip
 const API_BASE = 'http://43.200.171.29:8080/api'
+// const API_BASE = 'http://13.124.0.25/api'
+
 // const API_BASE = process.env.REACT_APP_INSTAS_API_URL
 console.log('API_BASE', API_BASE);
 
@@ -64,6 +67,7 @@ export const __deleteInsta = createAsyncThunk("instas/__deleteInsta", async (pay
         }
         const data = await axios.delete(`${API_BASE}/board/details/${payload}`, config)
         console.log('data', data);
+        cookies.remove('boardId');
         return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
         console.log('error', error);
