@@ -1,8 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const API_BASE = process.env.REACT_APP_INSTAS_API_URL;
-// const API_BASE = 'http://43.200.171.29:8080/api'
+// const API_BASE = process.env.REACT_APP_INSTAS_API_URL;
+const API_BASE = 'http://43.200.171.29:8080/api'
+
+
+// const API_BASE = 'http://13.124.0.25/api'
+
+
 
 const initialState = {
     // instas: [],

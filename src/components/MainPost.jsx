@@ -11,6 +11,7 @@ import PostDetail from "./PostDetail";
 import PostOption from "./PostOption";
 import PostMyOption from "./PostMyOption";
 import Cookies from "universal-cookie";
+import PostEditForm from "./PostEditForm";
 
 const MainPost = ({
     boardId,
@@ -26,7 +27,11 @@ const MainPost = ({
 }) => {
     const dispatch = useDispatch();
 
-    const [selectId, setSelectId] = useState(null);
+    const [selectBoard, setSelectBoard] = useState('');
+    const [editInsta, setEditInsta] = useState(false);
+    const [editInstaContent, setEditInstaContent] = useState('');
+
+    console.log('insta', insta)
 
     // 좋아요 구현
     let [like, setLike] = useState(0);
@@ -72,9 +77,39 @@ const MainPost = ({
         dispatch(__postComments(comment))
     }
 
+
+
+    const onClickModalHandler = () => {
+        if (cookies.get('username') === username) {
+            console.log('boardId!!!!', boardId);
+            setMyOptionModal(true);
+            cookies.set('boardId', boardId);
+        } else {
+            setOptionModal(true);
+        }
+    }
+
+
+
     const onClickDeleteHandler = () => {
+        console.log('boardId!!!!@@@@@@', cookies.get('boardId'))
+
+        const confirm = window.confirm('정말 삭제하시겠습니까?')
+        if (confirm) {
+            dispatch(__deleteInsta(cookies.get('boardId')));
+        }
+    }
+
+    const onClickPutModalHandler = () => {
         console.log('boardId!!!!', boardId);
-        dispatch(__deleteInsta(boardId));
+        setMyOptionModal(false);
+        setEditInsta(true);
+    }
+
+    const showInstaImg = () => {
+        return (
+            <img src={img} alt='insta img' />
+        )
     }
 
     return (
@@ -87,14 +122,7 @@ const MainPost = ({
                         <UserImg />
                         <UserLabel>{username}</UserLabel>
                     </FirstHeader>
-                    <BiDotsHorizontalRounded style={{ paddingRight: "15px" }}
-                        onClick={() => {
-                            console.log('boardId', boardId)
-                            setSelectId(boardId);
-                            cookies.get('username') === username
-                                ? setMyOptionModal(true)
-                                : setOptionModal(true)
-                        }} />
+                    <BiDotsHorizontalRounded style={{ paddingRight: "15px" }} onClick={onClickModalHandler} />
                 </PostHeader>
 
                 <PostImg>
@@ -150,9 +178,13 @@ const MainPost = ({
             {optionModal && <PostOption optionModal={optionModal} setOptionModal={setOptionModal} />}
             {myOptionModal &&
                 <PostMyOption
+                    boardId={boardId}
                     setMyOptionModal={setMyOptionModal}
                     onClickDeleteHandler={onClickDeleteHandler}
+                    onClickPutModalHandler={onClickPutModalHandler}
                 />}
+
+            {editInsta && <PostEditForm setEditInsta={setEditInsta} insta={insta} />}
         </>
     )
 }
