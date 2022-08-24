@@ -7,10 +7,26 @@ import { VscSmiley } from "react-icons/vsc";
 import { RiMapPin2Line } from 'react-icons/ri'
 import { IoIosArrowDown } from 'react-icons/io'
 import { useDispatch, useSelector } from 'react-redux'
-import { __getInstas, __postInstas } from '../redux/modules/InstaSlice'
+import { __getInstas, __postInstas, __getDetailInsta } from '../redux/modules/InstaSlice'
 import FileUpload from './utils/FileUpload'
+import Cookies from "universal-cookie";
 
 const PostEditForm = ({ setEditInsta }) => {
+  const dispatch = useDispatch();
+  const cookies = new Cookies();
+  console.log(typeof cookies.get('boardId'));
+  const data = useSelector((state) => state.instas.insta);
+
+  console.log('data', data);
+  // console.log('result', data.data.result);
+
+  // if (insta['boardId'] === Number(cookies.get('boardId'))) {
+  //   console.log('insta', insta);
+
+
+  useEffect(() => {
+    dispatch(__getDetailInsta(Number(cookies.get('boardId'))))
+  }, [dispatch])
 
 
   return (
@@ -30,12 +46,16 @@ const PostEditForm = ({ setEditInsta }) => {
 
           <StyledBoxBody>
             <StyledUploadBoxBody>
-
+              {/* {data && data.result.data.imgUrl.map((img, index) => (
+                <img key={index} src={img} alt='img'
+                  style={{ width: '100%' }}
+                />
+              ))} */}
             </StyledUploadBoxBody>
             <StyledFormBoxBody>
               <FirstHeader>
                 <UserImg />
-                <UserLabel>user_name</UserLabel>
+                <UserLabel>{data && data.result.data.username}</UserLabel>
               </FirstHeader>
               <StyledTextarea
                 placeholder='문구 입력...'

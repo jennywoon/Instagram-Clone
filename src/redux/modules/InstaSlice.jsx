@@ -6,10 +6,10 @@ import Cookies from "universal-cookie"
 
 const cookies = new Cookies();
 // 13.124.0.25 현욱님 ip
-// const API_BASE = 'http://43.200.171.29:8080/api'
+const API_BASE = 'http://43.200.171.29:8080/api'
 // const API_BASE = 'http://13.124.0.25/api'
 
-const API_BASE = process.env.REACT_APP_INSTAS_API_URL
+// const API_BASE = process.env.REACT_APP_INSTAS_API_URL
 console.log('API_BASE', API_BASE);
 console.log(API_BASE)
 
@@ -32,6 +32,19 @@ export const __getInstas = createAsyncThunk("instas/getInstas", async (payload, 
     }
 });
 
+
+export const __getDetailInsta = createAsyncThunk("instas/getDetailInstas", async (payload, thunkAPI) => {
+    try {
+        const data = await axios.get(`${API_BASE}/boards/details/${payload}`)
+        console.log(data.data)
+        return thunkAPI.fulfillWithValue(data.data);
+    } catch (error) {
+        console.log('error', error);
+        return thunkAPI.rejectWithValue(error);
+    }
+});
+
+
 export const __postInstas = createAsyncThunk("instas/postInstas", async (payload, thunkAPI) => {
     console.log('payload', payload)
     try {
@@ -45,7 +58,7 @@ export const __postInstas = createAsyncThunk("instas/postInstas", async (payload
         }
         const data = await axios.post(`${API_BASE}/board/write`, payload, config)
         console.log('data', data)
-        thunkAPI.dispatch(__getInstas());
+        // thunkAPI.dispatch(__getInstas());
         return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
         console.log('error', error)
@@ -75,11 +88,12 @@ export const __deleteInsta = createAsyncThunk("instas/__deleteInsta", async (pay
 
 
 
+
 export const __getComments = createAsyncThunk("insta/getComments", async (payload, thunkAPI) => {
     console.log('payload', payload);
     try {
         const data = await axios.get(`${API_BASE}/boards/details/${payload}`);
-        console.log( data.data.result.data.commentList);
+        console.log(data.data.result.data.commentList);
         return thunkAPI.fulfillWithValue(data.data.result);
     } catch (error) {
         return thunkAPI.rejectWithValue(error);
@@ -121,11 +135,25 @@ export const InstaSlice = createSlice({
             state.isLoading = false;
             state.error = action.payload;
         },
+
+        [__getDetailInsta.pending]: (state) => {
+            state.isLoading = true;
+        },
+        [__getDetailInsta.fulfilled]: (state, action) => {
+            state.isLoading = false;
+            state.insta = action.payload;
+        },
+        [__getDetailInsta.rejected]: (state, action) => {
+            state.isLoading = false;
+            state.error = action.payload;
+        },
+
         [__postInstas.pending]: (state) => {
             state.isLoading = true; // 네트워크 요청이 시작되면 로딩상태를 true로 변경합니다.
         },
         [__postInstas.fulfilled]: (state, action) => {
             state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경합니다.
+            console.log(action.payload);
             state.instas.push(action.payload); // Store에 있는 todos에 서버에서 가져온 todos를 넣습니다.
         },
         [__postInstas.rejected]: (state, action) => {
