@@ -7,12 +7,11 @@ import { __getComments } from "../redux/modules/InstaSlice";
 
 const PostDetail = ({ setModalOpen, boardId }) => {
 
-
     console.log('boardId', boardId)
     const dispatch = useDispatch();
     const data = useSelector((state) => state.instas.insta.data)
 
-    console.log('data', data.imgUrl);
+    // console.log('data', data.imgUrl);
     const modalRef = useRef(null);
 
     const closeModal = (e) => {

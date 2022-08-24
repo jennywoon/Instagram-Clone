@@ -11,7 +11,7 @@ import { __getInstas, __postInstas, __getDetailInsta } from '../redux/modules/In
 import FileUpload from './utils/FileUpload'
 import Cookies from "universal-cookie";
 
-const PostEditForm = ({ setEditInsta }) => {
+const PostEditForm = ({ setEditInsta, insta }) => {
   const dispatch = useDispatch();
   const cookies = new Cookies();
   console.log(typeof cookies.get('boardId'));
@@ -55,7 +55,9 @@ const PostEditForm = ({ setEditInsta }) => {
             <StyledFormBoxBody>
               <FirstHeader>
                 <UserImg />
-                <UserLabel>{data && data.result.data.username}</UserLabel>
+                <UserLabel>
+                  {data.result && data.result.data.username}
+                  </UserLabel>
               </FirstHeader>
               <StyledTextarea
                 placeholder='문구 입력...'

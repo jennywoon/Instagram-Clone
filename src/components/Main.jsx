@@ -13,7 +13,7 @@ const Main = () => {
 
     const { instas } = useSelector((state) => state.instas)
     const data = useSelector((state) => state.instas.instas.result)
-    console.log('instas', instas, 'data', data && data.data.BoardInfo)
+    // console.log('instas', instas, 'data', data && data.data.BoardInfo)
 
     const [optionModal, setOptionModal] = useState(false);
     const [myOptionModal, setMyOptionModal] = useState(false);

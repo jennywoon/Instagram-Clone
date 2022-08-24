@@ -34,7 +34,7 @@ const MainPost = ({
     const [editInsta, setEditInsta] = useState(false);
     const [editInstaContent, setEditInstaContent] = useState('');
 
-    console.log('insta', insta)
+    // console.log('insta', insta)
 
     // 좋아요 구현
     let [like, setLike] = useState(0);
@@ -46,14 +46,14 @@ const MainPost = ({
     // 모달 구현
     const [modalOpen, setModalOpen] = useState(false);
 
-    const showModal = () => {
+    const showModal = (e) => {
+        e.preventDefault();
         setModalOpen(true);
     }
 
     const cookies = new Cookies();
     // console.log(cookies.get('username'))
     // console.log('username!!', username, boardId, cookies.get('username') === username)
-
 
     // 댓글 POST
     const [userComment, setUserComment] = useState({
@@ -68,6 +68,7 @@ const MainPost = ({
     const { comment } = userComment;
 
     const onChangeHandler = (e) => {
+        e.preventDefault();
         const { value, name } = e.target;
         setUserComment({
             ...userComment,
@@ -77,10 +78,8 @@ const MainPost = ({
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
-        dispatch(__postComments(userComment))
+        dispatch(__postComments(comment))
     }
-
-
 
     const onClickModalHandler = () => {
         if (cookies.get('username') === username) {
@@ -92,9 +91,8 @@ const MainPost = ({
         }
     }
 
-
-
-    const onClickDeleteHandler = () => {
+    const onClickDeleteHandler = (e) => {
+        e.preventDefault();
         console.log('boardId!!!!@@@@@@', cookies.get('boardId'))
 
         const confirm = window.confirm('정말 삭제하시겠습니까?')
@@ -104,7 +102,7 @@ const MainPost = ({
     }
 
     const onClickPutModalHandler = () => {
-        console.log('boardId!!!!', boardId);
+        // console.log('boardId!!!!', boardId);
         setMyOptionModal(false);
         setEditInsta(true);
     }
@@ -117,10 +115,10 @@ const MainPost = ({
 
     return (
         <>
+        {modalOpen && <PostDetail setModalOpen={setModalOpen} boardId={boardId} />}
             <PostContainer
                 onSubmit={onSubmitHandler}
-            >
-                {modalOpen && <PostDetail setModalOpen={setModalOpen} boardId={boardId} />}
+            > 
                 <PostHeader>
                     <FirstHeader>
                         <UserImg />
@@ -131,7 +129,7 @@ const MainPost = ({
 
                 <PostImg>
                     {img.map((img, index) => (
-                        <img key={index} src={img} />
+                        <img key={index} src={img}/>
                     ))}
                 </PostImg>
 

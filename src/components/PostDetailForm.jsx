@@ -10,39 +10,52 @@ import { __getComments, __getInstas, __postComments } from "../redux/modules/Ins
 import PostDetailFormComment from "./PostDetailFormComment";
 import Cookies from "universal-cookie";
 
-const PostDetailForm = ({ username, boardContent, commentList, commentId }) => {
+const PostDetailForm = ({ boardContent, commentList, boardId }) => {
 
     const dispatch = useDispatch();
-
+    const insta = useSelector((state) => state.instas.insta);
+    console.log(insta.data)
+    console.log(insta.data.boardId)
     const [userComment, setUserComment] = useState({
         comment: "",
     })
 
-    const { comment } = userComment;
+    const { commentId, username, comment } = userComment;
+
+    console.log(cookies.get("username"))
+    const cookies = new Cookies();
 
     const onChangeHandler = (e) => {
-        console.log(userComment)
+        if(cookies.get("username") === username){
+            console.log(commentId)
+            cookies.set("commentId", commentId)
+        }
         const { value, name } = e.target;
         setUserComment({
             ...userComment,
-            commentId,
+            // commentId: insta.data.commentId,
+            comment: userComment,
             [name]: value,
         })
     }
 
+    useEffect(() => {
+        dispatch(__getComments(boardId))
+    },[dispatch]);
+
     const postComment = (e) => {
         e.preventDefault();
-        // e.stopPropagation();
-        // dispatch(__postComments({ boardId: param.id, content }));
-        console.log(commentId)
-        dispatch(__postComments({ userComment }));
+
+        dispatch(__postComments(userComment));
         setUserComment({
             comment: "",
         })
     }
 
     return (
-        <PostDetailContainer onSubmit={postComment}>
+        <PostDetailContainer 
+        // onSubmit={postComment}
+        >
             <PostHeader>
                 <FirstHeader>
                     <UserImg />
@@ -98,7 +111,9 @@ const PostDetailForm = ({ username, boardContent, commentList, commentId }) => {
                             onChange={onChangeHandler}
                         />
                     </CommentFirstSection>
-                    <UploadButton>게시</UploadButton>
+                    <UploadButton
+                    onClick={postComment}
+                    >게시</UploadButton>
                 </CommentWrap>
             </LikeSecondBar>
 
