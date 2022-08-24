@@ -18,10 +18,12 @@
 - 청운 : 검색기능, 카카오톡 소셜 로그인, 게시글 post, 댓글 post, 메인페이지 모달창 팝업, 로그인+회원가입+로그아웃, 댓글 CURD
 - 영일 : 다중 이미지 업로드, 헤더 버튼 모달창 팝업, 게시글+대댓글 CRUD, 로그인 토큰 쿠키 저장
 
-### `yarn build`
+### 트러블슈팅
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- 로그인을 했으나, 게시글 POST시 username과 boardId가 불러와지지 않아, cookie.get, cookie.set을 이벤트핸들러에 넣어 직접 빼서 사용
+
+![image](https://user-images.githubusercontent.com/109018926/186480333-ea54cdbb-776f-4fd6-9fe1-8b2309ed5872.png)
+
 
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
