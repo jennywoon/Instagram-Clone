@@ -126,9 +126,9 @@ const MainPost = ({
                     <BiDotsHorizontalRounded style={{ paddingRight: "15px" }} onClick={onClickModalHandler} />
                 </PostHeader>
                 <PostImg>
-                        {img.map((img, index) => (
-                            <img key={index} src={img} />
-                        ))}
+                    {img.map((img, index) => (
+                        <img key={index} src={img} />
+                    ))}
                 </PostImg>
 
                 <LikeFirstBar>
