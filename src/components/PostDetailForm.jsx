@@ -10,20 +10,18 @@ import { __getComments, __getInstas, __postComments } from "../redux/modules/Ins
 import PostDetailFormComment from "./PostDetailFormComment";
 import Cookies from "universal-cookie";
 
-const PostDetailForm = ({ boardContent, commentList, boardId }) => {
-
+const PostDetailForm = ({ username, boardContent, commentList, commentId, boardId }) => {
     const dispatch = useDispatch();
-    const insta = useSelector((state) => state.instas.insta);
-    console.log(insta.data)
-    console.log(insta.data.boardId)
+    const cookies = new Cookies();
+
     const [userComment, setUserComment] = useState({
         comment: "",
     })
 
-    const { commentId, username, comment } = userComment;
 
-    console.log(cookies.get("username"))
-    const cookies = new Cookies();
+    const { comment } = userComment;
+
+    console.log('boardId', boardId, 'commentUser', cookies.get('username'), 'comment', comment);
 
     const onChangeHandler = (e) => {
         if(cookies.get("username") === username){
@@ -33,8 +31,7 @@ const PostDetailForm = ({ boardContent, commentList, boardId }) => {
         const { value, name } = e.target;
         setUserComment({
             ...userComment,
-            // commentId: insta.data.commentId,
-            comment: userComment,
+            // commentId,
             [name]: value,
         })
     }
@@ -45,8 +42,16 @@ const PostDetailForm = ({ boardContent, commentList, boardId }) => {
 
     const postComment = (e) => {
         e.preventDefault();
+        e.stopPropagation();
+        // e.stopPropagation();
+        // dispatch(__postComments({ boardId: param.id, content }));
+        console.log(commentId)
+        const newComment = {
+            boardId: boardId,
+            content: comment
+        }
 
-        dispatch(__postComments(userComment));
+        dispatch(__postComments(newComment));
         setUserComment({
             comment: "",
         })

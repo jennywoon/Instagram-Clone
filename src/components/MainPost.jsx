@@ -102,7 +102,6 @@ const MainPost = ({
     }
 
     const onClickPutModalHandler = () => {
-        // console.log('boardId!!!!', boardId);
         setMyOptionModal(false);
         setEditInsta(true);
     }
@@ -115,10 +114,10 @@ const MainPost = ({
 
     return (
         <>
-        {modalOpen && <PostDetail setModalOpen={setModalOpen} boardId={boardId} />}
+            {modalOpen && <PostDetail setModalOpen={setModalOpen} boardId={boardId} />}
             <PostContainer
                 onSubmit={onSubmitHandler}
-            > 
+            >
                 <PostHeader>
                     <FirstHeader>
                         <UserImg />
@@ -186,7 +185,7 @@ const MainPost = ({
                     onClickPutModalHandler={onClickPutModalHandler}
                 />}
 
-            {editInsta && <PostEditForm setEditInsta={setEditInsta} insta={insta} />}
+            {editInsta && <PostEditForm setEditInsta={setEditInsta} />}
         </>
     )
 }

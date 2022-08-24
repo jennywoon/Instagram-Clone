@@ -7,21 +7,34 @@ import { VscSmiley } from "react-icons/vsc";
 import { RiMapPin2Line } from 'react-icons/ri'
 import { IoIosArrowDown } from 'react-icons/io'
 import { useDispatch, useSelector } from 'react-redux'
-import { __getInstas, __postInstas, __getDetailInsta } from '../redux/modules/InstaSlice'
+import { __getInstas, __postInstas, __getDetailInsta, __putInsta } from '../redux/modules/InstaSlice'
 import FileUpload from './utils/FileUpload'
 import Cookies from "universal-cookie";
 
 const PostEditForm = ({ setEditInsta, insta }) => {
   const dispatch = useDispatch();
+  const [boardContent, setBoardContent] = useState('')
+
   const cookies = new Cookies();
   console.log(typeof cookies.get('boardId'));
   const data = useSelector((state) => state.instas.insta);
 
-  console.log('data', data);
-  // console.log('result', data.data.result);
+  console.log('boardContent', boardContent, Boolean(boardContent))
+  console.log('data', data.result);
 
-  // if (insta['boardId'] === Number(cookies.get('boardId'))) {
-  //   console.log('insta', insta);
+
+  const formdata = new FormData();
+  const onSubmitInstaEditHandler = () => {
+    // const updataContent = {
+    //   boardId: Number(cookies.get('boardId')),
+    //   content: boardContent
+    // }
+
+    formdata.append('content', new Blob([JSON.stringify(boardContent)], { type: "application/json" }))
+
+    dispatch(__putInsta(formdata));
+    setBoardContent('');
+  }
 
 
   useEffect(() => {
@@ -36,35 +49,45 @@ const PostEditForm = ({ setEditInsta, insta }) => {
       <StyledUploadContainer>
         <StyledUploadBox>
 
-          <form onSubmit={() => { }}>
+          <form onSubmit={(e) => {
+            e.preventDefault();
+            onSubmitInstaEditHandler();
+
+          }}>
             <StyledUploadBoxHeader>
               <p>취소</p>
               <p style={{ position: 'relative', left: '15px' }}>정보 수정</p>
-              <Button backgroundColor='none' color='#0095F6' padding='0.5rem' type="submit">완료</Button>
+              <Button
+                backgroundColor='none'
+                color='#0095F6'
+                padding='0.5rem'
+                type="submit"
+              >완료</Button>
             </StyledUploadBoxHeader>
           </form>
 
           <StyledBoxBody>
             <StyledUploadBoxBody>
-              {/* {data && data.result.data.imgUrl.map((img, index) => (
+              {data.result && data.result.data.imgUrl.map((img, index) => (
                 <img key={index} src={img} alt='img'
-                  style={{ width: '100%' }}
+                  style={{ width: '100%', height: '100%', backgroundSize: 'cover' }}
                 />
-              ))} */}
+              ))}
             </StyledUploadBoxBody>
             <StyledFormBoxBody>
               <FirstHeader>
                 <UserImg />
-                <UserLabel>
-                  {data.result && data.result.data.username}
-                  </UserLabel>
+                <UserLabel>{data.result && data.result.data.username}</UserLabel>
               </FirstHeader>
               <StyledTextarea
-                placeholder='문구 입력...'
+                // placeholder='문구 입력...'
                 maxLength="2200"
                 name="content"
-              // value={content}
-              // onChange={onChangeHandler}
+                value={boardContent}
+                onChange={(e) => {
+                  const { value } = e.target;
+                  setBoardContent(value);
+                }}
               ></StyledTextarea>
               <CommentWrap>
                 <CommentFirstSection>
