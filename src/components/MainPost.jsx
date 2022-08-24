@@ -94,7 +94,7 @@ const MainPost = ({
     const onClickDeleteHandler = (e) => {
         e.preventDefault();
         console.log('boardId!!!!@@@@@@', cookies.get('boardId'))
-
+        window.location.reload();
         const confirm = window.confirm('정말 삭제하시겠습니까?')
         if (confirm) {
             dispatch(__deleteInsta(Number(cookies.get('boardId'))));
@@ -125,11 +125,10 @@ const MainPost = ({
                     </FirstHeader>
                     <BiDotsHorizontalRounded style={{ paddingRight: "15px" }} onClick={onClickModalHandler} />
                 </PostHeader>
-
                 <PostImg>
-                    {img.map((img, index) => (
-                        <img key={index} src={img}/>
-                    ))}
+                        {img.map((img, index) => (
+                            <img key={index} src={img} />
+                        ))}
                 </PostImg>
 
                 <LikeFirstBar>

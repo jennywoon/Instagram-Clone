@@ -70,7 +70,7 @@ const PostEditForm = ({ setEditInsta, insta }) => {
             <StyledUploadBoxBody>
               {data.result && data.result.data.imgUrl.map((img, index) => (
                 <img key={index} src={img} alt='img'
-                  style={{ width: '100%', height: '100%', backgroundSize: 'cover' }}
+                  style={{ width: '100%', height: '100%', backgroundSize: 'cover'}}
                 />
               ))}
             </StyledUploadBoxBody>

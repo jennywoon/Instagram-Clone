@@ -53,8 +53,11 @@ const FirstWrap = styled.div`
     display: flex;
     align-items: center;
     gap: 5px;
+    border-top: 1px solid rgb(38,38,38);
+    height: 52px;
 `
-const HeaderLable = styled.div``
+const HeaderLable = styled.div`
+`
 const SecondWrap = styled.div`
     display: flex;
     align-items: center;

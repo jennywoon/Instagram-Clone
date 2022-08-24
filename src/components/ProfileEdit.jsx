@@ -109,7 +109,8 @@ const PostWrap = styled.div`
     display: flex;
     gap: 5px;
 `
-const PostLabel = styled.div``
+const PostLabel = styled.div`
+`
 const PostCount = styled.div``
 const FollowerWrap = styled.div`
     display: flex;
