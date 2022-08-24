@@ -99,7 +99,7 @@ const MainPost = ({
 
         const confirm = window.confirm('정말 삭제하시겠습니까?')
         if (confirm) {
-            dispatch(__deleteInsta(cookies.get('boardId')));
+            dispatch(__deleteInsta(Number(cookies.get('boardId'))));
         }
     }
 
@@ -117,9 +117,8 @@ const MainPost = ({
 
     return (
         <>
-
-            <PostContainer 
-            onSubmit={onSubmitHandler}
+            <PostContainer
+                onSubmit={onSubmitHandler}
             >
                 {modalOpen && <PostDetail setModalOpen={setModalOpen} boardId={boardId} />}
                 <PostHeader>
