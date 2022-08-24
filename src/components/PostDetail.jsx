@@ -5,10 +5,12 @@ import styled from "styled-components"
 import design1 from "../assets/design1.jpg"
 import { __getComments } from "../redux/modules/InstaSlice";
 
-const PostDetail = ({ setModalOpen, boardId }) => {
+const PostDetail = ({ setModalOpen, boardId, }) => {
 
 
     console.log('boardId', boardId)
+
+
     const dispatch = useDispatch();
     const data = useSelector((state) => state.instas.insta.data)
 
@@ -36,6 +38,7 @@ const PostDetail = ({ setModalOpen, boardId }) => {
                     commentList={data.commentList}
                     boardContent={data.content}
                     username={data.username}
+                    boardId={boardId}
                 />
             </PostDetailContainer>
         </Background>
