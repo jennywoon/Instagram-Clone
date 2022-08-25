@@ -29,7 +29,7 @@
 
 ![image](https://user-images.githubusercontent.com/109018926/186585811-e7a46d23-34d2-42f5-a533-95b6347bab4d.png)
 
-- 게시글 슬라이드 사용할 때, 이미지 사이즈 조정(기존 컨테이너보다 사이즈는 적게, <div>태그 달아줘야 한다..ㅠㅠ
+- 게시글 슬라이드 사용할 때, 이미지 사이즈 조정(기존 컨테이너보다 사이즈는 , <div>태그 달아줘야 한다..ㅠㅠ
 
 ![image](https://user-images.githubusercontent.com/109018926/186587074-bb355e55-b09f-4195-85f3-cebb376da240.png)
 
