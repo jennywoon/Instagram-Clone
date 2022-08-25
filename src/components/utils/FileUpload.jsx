@@ -3,12 +3,67 @@ import styled from 'styled-components'
 import { BsImages } from 'react-icons/bs'
 import Button from '../elements/Button'
 import { useDropzone } from 'react-dropzone'
-
+import Slider from "react-slick";
 
 
 const FileUpload = ({ files, setFiles }) => {
+  function SampleNextArrow(props) {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{
+          ...style,
+          display: "block",
+          // background: "red",
+          right: '10px',
+          width: '30px',
+          height: '30px',
+          textAlign: 'center',
+          paddingTop: '10px',
+          zIndex: 10,
+        }}
+        onClick={onClick}
+      />
+    );
+  }
+
+  function SamplePrevArrow(props) {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{
+          ...style,
+          display: "block",
+          // background: "green",
+          left: '10px',
+          width: '30px',
+          height: '30px',
+          textAlign: 'center',
+          paddingTop: '10px',
+          zIndex: 10,
+        }
+        }
+        onClick={onClick}
+      />
+    );
+  }
+
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />
+  };
+
+
   const { getRootProps, getInputProps } = useDropzone({
-    maxFiles: 5,
+    maxFiles: 1,
     accept: {
       'image/png': ['.png'],
       'image/jpeg': ['.jpeg'],
@@ -20,7 +75,7 @@ const FileUpload = ({ files, setFiles }) => {
       }))]);
     }
   })
-  console.log('files', files);
+  console.log('files', files.length, Boolean(files));
 
   useEffect(() => {
     // Make sure to revoke the data uris to avoid memory leaks, will run on unmount
@@ -29,48 +84,47 @@ const FileUpload = ({ files, setFiles }) => {
 
   return (
 
-    <section className="container" style={{ width: '100%' }}>
-      <div {...getRootProps({ className: 'dropzone' })} style={{ width: '100%', height: '450px', display: 'flex', justifyContent: 'center' }}>
+    <section className="container" style={{ width: '100%', height: '700px' }}>
+      {files.length === 0 ?
+        <>
+          <div {...getRootProps({ className: 'dropzone' })}>
 
-        <input {...getInputProps()} />
-        <StyledUploadBoxBody>
-          <BsImages style={{ width: '70px', height: '70px' }} />
-          <p>사진과 동영상을 여기에 끌어다 놓으세요 </p>
-          <Button width='150px' backgroundColor='#0095F6' color='#fff' padding='0.6rem 0'>컴퓨터에서 선택</Button>
-        </StyledUploadBoxBody>
-      </div>
-      <StyledImageContainer>
-        {files && files.map((file, index) => (
-          //   file.length > 1 ?
-          //     file.mpa((item, index) => {
-          //   <div key={index} >
-          //     <div style={{ width: '200px', height: '200px' }}>
-          //       <img
-          //         src={item[index].preview}
-          //         style={{ width: '100%', height: '100%', backgroundSize: 'cover' }}
-          //         onLoad={() => {
-          //           file.map((itme) => {
-          //             URL.revokeObjectURL(itme[index].preview);
-          //           })
-          //         }}
-          //       />
-          //     </div>
-          //   </div>
-          // })
-          // :
-
-          // 파일 여러장 한꺼번에 보여주기는 crud 끝나고 하기
-          <div key={index} >
-            <div style={{ width: '200px', height: '200px' }}>
-              <img
-                src={file[0].preview}
-                style={{ width: '100%', height: '100%', backgroundSize: 'cover' }}
-                onLoad={() => URL.revokeObjectURL(file[0].preview)}
-              />
-            </div>
+            <input {...getInputProps()} />
+            <StyledUploadBoxBody width='600px' height='700px'>
+              <BsImages style={{ width: '70px', height: '70px' }} />
+              <p>사진과 동영상을 여기에 끌어다 놓으세요 </p>
+              <Button width='150px' backgroundColor='#0095F6' color='#fff' padding='0.6rem 0'>컴퓨터에서 선택</Button>
+            </StyledUploadBoxBody>
           </div>
-        ))}
-      </StyledImageContainer>
+        </>
+        :
+        <>
+          <StyledImageContainer>
+            <Slider {...settings} >
+              {files && files.map((file, index) => (
+
+                // 파일 여러장 한꺼번에 보여주기는 crud 끝나고 하기
+                <div key={index} style={{ width: '100%' }}>
+                  <img
+                    src={file[0].preview}
+                    style={{ width: '100%', height: '670px', backgroundSize: 'cover' }}
+                    onLoad={() => URL.revokeObjectURL(file[0].preview)}
+                  />
+                </div>
+              ))}
+            </Slider>
+          </StyledImageContainer>
+          <div {...getRootProps({ className: 'dropzone' })}>
+
+            <input {...getInputProps()} />
+            <StyledUploadBoxBodySmall>
+              <BsImages style={{ width: '40px', height: '40px' }} />
+              <p style={{ fontSize: '0.7rem', margin: '10px 0 0 0' }}>사진과 동영상을 여기에 끌어다 놓으세요 </p>
+              <Button width='100px' backgroundColor='#0095F6' color='#fff' padding='0.6rem 0' >컴퓨터에서 선택</Button>
+            </StyledUploadBoxBodySmall>
+          </div>
+        </>
+      }
     </section >
   )
 }
@@ -78,25 +132,45 @@ const FileUpload = ({ files, setFiles }) => {
 
 const StyledUploadBoxBody = styled.div`
   display: flex;
-  width:100%;
-  height:100%;
+  width:600px;
+  height:700px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: relative;
   padding:.5rem;
-  /* border:1px solid #000; */
+  background:#fff;
+  box-sizing:border-box;
+  position: relative;
+  padding-left:30px;
 `
 
+const StyledUploadBoxBodySmall = styled.div`
+  display: flex;
+  width:180px;
+  height:200px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding:.5rem;
+  color: #fff;
+  background:rgba(0,0,0,.5);
+  box-sizing:border-box;
+  padding:10px 20px;
+  border-radius:20px;
+  position: absolute;
+  right:10px;
+  bottom: 10px;
+`
+
+
 const StyledImageContainer = styled.div`
-  /* border:1px solid #000; */
   width:100%;
-  height:250px;
+  height:700px;
   padding:.5rem 0 0 .5rem;
   box-sizing:border-box;
-  display: flex;
-  overflow-x: scroll;
-  background: #eee;
+  /* display: flex; */
+  /* overflow-x: scroll; */
+  background: #fff;
   scrollbar-width: none;
   border-bottom-left-radius: 20px;
   &::-webkit-scrollbar {

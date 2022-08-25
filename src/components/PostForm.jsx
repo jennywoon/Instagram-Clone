@@ -202,13 +202,14 @@ const StyledBoxBody = styled.div`
 const StyledUploadBoxBody = styled.div`
   display: flex;
   width:600px;
-  height: 100%;
+  height: 730px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
   border-bottom-left-radius:20px;
-  background-color: #eee;
+  background-color: #fff;
+  border-right:1px solid #eee;
 `
 
 const StyledFormBoxBody = styled.div`

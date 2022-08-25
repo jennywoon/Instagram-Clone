@@ -295,6 +295,7 @@ const PostImg = styled.div`
     height: 525px;
     background-position: center;
     background-size: 100% 100%;
+    z-index:10px;
 `
 
 const LikeFirstBar = styled.div`

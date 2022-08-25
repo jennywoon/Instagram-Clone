@@ -5,7 +5,7 @@ import { IoBookmarkOutline } from "react-icons/io5";
 import { TbBuildingCottage } from "react-icons/tb";
 import ProfilePost from "./ProfilePost";
 
-const ProfilePostList = () => {
+const ProfilePostList = ({ data }) => {
 
     return (
         <Container>
@@ -15,21 +15,21 @@ const ProfilePostList = () => {
                     <HeaderLable>게시물</HeaderLable>
                 </FirstWrap>
                 <SecondWrap>
-                    <IoBookmarkOutline/>
+                    <IoBookmarkOutline />
                     <HeaderLable>저장됨</HeaderLable>
                 </SecondWrap>
                 <ThirdWrap>
-                    <TbBuildingCottage/>
+                    <TbBuildingCottage />
                     <HeaderLable>태그됨</HeaderLable>
                 </ThirdWrap>
             </Header>
             <ProfileBottom>
                 {/* map돌려서 넣기 */}
-                <ProfilePost/>
-                <ProfilePost/>
-                <ProfilePost/>
-                <ProfilePost/>
-                <ProfilePost/>
+                {data.result && data.result.data.BoardInfo.map((data) => {
+                    return (
+                        <ProfilePost key={data.boardId} img={data.imgUrl} />
+                    )
+                })}
             </ProfileBottom>
         </Container>
     )
