@@ -15,8 +15,6 @@ import Slider from "react-slick";
 
 const PostEditForm = ({ setEditInsta, insta, setModalOpen}) => {
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
-  // const history = useHistory();
   const [boardContent, setBoardContent] = useState('')
 
   function SampleNextArrow(props) {
@@ -74,15 +72,13 @@ const PostEditForm = ({ setEditInsta, insta, setModalOpen}) => {
   };
 
 
-
-
-
   const cookies = new Cookies();
   console.log(typeof cookies.get('boardId'));
+  console.log(cookies.get("boardContent"))
   const data = useSelector((state) => state.instas.insta);
 
   console.log('boardContent', boardContent, Boolean(boardContent))
-  console.log('data', data.result);
+  console.log('data', data.result.data);
 
 
   const formdata = new FormData();
@@ -153,12 +149,12 @@ const PostEditForm = ({ setEditInsta, insta, setModalOpen}) => {
                 // placeholder='문구 입력...'
                 maxLength="2200"
                 name="content"
-                value={boardContent}
+                // value={boardContent}
                 onChange={(e) => {
                   const { value } = e.target;
                   setBoardContent(value);
                 }}
-              ></StyledTextarea>
+              >{data.result.data.content}</StyledTextarea>
               <CommentWrap>
                 <CommentFirstSection>
                   <div>
