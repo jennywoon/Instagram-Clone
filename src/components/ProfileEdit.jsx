@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux"
 import styled from "styled-components";
 import { GoGear } from "react-icons/go";
 import test2 from "../assets/test2.jpg"
 
-const ProfileEdit = () => {
-
+const ProfileEdit = ({ data, cookies }) => {
     const navigate = useNavigate();
+
 
     return (
         <ProfileEditContainer>
@@ -15,26 +16,26 @@ const ProfileEdit = () => {
             </UserFirstContainer>
             <UserSecondContainer>
                 <FirstWrap>
-                    <UserLable>user_name</UserLable>
+                    <UserLable>{cookies.get('username')}</UserLable>
                     <StEditButton
-                    onClick={() => {
-                        navigate("/mypage/edit")
-                    }}
+                        onClick={() => {
+                            navigate("/mypage/edit")
+                        }}
                     >프로필 편집</StEditButton>
                     <GoGear size="25" />
                 </FirstWrap>
                 <SecondWrap>
                     <PostWrap>
                         <PostLabel>게시물</PostLabel>
-                        <PostCount>숫자</PostCount>
+                        <PostCount>{data.result && data.result.data.BoardInfo.length}</PostCount>
                     </PostWrap>
                     <FollowerWrap>
                         <FollowerLabel>팔로워</FollowerLabel>
-                        <FollowerCount>숫자</FollowerCount>
+                        <FollowerCount>0</FollowerCount>
                     </FollowerWrap>
                     <FollowWrap>
                         <FollowLabel>팔로우</FollowLabel>
-                        <FollowCount>숫자</FollowCount>
+                        <FollowCount>0</FollowCount>
                     </FollowWrap>
                 </SecondWrap>
                 <ThirdWrap>
