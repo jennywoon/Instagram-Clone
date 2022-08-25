@@ -12,7 +12,7 @@ import { __getInstas, __postInstas, __getDetailInsta, __putInsta } from '../redu
 import FileUpload from './utils/FileUpload'
 import Cookies from "universal-cookie";
 
-const PostEditForm = ({ setEditInsta, insta }) => {
+const PostEditForm = ({ setEditInsta, insta, setModalOpen}) => {
   const dispatch = useDispatch();
   // const navigate = useNavigate();
   // const history = useHistory();
@@ -59,7 +59,7 @@ const PostEditForm = ({ setEditInsta, insta }) => {
           }}>
             <StyledUploadBoxHeader>
               <p 
-              // onClick={() => history.goback()}
+              onClick={() => setEditInsta(false)}
               style={{cursor:"pointer"}}
               >취소</p>
               <p style={{ position: 'relative', left: '15px' }}>정보 수정</p>
@@ -68,6 +68,7 @@ const PostEditForm = ({ setEditInsta, insta }) => {
                 color='#0095F6'
                 padding='0.5rem'
                 type="submit"
+                
               >완료</Button>
             </StyledUploadBoxHeader>
           </form>

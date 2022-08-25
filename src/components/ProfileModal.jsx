@@ -18,7 +18,7 @@ const ProfileModal = ({
 
   const onClickLogout = (e) => {
     logout();
-    navigate("/login");
+    navigate("/");
     window.location.reload();
     alert("로그아웃 되었습니다.");
   };
