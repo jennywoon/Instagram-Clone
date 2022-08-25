@@ -232,7 +232,8 @@ export const InstaSlice = createSlice({
         },
         [__postComments.fulfilled]: (state, action) => {
             state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경합니다.
-            state.insta.push(action.payload); // Store에 있는 todos에 서버에서 가져온 todos를 넣습니다.
+            console.log('action.payload', action.payload)
+            state.insta.data.commentList.push(action.payload); // Store에 있는 todos에 서버에서 가져온 todos를 넣습니다.
         },
         [__postComments.rejected]: (state, action) => {
             state.isLoading = false; // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경합니다.
