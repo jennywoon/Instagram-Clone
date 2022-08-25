@@ -111,6 +111,7 @@ const PostDetail = ({ setModalOpen, boardId, }) => {
                         boardContent={data.content}
                         username={data.username}
                         boardId={boardId}
+                        setModalOpen={setModalOpen}
                     />
                 </PostDetailContainer>
             </Background>

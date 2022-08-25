@@ -10,7 +10,7 @@ import { __getComments, __getInstas, __postComments } from "../redux/modules/Ins
 import PostDetailFormComment from "./PostDetailFormComment";
 import Cookies from "universal-cookie";
 
-const PostDetailForm = ({ username, boardContent, commentList, commentId, boardId }) => {
+const PostDetailForm = ({ username, boardContent, commentList, commentId, boardId, setModalOpen }) => {
     const dispatch = useDispatch();
     const cookies = new Cookies();
 
@@ -24,7 +24,7 @@ const PostDetailForm = ({ username, boardContent, commentList, commentId, boardI
     console.log('boardId', boardId, 'commentUser', cookies.get('username'), 'comment', comment);
 
     const onChangeHandler = (e) => {
-        if(cookies.get("username") === username){
+        if (cookies.get("username") === username) {
             console.log(commentId)
             cookies.set("commentId", commentId)
         }
@@ -38,9 +38,9 @@ const PostDetailForm = ({ username, boardContent, commentList, commentId, boardI
 
     useEffect(() => {
         dispatch(__getComments(boardId))
-    },[dispatch]);
+    }, [dispatch]);
 
-    const postComment = (e) => {
+    const postComment = async (e) => {
         e.preventDefault();
         e.stopPropagation();
         // e.stopPropagation();
@@ -51,14 +51,14 @@ const PostDetailForm = ({ username, boardContent, commentList, commentId, boardI
             content: comment
         }
 
-        dispatch(__postComments(newComment));
+        await dispatch(__postComments(newComment));
         setUserComment({
             comment: "",
         })
     }
 
     return (
-        <PostDetailContainer 
+        <PostDetailContainer
         // onSubmit={postComment}
         >
             <PostHeader>
@@ -117,7 +117,7 @@ const PostDetailForm = ({ username, boardContent, commentList, commentId, boardI
                         />
                     </CommentFirstSection>
                     <UploadButton
-                    onClick={postComment}
+                        onClick={postComment}
                     >게시</UploadButton>
                 </CommentWrap>
             </LikeSecondBar>
