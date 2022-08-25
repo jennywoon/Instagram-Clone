@@ -8,43 +8,47 @@ import test2 from "../assets/test2.jpg"
 const ProfileEdit = ({ data, cookies }) => {
     const navigate = useNavigate();
 
+    if (data.result) {
+        const userData = data.result.data.BoardInfo.filter((item) => item.username === cookies.get('username'));
+        console.log('userData', userData);
 
-    return (
-        <ProfileEditContainer>
-            <UserFirstContainer>
-                <UserImg />
-            </UserFirstContainer>
-            <UserSecondContainer>
-                <FirstWrap>
-                    <UserLable>{cookies.get('username')}</UserLable>
-                    <StEditButton
-                        onClick={() => {
-                            navigate("/mypage/edit")
-                        }}
-                    >프로필 편집</StEditButton>
-                    <GoGear size="25" />
-                </FirstWrap>
-                <SecondWrap>
-                    <PostWrap>
-                        <PostLabel>게시물</PostLabel>
-                        <PostCount>{data.result && data.result.data.BoardInfo.length}</PostCount>
-                    </PostWrap>
-                    <FollowerWrap>
-                        <FollowerLabel>팔로워</FollowerLabel>
-                        <FollowerCount>0</FollowerCount>
-                    </FollowerWrap>
-                    <FollowWrap>
-                        <FollowLabel>팔로우</FollowLabel>
-                        <FollowCount>0</FollowCount>
-                    </FollowWrap>
-                </SecondWrap>
-                <ThirdWrap>
-                    <UserName>이름</UserName>
-                </ThirdWrap>
-            </UserSecondContainer>
-        </ProfileEditContainer>
+        return (
+            <ProfileEditContainer>
+                <UserFirstContainer>
+                    <UserImg />
+                </UserFirstContainer>
+                <UserSecondContainer>
+                    <FirstWrap>
+                        <UserLable>{cookies.get('username')}</UserLable>
+                        <StEditButton
+                            onClick={() => {
+                                navigate("/mypage/edit")
+                            }}
+                        >프로필 편집</StEditButton>
+                        <GoGear size="25" />
+                    </FirstWrap>
+                    <SecondWrap>
+                        <PostWrap>
+                            <PostLabel>게시물</PostLabel>
+                            <PostCount>{userData.length}</PostCount>
+                        </PostWrap>
+                        <FollowerWrap>
+                            <FollowerLabel>팔로워</FollowerLabel>
+                            <FollowerCount>0</FollowerCount>
+                        </FollowerWrap>
+                        <FollowWrap>
+                            <FollowLabel>팔로우</FollowLabel>
+                            <FollowCount>0</FollowCount>
+                        </FollowWrap>
+                    </SecondWrap>
+                    <ThirdWrap>
+                        <UserName>이름</UserName>
+                    </ThirdWrap>
+                </UserSecondContainer>
+            </ProfileEditContainer>
 
-    )
+        )
+    }
 }
 
 export default ProfileEdit;

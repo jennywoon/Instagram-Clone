@@ -5,34 +5,43 @@ import { IoBookmarkOutline } from "react-icons/io5";
 import { TbBuildingCottage } from "react-icons/tb";
 import ProfilePost from "./ProfilePost";
 
-const ProfilePostList = ({ data }) => {
+const ProfilePostList = ({ data, cookies }) => {
 
-    return (
-        <Container>
-            <Header>
-                <FirstWrap>
-                    <AiOutlineTable />
-                    <HeaderLable>게시물</HeaderLable>
-                </FirstWrap>
-                <SecondWrap>
-                    <IoBookmarkOutline />
-                    <HeaderLable>저장됨</HeaderLable>
-                </SecondWrap>
-                <ThirdWrap>
-                    <TbBuildingCottage />
-                    <HeaderLable>태그됨</HeaderLable>
-                </ThirdWrap>
-            </Header>
-            <ProfileBottom>
-                {/* map돌려서 넣기 */}
-                {data.result && data.result.data.BoardInfo.map((data) => {
-                    return (
-                        <ProfilePost key={data.boardId} img={data.imgUrl} />
-                    )
-                })}
-            </ProfileBottom>
-        </Container>
-    )
+    console.log('data', data)
+
+    if (data.result) {
+        const userData = data.result.data.BoardInfo.filter((item) => item.username === cookies.get('username'));
+        console.log('userData', userData);
+
+
+
+        return (
+            <Container>
+                <Header>
+                    <FirstWrap>
+                        <AiOutlineTable />
+                        <HeaderLable>게시물</HeaderLable>
+                    </FirstWrap>
+                    <SecondWrap>
+                        <IoBookmarkOutline />
+                        <HeaderLable>저장됨</HeaderLable>
+                    </SecondWrap>
+                    <ThirdWrap>
+                        <TbBuildingCottage />
+                        <HeaderLable>태그됨</HeaderLable>
+                    </ThirdWrap>
+                </Header>
+                <ProfileBottom>
+                    {/* map돌려서 넣기 */}
+                    {userData.map((data) => {
+                        return (
+                            <ProfilePost key={data.boardId} img={data.imgUrl} />
+                        )
+                    })}
+                </ProfileBottom>
+            </Container>
+        )
+    }
 }
 
 export default ProfilePostList;

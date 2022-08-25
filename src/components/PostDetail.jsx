@@ -89,16 +89,18 @@ const PostDetail = ({ setModalOpen, boardId, }) => {
             <PostDetailContainer ref={modalRef}>
                 <PostImg>
                     <Slider {...settings}>
-                    {data.imgUrl.map((img) => (
-                        <img src={img} 
-                        style={{
-                            width: "100%",
-                            height: "870px",
-                            backgroundSize: "100% 100%",
-                            backgroundPosition: "center"
-                        }}
-                        />
-                    ))}
+                        {data.imgUrl.map((img) => (
+                            <div>
+                                <img src={img}
+                                    style={{
+                                        width: "100%",
+                                        height: "830px",
+                                        backgroundSize: "100% 100%",
+                                        backgroundPosition: "center"
+                                    }}
+                                />
+                            </div>
+                        ))}
                     </Slider>
                 </PostImg>
                 <PostDetailForm
@@ -135,11 +137,12 @@ const PostDetailContainer = styled.div`
 const PostImg = styled.div`
     width: 826px;
     height: 870px;
+    background-color:#fff;
     /* display: flex; */
     /* overflow-y:hidden; */
     /* overflow-x:scroll; */
     /* overflow: hidden; */
-    background-position: center;
-    background-size: 100% 100%;
+    /* background-position: center;
+    background-size: 100% 100%; */
 
 `
