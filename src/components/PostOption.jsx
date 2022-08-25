@@ -28,7 +28,7 @@ const PostOption = ({ boardId, optionModal, setOptionModal, username }) => {
 const StyledBackground = styled.div`
       width:100vw;
       height: 100vh;
-      background: rgba(0,0,0,0.2);
+      background: rgba(87,87,87,0.05);
       position:fixed;
       top: 0;
       bottom: 0;

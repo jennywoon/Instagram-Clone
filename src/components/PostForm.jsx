@@ -148,7 +148,7 @@ const PostForm = ({
 const StyledBackground = styled.div`
   width:100vw;
   height: 100vh;
-  background: rgba(0,0,0,.5);
+  background: rgba(87,87,87,0.5);
   display: flex;
   justify-content: center;
   align-items: center;

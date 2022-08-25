@@ -10,12 +10,12 @@ const PostMyOption = ({ boardId, setMyOptionModal, onClickDeleteHandler, onClick
       <StyledBackground onClick={() => setMyOptionModal(false)}>
       </StyledBackground>
       <StyledUploadBox>
-        <StyledUploadBoxHeader 
-        onClick={onClickDeleteHandler} style={{cursor:"pointer"}}>
-        삭제</StyledUploadBoxHeader>
-        <StyledUploadBoxHeader 
-        onClick={onClickPutModalHandler}
-        style={{cursor:"pointer"}}
+        <StyledUploadBoxHeader
+          onClick={onClickDeleteHandler} style={{ cursor: "pointer" }}>
+          삭제</StyledUploadBoxHeader>
+        <StyledUploadBoxHeader
+          onClick={onClickPutModalHandler}
+          style={{ cursor: "pointer" }}
         >수정</StyledUploadBoxHeader>
         <StyledUploadBoxHeader>좋아요 수 숨기기</StyledUploadBoxHeader>
         <StyledUploadBoxHeader>댓글 기능 해제</StyledUploadBoxHeader>
@@ -32,7 +32,7 @@ const PostMyOption = ({ boardId, setMyOptionModal, onClickDeleteHandler, onClick
 const StyledBackground = styled.div`
       width:100vw;
       height: 100vh;
-      background: rgba(0,0,0,0.2);
+      background: rgba(87,87,87,0.05);
       position:fixed;
       top: 0;
       bottom: 0;
