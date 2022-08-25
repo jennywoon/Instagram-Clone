@@ -9,6 +9,7 @@ import { IoIosArrowDown } from 'react-icons/io'
 import { useDispatch, useSelector } from 'react-redux'
 import { __getInstas, __postInstas } from '../redux/modules/InstaSlice'
 import FileUpload from './utils/FileUpload'
+import Cookies from "universal-cookie";
 
 
 const PostForm = ({
@@ -42,7 +43,11 @@ const PostForm = ({
 
   console.log('files', files, 'insta', insta);
 
+  const cookies = new Cookies();
+  console.log("user", cookies.get("username"))
+
   const formdata = new FormData();
+
   const onSubmitHandler = (e) => {
     const newInsta = {
       content: insta
@@ -86,7 +91,7 @@ const PostForm = ({
             <StyledFormBoxBody>
               <FirstHeader>
                 <UserImg />
-                <UserLabel>user_name</UserLabel>
+                <UserLabel>{cookies.get("username")}</UserLabel>
               </FirstHeader>
               <StyledTextarea
                 placeholder='문구 입력...'
