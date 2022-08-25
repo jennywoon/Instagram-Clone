@@ -42,7 +42,7 @@ const LoginForm = () => {
   useEffect(() => {
     if (cookieCkeck()) {
       alert("이미 로그인 하셨습니다.");
-      navigate("/");
+      navigate("/main");
     }
     // else {
     //   return;
@@ -63,7 +63,7 @@ const LoginForm = () => {
 
       setTokenToCookie(tokenData);
 
-      navigate("/");
+      navigate("/main");
     } catch (error) {
       if (userInfo.username.trim() === "") {
         return alert("로그인 정보를 입력해 주세요.");

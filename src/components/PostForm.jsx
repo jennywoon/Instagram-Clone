@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from "react-router-dom"
 import styled from 'styled-components'
 import { BsImages } from 'react-icons/bs'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
@@ -18,6 +19,7 @@ const PostForm = ({
 }) => {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [files, setFiles] = useState([]);
 
@@ -64,6 +66,8 @@ const PostForm = ({
 
     formdata.append('content', new Blob([JSON.stringify(newInsta)], { type: "application/json" }))
     dispatch(__postInstas(formdata));
+    navigate("/main")
+    window.location.reload();
   }
 
 

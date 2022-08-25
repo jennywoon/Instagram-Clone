@@ -17,7 +17,7 @@ const RegisterForm = () => {
   useEffect(() => {
     if (cookieCkeck()) {
       alert("로그아웃을 해주세요.");
-      navigate("/");
+      navigate("/main");
     } else {
       return;
     }
@@ -56,10 +56,12 @@ const RegisterForm = () => {
           validPassword: validPassword,
         });
       alert("회원가입이 완료되었습니다. 로그인을 해주세요.");
-        navigate("/login")
+      navigate("/")
+      window.location.reload()
     } catch (error) {
       alert("회원가입이 실패하였습니다");
-      return;
+      return
+      ;
     }
   };
 
@@ -229,7 +231,7 @@ const RegisterForm = () => {
           {/* <span style={{ color: '#0095F6' }}>로그인</span> */}
           <StLogin
           onClick={() => {
-            navigate("/login")
+            navigate("/")
           }}
           >
             로그인

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import { useNavigate } from "react-router-dom"
 import { BsImages } from 'react-icons/bs'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import Button from './elements/Button'
@@ -13,6 +14,8 @@ import Cookies from "universal-cookie";
 
 const PostEditForm = ({ setEditInsta, insta }) => {
   const dispatch = useDispatch();
+  // const navigate = useNavigate();
+  // const history = useHistory();
   const [boardContent, setBoardContent] = useState('')
 
   const cookies = new Cookies();
@@ -55,7 +58,10 @@ const PostEditForm = ({ setEditInsta, insta }) => {
 
           }}>
             <StyledUploadBoxHeader>
-              <p>취소</p>
+              <p 
+              // onClick={() => history.goback()}
+              style={{cursor:"pointer"}}
+              >취소</p>
               <p style={{ position: 'relative', left: '15px' }}>정보 수정</p>
               <Button
                 backgroundColor='none'

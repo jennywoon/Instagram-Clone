@@ -91,6 +91,7 @@ const FileUpload = ({ files, setFiles }) => {
   //   width: "600px",
   // }
 
+  return(
     <section className="container" style={{ width: '100%', height: '700px' }}>
       {files.length === 0 ?
         <>
@@ -131,9 +132,10 @@ const FileUpload = ({ files, setFiles }) => {
             </StyledUploadBoxBodySmall>
           </div>
         </>
+  
       }
     </section >
-  
+  )
 }
 
 

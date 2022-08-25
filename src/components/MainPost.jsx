@@ -176,7 +176,7 @@ const MainPost = ({
                         <UserImg />
                         <UserLabel>{username}</UserLabel>
                     </FirstHeader>
-                    <BiDotsHorizontalRounded style={{ paddingRight: "15px" }} onClick={onClickModalHandler} />
+                    <BiDotsHorizontalRounded style={{ paddingRight: "15px", cursor:"pointer" }} onClick={onClickModalHandler} />
                 </PostHeader>
                 <PostImg>
                     <Slider {...settings} >
