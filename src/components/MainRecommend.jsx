@@ -5,8 +5,10 @@ import design2 from "../assets/design2.jpg"
 import design3 from "../assets/design3.jpg"
 import design4 from "../assets/design4.jpg"
 import { AiOutlineCopyrightCircle } from "react-icons/ai";
+import Cookies from "universal-cookie";
 
 const MainRecommend = () => {
+    const cookies = new Cookies();
 
     const [state, setState] = useState("팔로우")
 
@@ -19,7 +21,7 @@ const MainRecommend = () => {
             <MyContainer>
                 <MyConterSection>
                     <UserImg />
-                    <UserLabel>username</UserLabel>
+                    <UserLabel>{cookies.get('username')}</UserLabel>
                 </MyConterSection>
                 <TransferLabel>전환</TransferLabel>
             </MyContainer>
