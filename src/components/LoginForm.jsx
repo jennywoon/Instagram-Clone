@@ -116,7 +116,7 @@ const LoginForm = () => {
           backgroundColor='#FFE500'
           color='#000'
         >카카오톡으로 로그인</Button> */}
-        <KakaoLogin />
+        {/* <KakaoLogin /> */}
       </StyledForm >
       <StyledBox>
         <p>계정이 없으신가요?
