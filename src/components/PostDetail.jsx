@@ -130,7 +130,7 @@ const Background = styled.div`
     left: 0;
     bottom: 0;
     right: 0;
-    background-color: rgba(0,0,0,0.50);
+    background-color: rgba(87,87,87,0.5);
     z-index: 11;
 `
 const PostDetailContainer = styled.div`
@@ -138,6 +138,7 @@ const PostDetailContainer = styled.div`
     height: 100%;
     display: flex;
     margin: auto;
+    
     align-items: center;
     /* position: relative; */
 `
@@ -145,6 +146,10 @@ const PostImg = styled.div`
     width: 826px;
     height: 870px;
     background-color:#fff;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    padding:1rem 1rem 0.5rem 1rem;
+    box-sizing:border-box;
     /* display: flex; */
     /* overflow-y:hidden; */
     /* overflow-x:scroll; */

@@ -7,23 +7,28 @@ import Cookies from "universal-cookie";
 
 const ProfilePost = ({ img, boardId }) => {
     const cookies = new Cookies();
-    const data = useSelector((state) => state.instas.insta);
-    console.log(data)
-    // console.log(cookies.get("boardId"))
+    // const data = useSelector((state) => state.instas.insta);
 
     const [modalOpen, setModalOpen] = useState(false);
 
     const showModal = (e) => {
-        e.preventDefault();
-        setModalOpen(true);
+        // setModalOpen(true);
     }
 
     return (
         <>
-        {modalOpen && <PostDetail setModalOpen={setModalOpen} boardId={boardId} />}
-        <ProfilePostContainer onClick={showModal}>
-            <img src={img[0]} alt='img' style={{ width: '100%', height: '100%' }} boardId={boardId}/>
-        </ProfilePostContainer>
+            {modalOpen && <PostDetail setModalOpen={setModalOpen} boardId={boardId} />}
+            <ProfilePostContainer onClick={() => {
+                // console.log('boardId', boardId)
+
+                cookies.set('myBoardId', boardId);
+
+                // console.log('cookies', cookies.get('myBoardId'))
+
+                showModal()
+            }}>
+                <img src={img[0]} alt='img' style={{ width: '100%', height: '100%' }} boardId={boardId} />
+            </ProfilePostContainer>
         </>
 
     )
