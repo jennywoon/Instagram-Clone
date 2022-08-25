@@ -2,7 +2,6 @@ import React, { useRef, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
-import test from "../assets/test.jpg"
 import { AiOutlineHeart } from "react-icons/ai";
 import { IoChatbubbleOutline, IoPaperPlaneOutline, IoBookmarkOutline } from "react-icons/io5";
 import { VscSmiley } from "react-icons/vsc";
@@ -12,6 +11,9 @@ import PostOption from "./PostOption";
 import PostMyOption from "./PostMyOption";
 import Cookies from "universal-cookie";
 import PostEditForm from "./PostEditForm";
+import Slider from "react-slick";
+
+
 
 const MainPost = ({
     boardId,
@@ -23,16 +25,67 @@ const MainPost = ({
     setOptionModal,
     myOptionModal,
     setMyOptionModal,
-    insta
 }) => {
     const dispatch = useDispatch();
-    // const param = useParams();
-    // const {instas} = useSelector((state) => state.instas)
-    // const insta = instas.find((insta) => insta.boardId === parseInt(param.id))
 
-    const [selectBoard, setSelectBoard] = useState('');
     const [editInsta, setEditInsta] = useState(false);
-    const [editInstaContent, setEditInstaContent] = useState('');
+
+    function SampleNextArrow(props) {
+        const { className, style, onClick } = props;
+        return (
+            <div
+                className={className}
+                style={{
+                    ...style,
+                    display: "block",
+                    // background: "red",
+                    right: '10px',
+                    width: '30px',
+                    height: '30px',
+                    textAlign: 'center',
+                    paddingTop: '10px',
+                    zIndex: 10,
+                }}
+                onClick={onClick}
+            />
+        );
+    }
+
+    function SamplePrevArrow(props) {
+        const { className, style, onClick } = props;
+        return (
+            <div
+                className={className}
+                style={{
+                    ...style,
+                    display: "block",
+                    // background: "green",
+                    left: '10px',
+                    width: '30px',
+                    height: '30px',
+                    textAlign: 'center',
+                    paddingTop: '10px',
+                    zIndex: 10,
+                }
+                }
+                onClick={onClick}
+            />
+        );
+    }
+
+
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        nextArrow: <SampleNextArrow />,
+        prevArrow: <SamplePrevArrow />
+    };
+
+
+
 
     // console.log('insta', insta)
 
@@ -126,9 +179,19 @@ const MainPost = ({
                     <BiDotsHorizontalRounded style={{ paddingRight: "15px" }} onClick={onClickModalHandler} />
                 </PostHeader>
                 <PostImg>
-                    {img.map((img, index) => (
-                        <img key={index} src={img} />
-                    ))}
+                    <Slider {...settings} >
+                        {img.map((img, index) => (
+                            <div>
+                                <img src={img}
+                                    style={{
+                                        width: '100%',
+                                        height: '500px',
+                                        backgroundSize: 'cover',
+                                        backgroundPosition: 'center',
+                                    }} />
+                            </div>
+                        ))}
+                    </Slider>
                 </PostImg>
 
                 <LikeFirstBar>
@@ -176,13 +239,15 @@ const MainPost = ({
                 </CommentWrap>
             </PostContainer>
             {optionModal && <PostOption optionModal={optionModal} setOptionModal={setOptionModal} />}
-            {myOptionModal &&
+            {
+                myOptionModal &&
                 <PostMyOption
                     boardId={boardId}
                     setMyOptionModal={setMyOptionModal}
                     onClickDeleteHandler={onClickDeleteHandler}
                     onClickPutModalHandler={onClickPutModalHandler}
-                />}
+                />
+            }
 
             {editInsta && <PostEditForm setEditInsta={setEditInsta} />}
         </>
@@ -228,9 +293,6 @@ const UserLabel = styled.div`
 const PostImg = styled.div`
     width: 100%;
     height: 525px;
-    display: flex;
-    overflow-x: scroll;
-    overflow-y: hidden;
     background-position: center;
     background-size: 100% 100%;
 `
