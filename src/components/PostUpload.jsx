@@ -30,6 +30,8 @@ const StyledUploadBox = styled.div`
   height: 700px;
   border-radius: 20px;
   background: #fff;
+
+  overflow: hidden;
 `
 
 const StyledUploadBoxHeader = styled.div`

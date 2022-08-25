@@ -4,8 +4,67 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components"
 import design1 from "../assets/design1.jpg"
 import { __getComments } from "../redux/modules/InstaSlice";
+import Slider from "react-slick";
 
 const PostDetail = ({ setModalOpen, boardId, }) => {
+
+    // 슬라이드 구현
+
+    function SampleNextArrow(props) {
+        const { className, style, onClick } = props;
+        return (
+            <div
+                className={className}
+                style={{
+                    ...style,
+                    display: "block",
+                    // background: "red",
+                    right: '10px',
+                    width: '30px',
+                    height: '30px',
+                    textAlign: 'center',
+                    paddingTop: '10px',
+                    zIndex: 10,
+                }}
+                onClick={onClick}
+            />
+        );
+    }
+
+    function SamplePrevArrow(props) {
+        const { className, style, onClick } = props;
+        return (
+            <div
+                className={className}
+                style={{
+                    ...style,
+                    display: "block",
+                    // background: "green",
+                    left: '10px',
+                    width: '30px',
+                    height: '30px',
+                    textAlign: 'center',
+                    paddingTop: '10px',
+                    zIndex: 10,
+                }
+                }
+                onClick={onClick}
+            />
+        );
+    }
+
+
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        nextArrow: <SampleNextArrow />,
+        prevArrow: <SamplePrevArrow />
+    };
+
+    //
 
     console.log('boardId', boardId)
 
@@ -29,9 +88,18 @@ const PostDetail = ({ setModalOpen, boardId, }) => {
         <Background onClick={closeModal}>
             <PostDetailContainer ref={modalRef}>
                 <PostImg>
+                    <Slider {...settings}>
                     {data.imgUrl.map((img) => (
-                        <img src={img} />
+                        <img src={img} 
+                        style={{
+                            width: "100%",
+                            height: "870px",
+                            backgroundSize: "100% 100%",
+                            backgroundPosition: "center"
+                        }}
+                        />
                     ))}
+                    </Slider>
                 </PostImg>
                 <PostDetailForm
                     commentList={data.commentList}
@@ -54,11 +122,11 @@ const Background = styled.div`
     bottom: 0;
     right: 0;
     background-color: rgba(0,0,0,0.50);
-    z-index: 0;
+    z-index: 11;
 `
 const PostDetailContainer = styled.div`
     width: 1300px; 
-    height: 100vh;
+    height: 100%;
     display: flex;
     margin: auto;
     align-items: center;
@@ -67,10 +135,11 @@ const PostDetailContainer = styled.div`
 const PostImg = styled.div`
     width: 826px;
     height: 870px;
-    display: flex;
-    overflow-y:hidden;
-    overflow-x:scroll;
+    /* display: flex; */
+    /* overflow-y:hidden; */
+    /* overflow-x:scroll; */
+    /* overflow: hidden; */
     background-position: center;
-    background-size: 100% 96%;
+    background-size: 100% 100%;
 
 `

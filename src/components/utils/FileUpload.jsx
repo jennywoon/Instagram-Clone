@@ -3,10 +3,11 @@ import styled from 'styled-components'
 import { BsImages } from 'react-icons/bs'
 import Button from '../elements/Button'
 import { useDropzone } from 'react-dropzone'
-
+import Slider from "react-slick";
 
 
 const FileUpload = ({ files, setFiles }) => {
+
   const { getRootProps, getInputProps } = useDropzone({
     maxFiles: 5,
     accept: {
@@ -27,8 +28,16 @@ const FileUpload = ({ files, setFiles }) => {
     return () => files && files.map((file) => URL.revokeObjectURL(file[0].preview));
   }, []);
 
-  return (
+  // const settings = {
+  //   dots: true,
+  //   infinite: true,
+  //   speed: 500,
+  //   slidesToShow: 1,
+  //   slidesToScroll: 1,
+  //   width: "600px",
+  // }
 
+  return (
     <section className="container" style={{ width: '100%' }}>
       <div {...getRootProps({ className: 'dropzone' })} style={{ width: '100%', height: '450px', display: 'flex', justifyContent: 'center' }}>
 
@@ -40,36 +49,19 @@ const FileUpload = ({ files, setFiles }) => {
         </StyledUploadBoxBody>
       </div>
       <StyledImageContainer>
-        {files && files.map((file, index) => (
-          //   file.length > 1 ?
-          //     file.mpa((item, index) => {
-          //   <div key={index} >
-          //     <div style={{ width: '200px', height: '200px' }}>
-          //       <img
-          //         src={item[index].preview}
-          //         style={{ width: '100%', height: '100%', backgroundSize: 'cover' }}
-          //         onLoad={() => {
-          //           file.map((itme) => {
-          //             URL.revokeObjectURL(itme[index].preview);
-          //           })
-          //         }}
-          //       />
-          //     </div>
-          //   </div>
-          // })
-          // :
-
-          // 파일 여러장 한꺼번에 보여주기는 crud 끝나고 하기
-          <div key={index} >
-            <div style={{ width: '200px', height: '200px' }}>
-              <img
-                src={file[0].preview}
-                style={{ width: '100%', height: '100%', backgroundSize: 'cover' }}
-                onLoad={() => URL.revokeObjectURL(file[0].preview)}
-              />
+        {/* <Slider {...settings}> */}
+          {files && files.map((file, index) => (
+            <div key={index} >
+              <div style={{ width: '200px', height: '200px' }}>
+                <img
+                  src={file[0].preview}
+                  style={{ width: '100%', height: '100%', backgroundSize: 'cover' }}
+                  onLoad={() => URL.revokeObjectURL(file[0].preview)}
+                />
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        {/* </Slider> */}
       </StyledImageContainer>
     </section >
   )
@@ -91,10 +83,12 @@ const StyledUploadBoxBody = styled.div`
 const StyledImageContainer = styled.div`
   /* border:1px solid #000; */
   width:100%;
+  /* width: 600px; */
   height:250px;
-  padding:.5rem 0 0 .5rem;
+  /* padding:.5rem 0 0 .5rem; */
   box-sizing:border-box;
   display: flex;
+  /* flex: none; */
   overflow-x: scroll;
   background: #eee;
   scrollbar-width: none;
@@ -102,6 +96,9 @@ const StyledImageContainer = styled.div`
   &::-webkit-scrollbar {
 	display:none Chrome , Safari , Opera
 }
+  /* background-position: 50% 50%;
+  background-size: contain;
+  background-repeat: no-repeat; */
 `
 
 export default FileUpload
