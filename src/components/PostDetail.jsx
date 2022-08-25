@@ -3,7 +3,7 @@ import PostDetailForm from "./PostDetailForm";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components"
 import design1 from "../assets/design1.jpg"
-import { __getComments } from "../redux/modules/InstaSlice";
+import { __getComments, __getInstas } from "../redux/modules/InstaSlice";
 import Slider from "react-slick";
 
 const PostDetail = ({ setModalOpen, boardId, }) => {
@@ -76,8 +76,10 @@ const PostDetail = ({ setModalOpen, boardId, }) => {
     const modalRef = useRef(null);
 
     const closeModal = (e) => {
-        if (!modalRef.current.contains(e.target))
+        if (!modalRef.current.contains(e.target)) {
             setModalOpen(false);
+            dispatch(__getInstas())
+        }
     };
 
     useEffect(() => {

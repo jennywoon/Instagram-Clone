@@ -36,9 +36,7 @@ const PostDetailForm = ({ username, boardContent, commentList, commentId, boardI
         })
     }
 
-    useEffect(() => {
-        dispatch(__getComments(boardId))
-    }, [dispatch]);
+        ;
 
     const postComment = async (e) => {
         e.preventDefault();
@@ -52,10 +50,12 @@ const PostDetailForm = ({ username, boardContent, commentList, commentId, boardI
         }
 
         await dispatch(__postComments(newComment));
+        await dispatch(__getComments(boardId));
         setUserComment({
             comment: "",
         })
     }
+
 
     return (
         <PostDetailContainer
