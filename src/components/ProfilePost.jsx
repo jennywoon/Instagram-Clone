@@ -1,21 +1,23 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import design5 from "../assets/design5.jpg"
 import PostDetail from "./PostDetail"
 import Cookies from "universal-cookie";
+import { __getComments } from "../redux/modules/InstaSlice";
 
 const ProfilePost = ({ img, boardId, myBoardId }) => {
-    // const cookies = new Cookies();
+    const cookies = new Cookies();
+    const dispatch = useDispatch();
     // const data = useSelector((state) => state.instas.insta);
     // console.log(data)
     // console.log(cookies.get("username"))
 
     const [modalOpen, setModalOpen] = useState(false);
 
-    const showModal = () => {
-        // e.preventDefault();
+    const showModal = async () => {
         setModalOpen(true);
+        await dispatch(__getComments(boardId));
     }
 
     return (
@@ -25,7 +27,6 @@ const ProfilePost = ({ img, boardId, myBoardId }) => {
                 // cookies.set("myBoardId", boardId);
                 // console.log(cookies.get("myBoardId"))
                 showModal()
-                // setModalOpen(true);
             }}>
                 <img src={img[0]} alt='img' style={{ width: '100%', height: '100%' }} boardId={boardId} />
             </ProfilePostContainer>
