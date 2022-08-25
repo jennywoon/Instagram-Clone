@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Input from './elements/Input'
 import Button from './elements/Button'
 import styled from 'styled-components';
-import KakaoLogin from "./KakaoLogin";
+// import KakaoLogin from "./KakaoLogin";
 import { setTokenToCookie, cookieCkeck } from '../actions/Cookie';
 import { useNavigate } from "react-router-dom"
 import useInputs from "../hooks/useInput"
