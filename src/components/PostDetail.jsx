@@ -72,7 +72,7 @@ const PostDetail = ({ setModalOpen, boardId, }) => {
     const dispatch = useDispatch();
     const data = useSelector((state) => state.instas.insta.data)
 
-    console.log('data', data);
+    // console.log('data', data);
     const modalRef = useRef(null);
 
     const closeModal = (e) => {
