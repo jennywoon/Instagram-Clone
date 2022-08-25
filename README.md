@@ -33,6 +33,11 @@
 
 ![image](https://user-images.githubusercontent.com/109018926/186587074-bb355e55-b09f-4195-85f3-cebb376da240.png)
 
+- 모달창 취소버튼 기존 useNavigate 방식 작동하지 않아, 모달창 false로 구현
+
+![image](https://user-images.githubusercontent.com/109018926/186595663-b448762f-6c91-4996-8c5c-2a22c91fe9ec.png)
+
+
 
 ### `yarn eject`
 
