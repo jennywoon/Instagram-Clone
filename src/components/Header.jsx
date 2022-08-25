@@ -33,7 +33,7 @@ const Header = ({
             <NavbarContainer>
                 <Logo
                     onClick={() => {
-                        navigate("/")
+                        navigate("/main")
                     }}
                 />
                 <StInput

@@ -11,12 +11,71 @@ import { useDispatch, useSelector } from 'react-redux'
 import { __getInstas, __postInstas, __getDetailInsta, __putInsta } from '../redux/modules/InstaSlice'
 import FileUpload from './utils/FileUpload'
 import Cookies from "universal-cookie";
+import Slider from "react-slick";
 
 const PostEditForm = ({ setEditInsta, insta }) => {
   const dispatch = useDispatch();
   // const navigate = useNavigate();
   // const history = useHistory();
   const [boardContent, setBoardContent] = useState('')
+
+  function SampleNextArrow(props) {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{
+          ...style,
+          display: "block",
+          // background: "red",
+          right: '10px',
+          width: '30px',
+          height: '30px',
+          textAlign: 'center',
+          paddingTop: '10px',
+          zIndex: 10,
+        }}
+        onClick={onClick}
+      />
+    );
+  }
+
+  function SamplePrevArrow(props) {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{
+          ...style,
+          display: "block",
+          // background: "green",
+          left: '10px',
+          width: '30px',
+          height: '30px',
+          textAlign: 'center',
+          paddingTop: '10px',
+          zIndex: 10,
+        }
+        }
+        onClick={onClick}
+      />
+    );
+  }
+
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />
+  };
+
+
+
+
 
   const cookies = new Cookies();
   console.log(typeof cookies.get('boardId'));
@@ -58,9 +117,9 @@ const PostEditForm = ({ setEditInsta, insta }) => {
 
           }}>
             <StyledUploadBoxHeader>
-              <p 
-              // onClick={() => history.goback()}
-              style={{cursor:"pointer"}}
+              <p
+                // onClick={() => history.goback()}
+                style={{ cursor: "pointer" }}
               >취소</p>
               <p style={{ position: 'relative', left: '15px' }}>정보 수정</p>
               <Button
@@ -74,11 +133,15 @@ const PostEditForm = ({ setEditInsta, insta }) => {
 
           <StyledBoxBody>
             <StyledUploadBoxBody>
-              {data.result && data.result.data.imgUrl.map((img, index) => (
-                <img key={index} src={img} alt='img'
-                  style={{ width: '100%', height: '100%', backgroundSize: 'cover'}}
-                />
-              ))}
+              <Slider {...settings} >
+                {data.result && data.result.data.imgUrl.map((img, index) => (
+                  <div>
+                    <img key={index} src={img} alt='img'
+                      style={{ width: '100%', height: '660px', backgroundSize: 'cover' }}
+                    />
+                  </div>
+                ))}
+              </Slider>
             </StyledUploadBoxBody>
             <StyledFormBoxBody>
               <FirstHeader>
@@ -197,15 +260,18 @@ const StyledBoxBody = styled.div`
 
 
 const StyledUploadBoxBody = styled.div`
-  display: flex;
+  /* display: flex; */
   width:600px;
-  height: 100%;
+  height: 730px;
+  border-right:1px solid #eee;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
+box-sizing:border-box;
+    padding: 1rem;
   border-bottom-left-radius:20px;
-  background-color: #eee;
+  background-color: #fff;
 `
 
 const StyledFormBoxBody = styled.div`
