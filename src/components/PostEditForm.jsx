@@ -13,7 +13,7 @@ import FileUpload from './utils/FileUpload'
 import Cookies from "universal-cookie";
 import Slider from "react-slick";
 
-const PostEditForm = ({ setEditInsta, insta, setModalOpen}) => {
+const PostEditForm = ({ setEditInsta, insta, setModalOpen }) => {
   const dispatch = useDispatch();
   const [boardContent, setBoardContent] = useState('')
 
@@ -82,7 +82,7 @@ const PostEditForm = ({ setEditInsta, insta, setModalOpen}) => {
 
 
   const formdata = new FormData();
-  const onSubmitInstaEditHandler = () => {
+  const onSubmitInstaEditHandler = async () => {
     // const updataContent = {
     //   boardId: Number(cookies.get('boardId')),
     //   content: boardContent
@@ -90,8 +90,11 @@ const PostEditForm = ({ setEditInsta, insta, setModalOpen}) => {
 
     formdata.append('content', new Blob([JSON.stringify(boardContent)], { type: "application/json" }))
 
-    dispatch(__putInsta(formdata));
+    await dispatch(__putInsta(formdata));
+    setEditInsta(false);
+    await dispatch(__getInstas());
     setBoardContent('');
+
   }
 
 
@@ -113,9 +116,9 @@ const PostEditForm = ({ setEditInsta, insta, setModalOpen}) => {
 
           }}>
             <StyledUploadBoxHeader>
-              <p 
-              onClick={() => setEditInsta(false)}
-              style={{cursor:"pointer"}}
+              <p
+                onClick={() => setEditInsta(false)}
+                style={{ cursor: "pointer" }}
               >취소</p>
               <p style={{ position: 'relative', left: '15px' }}>정보 수정</p>
               <Button
@@ -123,7 +126,7 @@ const PostEditForm = ({ setEditInsta, insta, setModalOpen}) => {
                 color='#0095F6'
                 padding='0.5rem'
                 type="submit"
-                
+
               >완료</Button>
             </StyledUploadBoxHeader>
           </form>
