@@ -23,7 +23,7 @@ const PostMyOption = ({ boardId, setMyOptionModal, onClickDeleteHandler, onClick
         <StyledUploadBoxHeader>공유 대상...</StyledUploadBoxHeader>
         <StyledUploadBoxHeader>링크 복사</StyledUploadBoxHeader>
         <StyledUploadBoxHeader>퍼가기</StyledUploadBoxHeader>
-        <StyledUploadBoxHeader style={{ border: 'none' }}>취소</StyledUploadBoxHeader>
+        <StyledUploadBoxHeader style={{ border: 'none', cursor:"pointer" }} onClick={() => setMyOptionModal(false)}>취소</StyledUploadBoxHeader>
       </StyledUploadBox>
     </>
   )

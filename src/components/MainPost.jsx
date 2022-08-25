@@ -147,11 +147,13 @@ const MainPost = ({
     const onClickDeleteHandler = (e) => {
         e.preventDefault();
         console.log('boardId!!!!@@@@@@', cookies.get('boardId'))
-        window.location.reload();
+        // window.location.reload();
         const confirm = window.confirm('정말 삭제하시겠습니까?')
         if (confirm) {
             dispatch(__deleteInsta(Number(cookies.get('boardId'))));
         }
+        setMyOptionModal(false)
+        window.location.reload()
     }
 
     const onClickPutModalHandler = () => {

@@ -6,10 +6,10 @@ import Cookies from "universal-cookie"
 
 const cookies = new Cookies();
 // 13.124.0.25 현욱님 ip
-const API_BASE = 'http://43.200.171.29:8080/api'
+// const API_BASE = 'http://43.200.171.29:8080/api'
 // const API_BASE = 'http://13.124.0.25/api'
 
-// const API_BASE = process.env.REACT_APP_INSTAS_API_URL
+const API_BASE = process.env.REACT_APP_INSTAS_API_URL
 console.log('API_BASE', API_BASE);
 console.log(API_BASE)
 
@@ -108,8 +108,6 @@ export const __putInsta = createAsyncThunk("instas/__putInsta", async (payload, 
         return thunkAPI.rejectWithValue(error);
     }
 })
-
-
 
 
 export const __getComments = createAsyncThunk("insta/getComments", async (payload, thunkAPI) => {
