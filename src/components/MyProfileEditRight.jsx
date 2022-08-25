@@ -1,8 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import Input from './elements/Input';
+import Cookies from "universal-cookie";
 
 const MyProfileEditRight = () => {
+
+
+    const cookies = new Cookies();
+
     return (
         <RightContainer>
             <FirstContainer>
@@ -10,7 +15,7 @@ const MyProfileEditRight = () => {
                     <div style={{ paddingRight: "30px" }}><UserImg /></div>
                 </FirstWrap>
                 <SecondWrap>
-                    <UserName>cjaeks0394</UserName>
+                    <UserName>{cookies.get('username')}</UserName>
                     <UserNameChange>프로필 사진 바꾸기</UserNameChange>
                 </SecondWrap>
             </FirstContainer>
@@ -86,7 +91,7 @@ const MyProfileEditRight = () => {
                 </FirstNameWrap>
                 <CheckboxContainer>
                     {/* <input type="checkbox"/> */}
-                    <StCheckBox type="checkbox"/>
+                    <StCheckBox type="checkbox" />
                     <Include>팔로우할 만한 비슷한 계정을 추천할 때 회원님의 계정을 포함합니다.</Include>
                 </CheckboxContainer>
             </RecommendContainer>

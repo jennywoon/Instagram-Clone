@@ -72,7 +72,7 @@ const PostDetail = ({ setModalOpen, boardId, }) => {
     const dispatch = useDispatch();
     const data = useSelector((state) => state.instas.insta.data)
 
-    // console.log('data', data.imgUrl);
+    console.log('data', data);
     const modalRef = useRef(null);
 
     const closeModal = (e) => {
@@ -84,34 +84,38 @@ const PostDetail = ({ setModalOpen, boardId, }) => {
         dispatch(__getComments(boardId));
     }, [dispatch]);
 
-    return (
-        <Background onClick={closeModal}>
-            <PostDetailContainer ref={modalRef}>
-                <PostImg>
-                    <Slider {...settings}>
-                        {data.imgUrl.map((img) => (
-                            <div>
-                                <img src={img}
-                                    style={{
-                                        width: "100%",
-                                        height: "830px",
-                                        backgroundSize: "100% 100%",
-                                        backgroundPosition: "center"
-                                    }}
-                                />
-                            </div>
-                        ))}
-                    </Slider>
-                </PostImg>
-                <PostDetailForm
-                    commentList={data.commentList}
-                    boardContent={data.content}
-                    username={data.username}
-                    boardId={boardId}
-                />
-            </PostDetailContainer>
-        </Background>
-    )
+
+    if (data) {
+
+        return (
+            <Background onClick={closeModal}>
+                <PostDetailContainer ref={modalRef}>
+                    <PostImg>
+                        <Slider {...settings}>
+                            {data.imgUrl.map((img) => (
+                                <div>
+                                    <img src={img}
+                                        style={{
+                                            width: "100%",
+                                            height: "830px",
+                                            backgroundSize: "100% 100%",
+                                            backgroundPosition: "center"
+                                        }}
+                                    />
+                                </div>
+                            ))}
+                        </Slider>
+                    </PostImg>
+                    <PostDetailForm
+                        commentList={data.commentList}
+                        boardContent={data.content}
+                        username={data.username}
+                        boardId={boardId}
+                    />
+                </PostDetailContainer>
+            </Background>
+        )
+    }
 }
 
 export default PostDetail;
