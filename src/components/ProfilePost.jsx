@@ -1,13 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import design5 from "../assets/design5.jpg"
+import PostDetail from "./PostDetail"
+import Cookies from "universal-cookie";
 
-const ProfilePost = ({ img }) => {
+const ProfilePost = ({ img, boardId }) => {
+    const cookies = new Cookies();
+    const data = useSelector((state) => state.instas.insta);
+    console.log(data)
+    // console.log(cookies.get("boardId"))
+
+    const [modalOpen, setModalOpen] = useState(false);
+
+    const showModal = (e) => {
+        e.preventDefault();
+        setModalOpen(true);
+    }
 
     return (
-        <ProfilePostContainer >
-            <img src={img[0]} alt='img' style={{ width: '100%', height: '100%' }} />
+        <>
+        {modalOpen && <PostDetail setModalOpen={setModalOpen} boardId={boardId} />}
+        <ProfilePostContainer onClick={showModal}>
+            <img src={img[0]} alt='img' style={{ width: '100%', height: '100%' }} boardId={boardId}/>
         </ProfilePostContainer>
+        </>
 
     )
 }
