@@ -89,7 +89,6 @@ const PostDetail = ({ setModalOpen, boardId, }) => {
             <PostDetailContainer ref={modalRef}>
                 <PostImg>
                     <Slider {...settings}>
-
                         {data.imgUrl.map((img) => (
                             <div>
                                 <img src={img}
@@ -138,6 +137,7 @@ const PostDetailContainer = styled.div`
 const PostImg = styled.div`
     width: 826px;
     height: 870px;
+    background-color:#fff;
     /* display: flex; */
     /* overflow-y:hidden; */
     /* overflow-x:scroll; */

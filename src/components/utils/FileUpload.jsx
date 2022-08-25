@@ -15,7 +15,6 @@ const FileUpload = ({ files, setFiles }) => {
         style={{
           ...style,
           display: "block",
-          // background: "red",
           right: '10px',
           width: '30px',
           height: '30px',
@@ -36,7 +35,6 @@ const FileUpload = ({ files, setFiles }) => {
         style={{
           ...style,
           display: "block",
-          // background: "green",
           left: '10px',
           width: '30px',
           height: '30px',
@@ -82,16 +80,7 @@ const FileUpload = ({ files, setFiles }) => {
     return () => files && files.map((file) => URL.revokeObjectURL(file[0].preview));
   }, []);
 
-  // const settings = {
-  //   dots: true,
-  //   infinite: true,
-  //   speed: 500,
-  //   slidesToShow: 1,
-  //   slidesToScroll: 1,
-  //   width: "600px",
-  // }
-
-  return(
+  return (
     <section className="container" style={{ width: '100%', height: '700px' }}>
       {files.length === 0 ?
         <>
@@ -147,7 +136,6 @@ const StyledUploadBoxBody = styled.div`
   justify-content: center;
   align-items: center;
   padding:.5rem;
-  background:#fff;
   box-sizing:border-box;
   position: relative;
   padding-left:30px;
@@ -177,17 +165,13 @@ const StyledImageContainer = styled.div`
   height:700px;
   padding:.5rem 0 0 .5rem;
   box-sizing:border-box;
-  /* display: flex; */
-  /* overflow-x: scroll; */
   background: #fff;
   scrollbar-width: none;
   border-bottom-left-radius: 20px;
   &::-webkit-scrollbar {
 	display:none Chrome , Safari , Opera
 }
-  /* background-position: 50% 50%;
-  background-size: contain;
-  background-repeat: no-repeat; */
+
 `
 
 export default FileUpload

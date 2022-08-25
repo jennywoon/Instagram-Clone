@@ -21,7 +21,7 @@ const Profile = () => {
     return (
         < ProfileContainer >
             <ProfileEdit data={data} cookies={cookies} />
-            <ProfilePostList data={data} />
+            <ProfilePostList data={data} cookies={cookies} />
         </ProfileContainer >
     )
 }
