@@ -78,7 +78,7 @@ const PostEditForm = ({ setEditInsta, insta, setModalOpen }) => {
   const data = useSelector((state) => state.instas.insta);
 
   console.log('boardContent', boardContent, Boolean(boardContent))
-  console.log('data', data.result.data);
+  console.log('data');
 
 
   const formdata = new FormData();
@@ -102,100 +102,102 @@ const PostEditForm = ({ setEditInsta, insta, setModalOpen }) => {
     dispatch(__getDetailInsta(Number(cookies.get('boardId'))))
   }, [dispatch])
 
+  if (data.result) {
 
-  return (
-    <>
-      <StyledBackground onClick={() => setEditInsta(false)}>
-      </StyledBackground>
-      <StyledUploadContainer>
-        <StyledUploadBox>
+    return (
+      <>
+        <StyledBackground onClick={() => setEditInsta(false)}>
+        </StyledBackground>
+        <StyledUploadContainer>
+          <StyledUploadBox>
 
-          <form onSubmit={(e) => {
-            e.preventDefault();
-            onSubmitInstaEditHandler();
+            <form onSubmit={(e) => {
+              e.preventDefault();
+              onSubmitInstaEditHandler();
 
-          }}>
-            <StyledUploadBoxHeader>
-              <p
-                onClick={() => setEditInsta(false)}
-                style={{ cursor: "pointer" }}
-              >취소</p>
-              <p style={{ position: 'relative', left: '15px' }}>정보 수정</p>
-              <Button
-                backgroundColor='none'
-                color='#0095F6'
-                padding='0.5rem'
-                type="submit"
+            }}>
+              <StyledUploadBoxHeader>
+                <p
+                  onClick={() => setEditInsta(false)}
+                  style={{ cursor: "pointer" }}
+                >취소</p>
+                <p style={{ position: 'relative', left: '15px' }}>정보 수정</p>
+                <Button
+                  backgroundColor='none'
+                  color='#0095F6'
+                  padding='0.5rem'
+                  type="submit"
 
-              >완료</Button>
-            </StyledUploadBoxHeader>
-          </form>
+                >완료</Button>
+              </StyledUploadBoxHeader>
+            </form>
 
-          <StyledBoxBody>
-            <StyledUploadBoxBody>
-              <Slider {...settings} >
-                {data.result && data.result.data.imgUrl.map((img, index) => (
-                  <div>
-                    <img key={index} src={img} alt='img'
-                      style={{ width: '100%', height: '660px', backgroundSize: 'cover' }}
-                    />
-                  </div>
-                ))}
-              </Slider>
-            </StyledUploadBoxBody>
-            <StyledFormBoxBody>
-              <FirstHeader>
-                <UserImg />
-                <UserLabel>{data.result && data.result.data.username}</UserLabel>
-              </FirstHeader>
-              <StyledTextarea
-                // placeholder='문구 입력...'
-                maxLength="2200"
-                name="content"
-                // value={boardContent}
-                onChange={(e) => {
-                  const { value } = e.target;
-                  setBoardContent(value);
-                }}
-              >{data.result.data.content}</StyledTextarea>
-              <CommentWrap>
-                <CommentFirstSection>
-                  <div>
-                    <VscSmiley size="26" style={{ padding: "0 15px" }} />
-                  </div>
-                  <UploadLable>0/2,200</UploadLable>
-                </CommentFirstSection>
-              </CommentWrap>
-              <CommentWrap>
-                <CommentFirstSection>
-                  <div>
-                    위치 추가
-                  </div>
-                  <RiMapPin2Line />
-                </CommentFirstSection>
-              </CommentWrap>
-              <CommentWrap>
-                <CommentFirstSection>
-                  <div>
-                    접근성
-                  </div>
-                  <IoIosArrowDown />
-                </CommentFirstSection>
-              </CommentWrap>
-              <CommentWrap>
-                <CommentFirstSection>
-                  <div>
-                    고급 설정
-                  </div>
-                  <IoIosArrowDown />
-                </CommentFirstSection>
-              </CommentWrap>
-            </StyledFormBoxBody>
-          </StyledBoxBody>
-        </StyledUploadBox>
-      </StyledUploadContainer>
-    </>
-  )
+            <StyledBoxBody>
+              <StyledUploadBoxBody>
+                <Slider {...settings} >
+                  {data.result.data.imgUrl.map((img, index) => (
+                    <div>
+                      <img key={index} src={img} alt='img'
+                        style={{ width: '100%', height: '660px', backgroundSize: 'cover' }}
+                      />
+                    </div>
+                  ))}
+                </Slider>
+              </StyledUploadBoxBody>
+              <StyledFormBoxBody>
+                <FirstHeader>
+                  <UserImg />
+                  <UserLabel>{data.result.data.username}</UserLabel>
+                </FirstHeader>
+                <StyledTextarea
+                  // placeholder='문구 입력...'
+                  maxLength="2200"
+                  name="content"
+                  // value={boardContent}
+                  onChange={(e) => {
+                    const { value } = e.target;
+                    setBoardContent(value);
+                  }}
+                >{data.result.data.content}</StyledTextarea>
+                <CommentWrap>
+                  <CommentFirstSection>
+                    <div>
+                      <VscSmiley size="26" style={{ padding: "0 15px" }} />
+                    </div>
+                    <UploadLable>0/2,200</UploadLable>
+                  </CommentFirstSection>
+                </CommentWrap>
+                <CommentWrap>
+                  <CommentFirstSection>
+                    <div>
+                      위치 추가
+                    </div>
+                    <RiMapPin2Line />
+                  </CommentFirstSection>
+                </CommentWrap>
+                <CommentWrap>
+                  <CommentFirstSection>
+                    <div>
+                      접근성
+                    </div>
+                    <IoIosArrowDown />
+                  </CommentFirstSection>
+                </CommentWrap>
+                <CommentWrap>
+                  <CommentFirstSection>
+                    <div>
+                      고급 설정
+                    </div>
+                    <IoIosArrowDown />
+                  </CommentFirstSection>
+                </CommentWrap>
+              </StyledFormBoxBody>
+            </StyledBoxBody>
+          </StyledUploadBox>
+        </StyledUploadContainer>
+      </>
+    )
+  }
 }
 
 const StyledBackground = styled.div`
