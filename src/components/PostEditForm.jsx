@@ -151,7 +151,7 @@ const PostEditForm = ({ setEditInsta, insta, setModalOpen }) => {
               <StyledTextarea
                 // placeholder='문구 입력...'
                 maxLength="2200"
-                name="content"
+                name="content" 
                 // value={boardContent}
                 onChange={(e) => {
                   const { value } = e.target;
