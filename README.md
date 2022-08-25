@@ -7,6 +7,7 @@
 3. 사진 업로드하면 미리보기 나오게 구현(완료)
 4. 모달창 팝업
 5. 로그인시 토큰 바디로 받기
+6. 캐러셀 사용, 슬라이드 구현(완료)
 
 ### 뷰 구성
 
@@ -24,11 +25,14 @@
 
 ![image](https://user-images.githubusercontent.com/109018926/186480333-ea54cdbb-776f-4fd6-9fe1-8b2309ed5872.png)
 
+- 사진 POST 후 미리보기시, 전체 사이즈에 사진이 올라가도록 구현
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![image](https://user-images.githubusercontent.com/109018926/186585811-e7a46d23-34d2-42f5-a533-95b6347bab4d.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- 게시글 슬라이드 사용할 때, 이미지 사이즈 조정(기존 컨테이너보다 사이즈는 적게, <div>태그 달아줘야 한다..ㅠㅠ
+
+![image](https://user-images.githubusercontent.com/109018926/186587074-bb355e55-b09f-4195-85f3-cebb376da240.png)
+
 
 ### `yarn eject`
 
