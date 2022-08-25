@@ -131,8 +131,9 @@ export default PostDetailForm;
 const PostDetailContainer = styled.form`
     border: 1px solid #ebedf0;
     width: 499px;
-    height: 870px;
-    border-radius: 5px;
+    height: 868px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
     background-color: white;
 `
 

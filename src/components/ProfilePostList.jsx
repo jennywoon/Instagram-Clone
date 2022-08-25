@@ -37,8 +37,7 @@ const ProfilePostList = ({ data, cookies, username, boardId, }) => {
                     {/* map돌려서 넣기 */}
                     {userData.map((data) => {
                         return (
-                            <ProfilePost key={data.boardId} img={data.imgUrl} boardId={data.boardId} 
-                            />
+                            <ProfilePost key={data.boardId} img={data.imgUrl} boardId={data.boardId} />
                         )
                     })}
                 </ProfileBottom>
